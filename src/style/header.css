@@ -1,0 +1,36 @@
+.header-container {
+    position: relative;
+    padding: 50px;
+}
+
+.content{
+    margin: 20px 0;
+    text-align: center;
+}
+
+.content.me img{
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 5px solid var(--color-primary);
+}
+
+.content.icons a{
+    margin: 0 10px;
+    font-size: 25px;
+}
+
+.content.infos img{
+    width: 30%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 960px) {
+    .header-container {
+        padding: 20px;
+    }
+
+    .content.infos img{
+        width: 90%;
+    }
+}
