@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/header.css';
-import { BsInstagram, BsGithub } from 'react-icons/bs';
+import { BsInstagram, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 const Header = () => {
     return (
@@ -28,8 +28,9 @@ const Header = () => {
                 </div>
 
                 <div className='content icons'>
-                    <a href='https://github.com/drypzz' target='_blank'><BsGithub/></a>
+                    <a href='https://github.com/drypzz/' target='_blank'><BsGithub/></a>
                     <a href='https://www.instagram.com/_gustavoaap/' target='_blank' rel='noreferrer'><BsInstagram/></a>
+                    <a href='https://www.linkedin.com/in/gustavoaap/' target='_blank' rel='noreferrer'><BsLinkedin/></a>
                 </div>
 
                 <div className='content infos'>

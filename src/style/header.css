@@ -9,7 +9,7 @@
 }
 
 .content.me img{
-    width: 100%;
+    width: 200px;
     margin: 0 auto;
     border-radius: 50%;
     border: 5px solid var(--color-primary);
