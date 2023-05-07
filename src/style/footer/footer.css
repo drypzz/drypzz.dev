@@ -5,8 +5,7 @@ footer{
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    background: radial-gradient(at 100% 90%, rgba(3, 126, 219, .2), transparent 50%),
-        radial-gradient(at 0% 100%, rgba(3, 126, 219, .2), transparent 50%);
+    background: radial-gradient(at 100% 90%, rgba(3, 126, 219, .2), transparent 50%), radial-gradient(at 0% 100%, rgba(3, 126, 219, .2), transparent 50%);
 }
 
 footer .content{

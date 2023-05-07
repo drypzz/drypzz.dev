@@ -1,4 +1,4 @@
-const getActualYear = () => {
+function getActualYear() {
     return new Date().getFullYear();
 };
 

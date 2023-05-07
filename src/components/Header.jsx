@@ -1,5 +1,7 @@
 import React from 'react';
-import '../style/header.css';
+
+import '../style/header/header.css';
+
 import { BsInstagram, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 const Header = () => {

@@ -1,4 +1,8 @@
+/* import */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* global */
 
 * {
   margin: 0;
@@ -10,6 +14,8 @@
   text-decoration: none;
 }
 
+/* var */
+
 :root {
   --color-bg: #1f1f38;
   --color-bg-variant: #2c2c6c;
@@ -18,12 +24,14 @@
   --color-white: #fff;
   --color-light: rgba(255, 255, 255, 0.6);
 
-  --transition: all 400ms ease;
+  --transition: all 600ms ease-in-out;
 
   --container-width-lg: 100%;
   --container-width-md: 86%;
   --container-width-sm: 90%;
 }
+
+/* defaults */
 
 html {
   scroll-behavior: smooth;
@@ -42,27 +50,19 @@ body {
   overflow-x: hidden;
 }
 
-.gradient-bg-welcome {
-  background: radial-gradient(at 0% 0%, rgba(3, 126, 219, .3), transparent 50%), radial-gradient(at 100% 50%, rgba(3, 126, 219, .3), transparent 50%), radial-gradient(at 100% 0%, rgba(3, 126, 219, .1), transparent 50%);
-}
-
-.container {
-  width: var(--container-width-lg);
-  margin: 0 auto;
-  text-align: center;
-}
-
 h1, h2, h3, h4, h5 {
   font-weight: 500;
 }
 
-h1 {
-  font-size: 2.5rem;
+hr {
+  border: 1px solid var(--color-primary);
+  margin: 20px auto;
+  width: 50%;
+  padding: 0;
 }
 
-.text-light {
-  color: var(--color-light);
-  font-size: 1.1rem;
+h1 {
+  font-size: 2.5rem;
 }
 
 a {
@@ -72,4 +72,44 @@ a {
 
 a:hover {
   color: var(--color-white);
+}
+
+/* class defaults */
+
+.container {
+  width: var(--container-width-lg);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gradient-bg-welcome {
+  background: radial-gradient(at 0% 0%, rgba(3, 126, 219, .3), transparent 50%), radial-gradient(at 100% 50%, rgba(3, 126, 219, .3), transparent 50%), radial-gradient(at 100% 0%, rgba(3, 126, 219, .1), transparent 50%);
+}
+
+.text-light {
+  color: var(--color-light);
+  font-size: 1.1rem;
+}
+
+.carousel .thumb.selected, .carousel .thumb:hover {
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+}
+
+.carousel .slide img{
+  width: 100%;
+  border: 2px solid var(--color-primary);
+}
+
+.carousel .thumb{
+  border: 2px solid rgba(3, 126, 219, .1);
+}
+
+@media screen and (max-width: 960px) {
+  hr{
+    width: 90%;
+  }
+  .carousel .slide img{
+    width: 100%;
+  }
 }

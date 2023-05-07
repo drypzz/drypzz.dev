@@ -1,6 +1,8 @@
 import React from 'react';
-import '../style/footer.css';
-import getActualYear from './functions/getDate';
+
+import '../style/footer/footer.css';
+
+import getActualYear from './functions/geralFunctions';
 
 const Footer = () => {
     return (
