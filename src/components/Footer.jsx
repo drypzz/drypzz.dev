@@ -11,7 +11,7 @@ const Footer = () => {
                 <span> 2021 - {getActualYear()} © All rights reserved</span>
             </div>
             <div className='content'>
-                <span>Published with GitHub Pages</span>
+                <span>Published with Netlify</span>
             </div>
         </footer>
     )
