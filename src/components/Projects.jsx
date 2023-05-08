@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 import '../style/projects/projects.css';
 
@@ -6,14 +9,18 @@ import { Museu, Thyagoof, PI } from './functions/Carousel';
 
 const Projects = () => {
 
+    useEffect(() => {
+        Aos.init({ duration: 3000 });
+    }, []);
+
     return (
         <div className='container'>
 
-            <div className='projects'>
+            <div data-aos='fade' className='projects'>
                 <h1>Projects 📊</h1>
             </div>
 
-            <div className='modal'>
+            <div data-aos='fade-up' className='modal'>
 
                 <div className='modal-container'>
                     <div className='modal-content'>

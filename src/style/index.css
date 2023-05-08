@@ -38,7 +38,15 @@ html {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
 }
 
 body {
@@ -75,6 +83,14 @@ a:hover {
 }
 
 /* class defaults */
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
 
 .container {
   width: var(--container-width-lg);

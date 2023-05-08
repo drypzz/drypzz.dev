@@ -19,6 +19,8 @@
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "^4.0.0",
+    "aos": "^2.3.4",
+    "react-spinners": "^0.13.8",
     "vite": "^4.3.5"
   }
 }
