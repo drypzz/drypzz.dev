@@ -4,6 +4,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
 
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 import BounceLoader from 'react-spinners/BounceLoader';
 
 import './style/index.css';
@@ -16,6 +19,7 @@ const App = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      Aos.init({ duration: 3000 });
     }, 5000);
   }, []);
 
@@ -28,7 +32,7 @@ const App = () => {
       :
         <div className='gradient-bg-welcome'>
           <Header />
-          <hr />
+          <hr data-aos='fade-right' />
           <Projects />
           <Footer />
         </div>
