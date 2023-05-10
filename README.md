@@ -35,7 +35,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 📥 Instalar todas as Dependência(s) Atual
 
-- Tente pelo método 1° método, se não der certo tente pelo 2° método.
+- Tente pelo 1° método, se não der certo tente pelo 2° método.
 
 ### 1° Método
 - Execute o arquivo: [Install.bat](https://raw.githack.com/drypzz/drypzz.dev/main/Install.bat) dentro da pasta do projeto
