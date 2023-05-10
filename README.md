@@ -3,7 +3,16 @@
 ## 📰 Informações
 
 - Version: 1.0.0
-- Date update: 10/05/23 - 14:12
+- Date update: 10/05/23 - 14:18
+
+## 📜 Como inicializar o projeto
+
+- Depois de baixar todas as dependencias, execute o seguinte comando: `npm run dev`
+- Logo depois espere o comando `npm run dev` terminar de executar
+- E pronto o projeto está rodando 
+- Para parar o projeto, aperte `Ctrl + C` no terminal
+- Para acessar o projeto online, acesse o seguinte link: `https://drypzz.netlify.app/`
+
 
 ## 🚀 Tecnologias
 
@@ -17,7 +26,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - Este é um projeto em Desenvolvimento Para Disp. Movel
 
-## 🔧 Installar todas as Dependência(s) Atual
+## 📥 Installar todas as Dependência(s) Atual
 
 - Execute o arquivo: `Install.bat`
 - Logo depois espere o arquivo `Install.bat` terminar de executar
