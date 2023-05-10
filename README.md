@@ -26,7 +26,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - Este é um projeto em Desenvolvimento Para Disp. Movel
 
-## 📥 Installar todas as Dependência(s) Atual
+## 📥 Instalar todas as Dependência(s) Atual
 
 - Execute o arquivo: `Install.bat`
 - Logo depois espere o arquivo `Install.bat` terminar de executar
