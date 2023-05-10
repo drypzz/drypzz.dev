@@ -11,7 +11,7 @@
 - Logo depois espere o comando `npm run dev` terminar de executar
 - E pronto o projeto está rodando 
 - Para parar o projeto, aperte `Ctrl + C` no terminal
-- Para acessar o projeto online, acesse o seguinte link: `https://drypzz.netlify.app/`
+- Para acessar o projeto online, acesse o seguinte link: [Clique aqui](https://drypzz.netlify.app/)
 
 
 ## 🚀 Tecnologias
