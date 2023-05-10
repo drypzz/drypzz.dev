@@ -5,14 +5,17 @@
 - Version: 1.0.0
 - Date update: 10/05/23 - 14:18
 
+---
+
 ## 📜 Como inicializar o projeto
 
 - Depois de baixar todas as dependencias, execute o seguinte comando: `npm run dev`
 - Logo depois espere o comando `npm run dev` terminar de executar
 - E pronto o projeto está rodando 
 - Para parar o projeto, aperte `Ctrl + C` no terminal
-- Para acessar o projeto online, acesse o seguinte link: [Clique aqui](https://drypzz.netlify.app/)
+- Para acessar o projeto online, acesse o seguinte link: [drypzz.netlify.app/](https://drypzz.netlify.app/)
 
+---
 
 ## 🚀 Tecnologias
 
@@ -22,17 +25,43 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - JSX
 - CSS
 
+---
+
 ## 💻 Projeto
 
 - Este é um projeto em Desenvolvimento Para Disp. Movel
 
+---
+
 ## 📥 Instalar todas as Dependência(s) Atual
 
-- Execute o arquivo: `Install.bat`
-- Logo depois espere o arquivo `Install.bat` terminar de executar
+- Tente pelo método 1° método, se não der certo tente pelo 2° método.
+
+### 1° Método
+- Execute o arquivo: [Install.bat](https://raw.githack.com/drypzz/drypzz.dev/main/Install.bat) dentro da pasta do projeto
+- Logo depois espere o arquivo [Install.bat](https://raw.githack.com/drypzz/drypzz.dev/main/Install.bat) terminar de executar
 - E pronto todas as dependência(s) estão instalada(s)
 
-```json
+### 2° Método
+- Execute o 1° comando
+```cmd
+npm i
+```
+- Execute o 2° comando
+```cmd
+npm i react react-dom react-icons react-responsive-carousel react-scroll-to-top react-spinners
+```
+- Execute o 3° comando
+```cmd
+npm i @types/react @types/react-dom @vitejs/plugin-react aos vite --save-dev
+```
+- E pronto todas as dependência(s) estão instalada(s)
+
+---
+
+## 📂 Dependência(s)
+
+```js
 {
     "type": "module",
     "homepage": "https://drypzz.netlify.app/",
