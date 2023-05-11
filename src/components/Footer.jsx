@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../style/footer/footer.css';
+import '../style/footer/footer.min.css';
 
 import getActualYear from './functions/geralFunctions';
 

@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-import '../style/header/header.css';
+import '../style/header/header.min.css';
 
 import { BsInstagram, BsGithub, BsLinkedin } from 'react-icons/bs';
 

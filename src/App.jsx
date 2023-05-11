@@ -11,7 +11,7 @@ import ScrollToTop from 'react-scroll-to-top';
 
 import BounceLoader from 'react-spinners/BounceLoader';
 
-import './style/index.css';
+import './style/index.min.css';
 
 const App = () => {
 
