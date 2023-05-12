@@ -9,7 +9,7 @@
 }
 
 .content.me img{
-    width: 200px;
+    width: 350px;
     margin: 0 auto;
     border-radius: 50%;
     border: 5px solid var(--color-primary);
@@ -21,7 +21,7 @@
 }
 
 .content.infos img{
-    width: 30%;
+    width: 40%;
     margin: 0 auto;
 }
 
@@ -30,7 +30,11 @@
         padding: 20px;
     }
 
+    .content.me img{
+        width: 250px;
+    }
+
     .content.infos img{
-        width: 90%;
+        width: 100%;
     }
 }

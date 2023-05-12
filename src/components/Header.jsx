@@ -5,6 +5,8 @@ import 'aos/dist/aos.css';
 
 import '../style/header/header.min.css';
 
+import img from '../imgs/social/0.jpg';
+
 import { BsInstagram, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 const Header = () => {
@@ -35,7 +37,7 @@ const Header = () => {
                     </div>
 
                     <div className='content me'>
-                        <img src='https://avatars.githubusercontent.com/u/79218936?v=4' alt='img-me' />
+                        <img src={img} alt='img-me' />
                     </div>
                 </div>
 
