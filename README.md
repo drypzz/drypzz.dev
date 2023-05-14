@@ -35,7 +35,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-- Este é um projeto em Desenvolvimento Para Disp. Movel
+- Este é um projeto em "Desenvolvimento"
 
 ---
 
