@@ -69,10 +69,10 @@ npm i @types/react @types/react-dom @vitejs/plugin-react aos vite --save-dev
 
 ```js
 {
-    "type": "module",
-    "homepage": "https://drypzz.netlify.app/",
+  "type": "module",
+  "homepage": "https://drypzz.netlify.app/",
     
-    "dependencies": {
+  "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
