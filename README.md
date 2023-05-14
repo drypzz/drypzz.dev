@@ -3,16 +3,22 @@
 ## 📰 Informações
 
 - Version: 1.0.5
-- Date update: 13/05/23 - 21:15
+- Date update: 13/05/23 - 21:21
 
 ---
 
 ## 📜 Como inicializar o projeto
 
-- Depois de baixar todas as dependencias, execute o seguinte comando: `npm run dev`
-- Logo depois espere o comando `npm run dev` terminar de executar
-- E pronto o projeto está rodando 
-- Para parar o projeto, aperte `Ctrl + C` no terminal
+- Clone o projeto: `git clone git@github.com:drypzz/drypzz.dev.git`
+- Entre na pasta do projeto: `cd drypzz.dev`
+- Instale todas as dependencias no Node: `npm i`
+- Logo depois espere o comando `npm i` terminar de executar
+- E pronto todas as dependencia(s) do Node estão instalada(s)
+---
+- Logo após, execute os comandos a seguir ou o arquivo [Install.bat](https://raw.githack.com/drypzz/drypzz.dev/main/Install.bat) dentro da pasta do projeto
+- ¹Comando: `npm i react react-dom react-icons react-responsive-carousel react-scroll-to-top react-spinners`
+- ²Comando: `npm i @types/react @types/react-dom @vitejs/plugin-react aos vite --save-dev`
+
 - Para acessar o projeto online, acesse o seguinte link: [drypzz.netlify.app/](https://drypzz.netlify.app/)
 
 ---
