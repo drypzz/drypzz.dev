@@ -11,7 +11,7 @@
 
 - Clone o projeto: `git clone git@github.com:drypzz/drypzz.dev.git`
 - Entre na pasta do projeto: `cd drypzz.dev`
-- Instale todas as dependencias no Node: `npm i`
+- Instale todas as dependencias do Node: `npm i`
 - Logo depois espere o comando `npm i` terminar de executar
 - E pronto todas as dependencia(s) do Node estão instalada(s)
 ---
