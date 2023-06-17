@@ -43,6 +43,17 @@ const Projects = () => {
                             <div style={{cursor: 'pointer'}} onClick={() => activeHoverInImage(e.id)}>
                                 {e.return}
                             </div>
+                            <div className='modal-content'>
+                                <div className='modal-content--container'>
+                                    {e.imgs ? e.imgs.map((e) => {
+                                        return (
+                                            <div className='modal-content--container--list'>
+                                                <img className='icons-linguage' key={e.id} src={e.src} alt='img' title={e.title} />
+                                            </div>
+                                        )
+                                    }) : ''}
+                                </div>
+                            </div>
                         </div>
                     )
                 })}

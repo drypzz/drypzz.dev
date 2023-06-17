@@ -63,8 +63,36 @@
     border: 1px solid red;
 }
 
+.modal-content--container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.modal-content--container--list{
+    margin: 0 10px;
+    border: 1px solid rgba(3, 126, 219, 0.1);
+    padding: 5px;
+    border-radius: 12px;
+    transition: all .5s ease-in-out;
+}
+
+.modal-content--container--list:hover{
+    background-color: rgba(53, 153, 204, .4);
+    border: 1px solid rgba(3, 126, 219, 0.5);
+}
+
+.icons-linguage{
+    width: 50px;
+}
+
 @media screen and (max-width: 960px) {
     .modal-container, .modal-container.hover{
         width: 100%;
+    }
+
+    .modal-content--container--list{
+        margin: 0 5px;
     }
 }

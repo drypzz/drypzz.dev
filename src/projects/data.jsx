@@ -1,5 +1,5 @@
 import React from 'react';
-import { Museu, Thyagoof, PI } from '../components/functions/Carousel';
+import { Museu, Thyagoof, PI, Portfolio } from '../components/functions/Carousel';
 
 /**
  * @description This is the data of the projects.
@@ -22,25 +22,56 @@ const toast = [
         id: 3,
         return: <PI thumbs={false} />
     },
+
+    {
+        id: 4,
+        return: <Portfolio thumbs={false} />
+    },
 ]
 
 const projects = [
     {
         id: 1,
         name: 'Museu de Informática',
-        return: <Museu thumbs={true} />
+        return: <Museu thumbs={true} />,
+        imgs: [
+            {id: 1, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', title: 'HTML5'},
+            {id: 2, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', title: 'CSS3'},
+            {id: 3, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', title: 'JavaScript'},
+        ],
     },
 
     {
         id: 2,
         name: 'Thyagoof Midia',
-        return: <Thyagoof thumbs={true} />
+        return: <Thyagoof thumbs={true} />,
+        imgs: [
+            {id: 1, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', title: 'CSS3'},
+            {id: 2, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', title: 'PHP'},
+        ],
     },
 
     {
         id: 3,
         name: 'Projeto Integrador',
-        return: <PI thumbs={true} />
+        return: <PI thumbs={true} />,
+        imgs: [
+            {id: 1, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', title: 'CSS3'},
+            {id: 2, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', title: 'PHP'},
+            {id: 3, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', title: 'JavaScript'},
+        ],
+    },
+
+    {
+        id: 4,
+        name: 'Portfolio',
+        return: <Portfolio thumbs={true} />,
+        imgs: [
+            {id: 1, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', title: 'CSS3'},
+            {id: 2, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', title: 'NextJS'},
+            {id: 3, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', title: 'JavaScript'},
+            {id: 4, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', title: 'ReactJS'},
+        ],
     },
 ]
 

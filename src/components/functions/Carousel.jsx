@@ -13,6 +13,9 @@ import pi6 from '../../imgs/6.png';
 import pi7 from '../../imgs/7.png';
 import pi8 from '../../imgs/8.png';
 
+import port9 from '../../imgs/9.png';
+import port10 from '../../imgs/10.png';
+
 function Museu( {thumbs} ){
   return (
     <Carousel autoPlay transitionTime={1000} showThumbs={thumbs} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
@@ -61,4 +64,17 @@ function PI( {thumbs} ) {
     );
 };
 
-export {Museu, Thyagoof, PI};
+function Portfolio( {thumbs} ) {
+    return (
+      <Carousel autoPlay transitionTime={1000} showThumbs={thumbs} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
+          <div className='modal-content'>
+              <img className='carousel-img' src={port9} />
+          </div>
+          <div className='modal-content'>
+              <img className='carousel-img' src={port10} />
+          </div>
+      </Carousel>
+    );
+};
+
+export {Museu, Thyagoof, PI, Portfolio};
