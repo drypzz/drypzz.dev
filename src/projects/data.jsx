@@ -8,25 +8,10 @@ import { Museu, Thyagoof, PI, Portfolio } from '../components/functions/Carousel
 */
 
 const toast = [
-    {
-        id: 1,
-        return: <Museu thumbs={false} />
-    },
-    
-    {
-        id: 2,
-        return: <Thyagoof thumbs={false} />
-    },
-
-    {
-        id: 3,
-        return: <PI thumbs={false} />
-    },
-
-    {
-        id: 4,
-        return: <Portfolio thumbs={false} />
-    },
+    {id: 1, return: <Museu thumbs={false} />},
+    {id: 2, return: <Thyagoof thumbs={false} />},
+    {id: 3, return: <PI thumbs={false} />},
+    {id: 4, return: <Portfolio thumbs={false} />},
 ]
 
 const projects = [
