@@ -13,9 +13,9 @@ import pi6 from '../../imgs/6.png';
 import pi7 from '../../imgs/7.png';
 import pi8 from '../../imgs/8.png';
 
-function Museu(){
+function Museu( {thumbs} ){
   return (
-    <Carousel autoPlay transitionTime={1000} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
+    <Carousel autoPlay transitionTime={1000} showThumbs={thumbs} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
         <div className='modal-content'>
             <img className='carousel-img' src={museu0} />
         </div>
@@ -29,9 +29,9 @@ function Museu(){
   );
 };
 
-function Thyagoof() {
+function Thyagoof( {thumbs} ) {
     return (
-      <Carousel autoPlay transitionTime={1000} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
+      <Carousel autoPlay transitionTime={1000} showThumbs={thumbs} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
           <div className='modal-content'>
               <img className='carousel-img' src={th3} />
           </div>
@@ -45,9 +45,9 @@ function Thyagoof() {
     );
 };
 
-function PI() {
+function PI( {thumbs} ) {
     return (
-      <Carousel autoPlay transitionTime={1000} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
+      <Carousel autoPlay transitionTime={1000} showThumbs={thumbs} stopOnHover={false} showStatus={false} infiniteLoop showArrows={false}>
           <div className='modal-content'>
               <img className='carousel-img' src={pi6} />
           </div>

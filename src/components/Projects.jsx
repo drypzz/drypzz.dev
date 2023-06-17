@@ -5,9 +5,21 @@ import 'aos/dist/aos.css';
 
 import '../style/projects/projects.min.css';
 
-import { Museu, Thyagoof, PI } from './functions/Carousel';
+import {projects, toast} from '../projects/data';
 
 const Projects = () => {
+
+    function activeHoverInImage(e) {
+        for(let i = 1; i <= toast.length; i++) {
+            if (e === i) {
+                document.getElementById(`modals-off${i}`).style.display = 'flex';
+                document.getElementById(`modals-off${i}`).classList.add('active');
+            } else {
+                document.getElementById(`modals-off${i}`).style.display = 'none';
+                document.getElementById(`modals-off${i}`).classList.remove('active');
+            }
+        }
+    };
 
     useEffect(() => {
         Aos.init({ duration: 3000 });
@@ -22,28 +34,34 @@ const Projects = () => {
 
             <div data-aos='fade-up' className='modal'>
 
-                <div className='modal-container'>
-                    <div className='modal-content'>
-                        <h3>Museu de Informática</h3>
-                    </div>
-                    <Museu />
-                </div>
-
-                <div className='modal-container'>
-                    <div className='modal-content'>
-                        <h3>Thyagoof Midia</h3>
-                    </div>
-                    <Thyagoof />
-                </div>
-
-                <div className='modal-container'>
-                    <div className='modal-content'>
-                        <h3>Projeto Integrador</h3>
-                    </div>
-                    <PI />
-                </div>
+                {projects.map((e) => {
+                    return (
+                        <div key={e.id} className='modal-container'>
+                            <div className='modal-content'>
+                                <h3>{e.name}</h3>
+                            </div>
+                            <div style={{cursor: 'pointer'}} onClick={() => activeHoverInImage(e.id)}>
+                                {e.return}
+                            </div>
+                        </div>
+                    )
+                })}
                 
             </div>
+
+            {toast.map((e) => {
+                return (
+                    <div key={e.id} className='modals-off' id={`modals-off${e.id}`}>
+                        <div className='modal-container hover'>
+                            {e.return}
+                            <div className='modal-content'>
+                                <button className='_dsa01293uncle' onClick={() => activeHoverInImage()}>Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
+
         </div>
     )
 };
