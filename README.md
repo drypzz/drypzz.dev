@@ -3,19 +3,19 @@
 ## 📰 Informações
 
 - Version: 1.0.5
-- Date update: 13/05/23 - 21:21
+- Date update: 17/06/23 - 01:38
 
 ---
 
 ## 📜 Como inicializar o projeto
 
-- Clone o projeto: `git clone git@github.com:drypzz/drypzz.dev.git`
-- Entre na pasta do projeto: `cd drypzz.dev`
+- Clone o projeto: `git clone git@github.com:drypzz/drypzz.dev.git "nomeDaPasta"`
+- Entre na pasta do projeto: `cd "nomeDaPasta"`
 - Instale todas as dependencias do Node: `npm i`
 - Logo depois espere o comando `npm i` terminar de executar
 - E pronto todas as dependencia(s) do Node estão instalada(s)
 ---
-- Logo após, execute os comandos a seguir ou o arquivo [Install.bat](https://raw.githack.com/drypzz/drypzz.dev/main/Install.bat) dentro da pasta do projeto
+- Logo após, execute os comandos a seguir dentro da pasta do projeto
 - ¹Comando: `npm i react react-dom react-icons react-responsive-carousel react-scroll-to-top react-spinners`
 - ²Comando: `npm i @types/react @types/react-dom @vitejs/plugin-react aos vite --save-dev`
 
