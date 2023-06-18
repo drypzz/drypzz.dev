@@ -53,9 +53,8 @@ const projects = [
         return: <Portfolio thumbs={true} />,
         imgs: [
             {id: 1, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', title: 'CSS3'},
-            {id: 2, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', title: 'NextJS'},
-            {id: 3, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', title: 'JavaScript'},
-            {id: 4, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', title: 'ReactJS'},
+            {id: 2, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', title: 'JavaScript'},
+            {id: 3, src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', title: 'ReactJS'},
         ],
     },
 ]
