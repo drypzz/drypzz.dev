@@ -53,6 +53,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -130,5 +131,9 @@
 
     .modal-content{
         width: 100%;
+    }
+
+    .projects-technology .technology svg{
+        width: 40px;
     }
 }

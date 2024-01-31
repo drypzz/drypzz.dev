@@ -32,7 +32,7 @@ export const projects = [
             {Component: SkillCSS3, tooltipContent: 'CSS3' },
             {Component: SkillHTML5, tooltipContent: 'HTML5' },
             {Component: SkillNextJS, tooltipContent: 'NextJS' },
-            {Component: SkillJavaScript, tooltipContent: 'JavaScript' },
+            // {Component: SkillJavaScript, tooltipContent: 'JavaScript' },
             {Component: SkillJSX, tooltipContent: 'JSX' },
         ],
     },
