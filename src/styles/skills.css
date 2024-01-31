@@ -1,0 +1,37 @@
+.skills-container{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.skills-technologies{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.skills-technologies-content svg{
+    width: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.skills-technologies-content svg:hover{
+    transform: scale(1.2);
+}
+
+@media screen and (max-width: 960px){
+
+    .skills-technologies{
+        background-color: var(--content-bg-color);
+        border-radius: 12px;
+        border: 1px solid var(--content-border-color);
+        padding: 10px;
+    }
+
+    .skills-technologies-content svg{
+        width: 40px;
+    }
+}

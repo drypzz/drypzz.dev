@@ -1,0 +1,102 @@
+.header-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-content{
+    margin: 20px 0;
+    text-align: center;
+}
+
+.header-content.me img{
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+}
+
+.header-content.icons a{
+    margin: 0 10px;
+    font-size: 25px;
+}
+
+.header-content.icons a svg{
+    color: var(--primary-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.header-content.icons a:hover svg{
+    color: white;
+    transform: scale(1.2);
+}
+
+.header-content.infos{
+    background-color: var(--content-bg-color);
+    width: 600px;
+    height: 130px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 1px solid var(--content-border-color);
+    border-radius: 10px;
+}
+
+.header-content.infos p{
+    position: relative;
+    font-size: 18px;
+    font-style: italic;
+    text-align: left;
+    color: #D8DEE9;
+}
+
+.header-content.infos p::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+.header-content.infos div{
+    margin-top: 5px;
+    text-align: right;
+}
+
+.header-content.infos span{
+    padding: 5px;
+    width: 100%;
+    font-size: 16px;
+    font-style: italic;
+    color: #848892;
+}
+  
+.fadeinText{
+    opacity: 0;
+    animation: fadeinText 5s ease-in infinite alternate;
+}
+  
+@keyframes fadeinText {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .header-container {
+        padding: 15px;
+    }
+
+    .header-content.me img{
+        width: 250px;
+    }
+
+    .header-content.infos{
+        width: 100%;
+        height: auto;
+    }
+}

@@ -1,0 +1,113 @@
+.projects-container{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.projects-container-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.projects-carousel-content--carousel{
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.projects-carousel-content--carousel:hover{
+    opacity: .7;
+}
+
+.projects-carousel-content{
+    max-width: 700px;
+    padding: 20px;
+    border: 1px solid var(--primary-color-variant);
+    border-radius: 12px;
+}
+
+.projects-carousel-content--title{
+    font-weight: 'bold';
+    margin-bottom: 10px;
+}
+
+.projects-carousel-content--title h2 span{
+    color: var(--primary-color);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.carousel .slide img{
+    width: 100%!important;
+    border: 2px solid var(--primary-color)!important;
+}
+
+
+
+
+/* Modal */
+
+.modal-container{
+    padding: 20px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    background-color: #000000e5;
+    outline: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.modal-content{
+    width: 75%;
+    pointer-events: auto;
+    position: relative;
+    margin: 1.75rem auto;
+    border: none;
+}
+
+.modal-content-close{
+    margin-top: 10px;
+}
+
+.modal-content-close button{
+    padding: 10px 50px;
+    color: red;
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid red;
+    transition: all .6s ease-in-out;
+    outline: none;
+    background: none;
+}
+
+.modal-content-close button:hover{
+    background: red;
+    color: white;
+}
+
+
+
+
+/* Media Queries */
+
+@media screen and (max-width: 960px){
+    .projects-carousel-content{
+        max-width: 100%;
+    }
+
+    .modal-content{
+        width: 100%;
+    }
+}
