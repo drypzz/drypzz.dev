@@ -1,3 +1,13 @@
+import {
+    SkillCSS3,
+    SkillHTML5,
+    SkillTypeScript,
+    SkillJavaScript,
+    SkillNextJS,
+    SkillPHP,
+    SkillJSX,
+} from "./skills";
+
 export const projects = [
     {
         title: "Guns Airsoft Arena",
@@ -17,6 +27,13 @@ export const projects = [
             '/images/_p1/07.png',
             '/images/_p1/08.png',
             '/images/_p1/09.png',
+        ],
+        technologies: [
+            {Component: SkillCSS3, tooltipContent: 'CSS3' },
+            {Component: SkillHTML5, tooltipContent: 'HTML5' },
+            {Component: SkillNextJS, tooltipContent: 'NextJS' },
+            {Component: SkillJavaScript, tooltipContent: 'JavaScript' },
+            {Component: SkillJSX, tooltipContent: 'JSX' },
         ],
     },
 
@@ -39,6 +56,11 @@ export const projects = [
             '/images/_p2/08.png',
             '/images/_p2/09.png',
         ],
+        technologies: [
+            {Component: SkillCSS3, tooltipContent: 'CSS3' },
+            {Component: SkillHTML5, tooltipContent: 'HTML5' },
+            {Component: SkillPHP, tooltipContent: 'PHP' },
+        ],
     },
     {
         title: "Portfólio",
@@ -50,6 +72,12 @@ export const projects = [
         secondaryImages: [
             '/images/_p3/01.png',
             '/images/_p3/02.png',
+        ],
+        technologies: [
+            {Component: SkillCSS3, tooltipContent: 'CSS3' },
+            {Component: SkillHTML5, tooltipContent: 'HTML5' },
+            {Component: SkillNextJS, tooltipContent: 'NextJS' },
+            {Component: SkillTypeScript, tooltipContent: 'TypeScript' },
         ],
     },
 ];

@@ -40,14 +40,14 @@ function SkillsPage() {
             <h1 data-aos='fade-left'>My Technologies 📋</h1>
             <div data-aos='fade-right' className='skills-technologies'>
                 {skills.map((skill, index) => (
-                <div
-                    className='skills-technologies-content'
-                    data-tooltip-id={`tooltip-${index}`}
-                    data-tooltip-content={skill.tooltipContent}
-                    key={index}
-                >
-                    <skill.SkillComponent />
-                </div>
+                    <div
+                        className='skills-technologies-content'
+                        data-tooltip-id={`tooltip-${index}`}
+                        data-tooltip-content={skill.tooltipContent}
+                        key={index}
+                    >
+                        <skill.SkillComponent />
+                    </div>
                 ))}
             </div>
             {skills.map((skill, index) => (

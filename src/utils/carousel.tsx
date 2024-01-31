@@ -1,11 +1,24 @@
-'use client'
-
-import { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 
-function ProjectCarousel({ title, description, images, secondaryImages }: { title: string, description: string, images: string[], secondaryImages: string[]}) {
+import { Tooltip } from 'react-tooltip';
 
-    const [showModal, setShowModal] = useState(false);
+type Technology = {
+    Component: React.ComponentType<any>;
+    tooltipContent: string;
+}
+
+type ProjectProps = {
+    title: string;
+    description: string;
+    images: string[];
+    secondaryImages: string[];
+    technologies: Technology[];
+}
+
+function ProjectCarousel({ title, description, images, secondaryImages, technologies }: ProjectProps) {
+
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<any>(null);
 
     const openModal = (image: any) => {
@@ -32,7 +45,22 @@ function ProjectCarousel({ title, description, images, secondaryImages }: { titl
                     ))}
                 </Carousel>
             </div>
-            {showModal && selectedImage && (
+            <div className="projects-technology">
+                {technologies.map((e, index) => (
+                    <div data-tooltip-id={`tooltip-technology-${index}`} data-tooltip-content={e.tooltipContent} className="technology" key={index}>
+                        <e.Component />
+                    </div>
+                ))}
+            </div>
+            {technologies.map((e, index) => (
+                <Tooltip
+                    id={`tooltip-technology-${index}`}
+                    key={index}
+                    arrowColor='rgba(3, 126, 219, 0.4)'
+                    style={{ backgroundColor: 'rgba(3, 126, 219, 0.4)', borderRadius: '5px' }}
+                />
+            ))}
+            {showModal && selectedImage.length > 0 && (
                 <div className="modal-container">
                     <div className="modal">
                         <div className="modal-content">

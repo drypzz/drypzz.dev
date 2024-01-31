@@ -11,7 +11,7 @@ function Projects() {
             <h1 data-aos="fade-up">My Projects 📊</h1>
             <div className="projects-container-content">
                 {projects.map((e, index) => (
-                    <ProjectCarousel key={index} title={e.title} description={e.description} images={e.images} secondaryImages={e.secondaryImages} />
+                    <ProjectCarousel key={index} title={e.title} description={e.description} images={e.images} secondaryImages={e.secondaryImages} technologies={e.technologies} />
                 ))}
             </div>
         </div>

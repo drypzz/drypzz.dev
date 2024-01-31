@@ -48,6 +48,27 @@
 
 
 
+.projects-technology{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.projects-technology .technology svg{
+    width: 50px;
+    transition: all .3s ease-in-out;
+}
+
+.projects-technology .technology svg:hover{
+    transform: scale(1.2);
+}
+
+
+
+
+
 /* Modal */
 
 .modal-container{
