@@ -12,7 +12,9 @@ import {
     SkillReactJS,
     SkillTypeScript,
     SkillNextJS,
-    SkillMySQL
+    SkillMySQL,
+    SkillJSX,
+    SkillTSX
 } from '@/utils/skills';
 
 import '@/styles/skills.css';
@@ -32,7 +34,9 @@ function SkillsPage() {
         { SkillComponent: SkillHTML5, tooltipContent: 'HTML5' },
         { SkillComponent: SkillCSS3, tooltipContent: 'CSS3' },
         { SkillComponent: SkillLua, tooltipContent: 'Lua' },
-        { SkillComponent: SkillMySQL, tooltipContent: 'MySQL'}
+        { SkillComponent: SkillMySQL, tooltipContent: 'MySQL'},
+        { SkillComponent: SkillJSX, tooltipContent: 'JSX'},
+        { SkillComponent: SkillTSX, tooltipContent: 'TSX'}
     ];
 
     return (
