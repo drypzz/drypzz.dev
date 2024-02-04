@@ -13,6 +13,7 @@ import Projects from "./components/Projects";
 import Footer from "./components/Footer";
 
 import "./globals.css";
+import ContactPage from "./components/Contact";
 
 function HomePage() {
 
@@ -45,8 +46,10 @@ function HomePage() {
           <HeaderPage />
           <hr data-aos='fade' />
           <SkillsPage />
-          <hr style={{width: '70%'}} data-aos='fade' />
+          <hr id="a" data-aos='fade' />
           <Projects />
+          <hr id="b" data-aos='fade' />
+          <ContactPage />
         </div>
         <Footer />
       </>
