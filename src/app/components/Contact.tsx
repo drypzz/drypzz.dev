@@ -18,7 +18,7 @@ function ContactPage() {
 
         const urlSearchParams = new URLSearchParams(formData as any);
 
-        fetch("/", {
+        fetch("/api/v1/sites", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: urlSearchParams.toString(),
