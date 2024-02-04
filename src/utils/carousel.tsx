@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from "react-tooltip";
 
 type Technology = {
     Component: React.ComponentType<any>;
@@ -31,35 +33,50 @@ function ProjectCarousel({ title, description, images, secondaryImages, technolo
         setShowModal(false);
     };
 
+    useEffect(() => {
+        const body = document.querySelector("body");
+        if (showModal) {
+            body?.classList.add("__className_e29382");
+        } else {
+            body?.classList.remove("__className_e29382");
+        }
+
+        return () => {
+            body?.classList.remove("__className_e29382");
+        };
+    }, [ showModal ]);
+
     return (
-        <div className="projects-carousel-content">
-            <div className="projects-carousel-content--title">
-                <h2>{title} <span>({description})</span></h2>
-            </div>
-            <div className="projects-carousel-content--carousel">
-                <Carousel autoPlay transitionTime={1500} showThumbs={false} stopOnHover={false} showStatus={false} infiniteLoop showArrows={true}>
-                    {images.map((image, index) => (
-                        <div key={index} className="image-carousel" onClick={() => openModal(secondaryImages)}>
-                            <img draggable={false} src={image} alt={`Project ${index + 1}`} />
+        <>
+            <div data-aos="fade-left" className="projects-carousel-content">
+                <div className="projects-carousel-content--title">
+                    <h2>{title} <span>({description})</span></h2>
+                </div>
+                <div className="projects-carousel-content--carousel">
+                    <Carousel autoPlay transitionTime={1500} showThumbs={false} stopOnHover={false} showStatus={false} infiniteLoop showArrows={true}>
+                        {images.map((image, index) => (
+                            <div key={index} className="image-carousel" onClick={() => openModal(secondaryImages)}>
+                                <img draggable={false} src={image} alt={`Project ${index + 1}`} />
+                            </div>
+                        ))}
+                    </Carousel>
+                </div>
+                <div className="projects-technology">
+                    {technologies.map((e, index) => (
+                        <div data-tooltip-id={`tooltip-technology-${index}`} data-tooltip-content={e.tooltipContent} className="technology" key={index}>
+                            <e.Component />
                         </div>
                     ))}
-                </Carousel>
-            </div>
-            <div className="projects-technology">
+                </div>
                 {technologies.map((e, index) => (
-                    <div data-tooltip-id={`tooltip-technology-${index}`} data-tooltip-content={e.tooltipContent} className="technology" key={index}>
-                        <e.Component />
-                    </div>
+                    <Tooltip
+                        id={`tooltip-technology-${index}`}
+                        key={index}
+                        arrowColor="rgba(3, 126, 219, 0.4)"
+                        style={{ backgroundColor: "rgba(3, 126, 219, 0.4)", borderRadius: "5px" }}
+                    />
                 ))}
             </div>
-            {technologies.map((e, index) => (
-                <Tooltip
-                    id={`tooltip-technology-${index}`}
-                    key={index}
-                    arrowColor='rgba(3, 126, 219, 0.4)'
-                    style={{ backgroundColor: 'rgba(3, 126, 219, 0.4)', borderRadius: '5px' }}
-                />
-            ))}
             {showModal && selectedImage.length > 0 && (
                 <div className="modal-container">
                     <div className="modal">
@@ -78,7 +95,7 @@ function ProjectCarousel({ title, description, images, secondaryImages, technolo
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 };
 

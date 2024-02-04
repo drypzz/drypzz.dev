@@ -2,7 +2,7 @@ import "@/styles/footer.css";
 
 function Footer() {
     return (
-        <footer data-aos="fade">
+        <footer data-aos="fade-right">
             <div className='content'>
                 <span> 2021 - {new Date().getFullYear()} © All rights reserved</span>
             </div>

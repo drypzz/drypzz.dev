@@ -49,6 +49,10 @@ body{
     overflow-x: hidden;
 }
 
+body.__className_e29382{
+    overflow: hidden;
+}
+
 h1, h2, h3, h4, h5 {
     font-weight: 500;
 }

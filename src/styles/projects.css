@@ -40,9 +40,13 @@
     font-weight: 400;
 }
 
+.projects-carousel-content--carousel .image-carousel{
+    margin: 5px;
+}
+
 .carousel .slide img{
     width: 100%!important;
-    border: 2px solid var(--primary-color)!important;
+    border: 4px solid var(--primary-color)!important;
 }
 
 

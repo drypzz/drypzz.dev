@@ -27,7 +27,6 @@ function HomePage() {
           duration: 2000,
           easing: 'ease',
           once: true,
-          mirror: false,
           offset: 0
         }
       );
