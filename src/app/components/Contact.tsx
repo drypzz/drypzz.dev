@@ -3,41 +3,38 @@ import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 import "@/styles/contact.css";
 
-function ContactPage () {
-
+function ContactPage() {
     const formRef = useRef<HTMLFormElement>(null);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    
-        const formData = new FormData(e.currentTarget);
-    
-        let isEmpty = false;
-        formData.forEach((value) => {
-            if (!value) {
-                isEmpty = true;
-            };
-        });
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
-        if (isEmpty) {
-            Notify.failure("Preencha todos os campos!", {
-                position: "right-bottom",
-                cssAnimationStyle: "from-right",
-                timeout: 3000,
-            });
+        const formData = new FormData(formRef.current!);
+        
+        if (formDataHasEmptyFields(formData)) {
+            Notify.failure("Por favor, preencha todos os campos.", { position: "right-bottom", cssAnimationStyle: "from-right", timeout: 3000 });
             return;
-        }
-    
-        setTimeout(() => {
-            if (formRef.current) {
-                formRef.current.reset();
+        };
+
+        const urlSearchParams = new URLSearchParams(formData as any);
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: urlSearchParams.toString(),
+        })
+        .then(() => Notify.success("Mensagem enviada com sucesso!", { position: "right-bottom", cssAnimationStyle: "from-right", timeout: 3000 }))
+        .catch((error) => Notify.failure("Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.", { position: "right-bottom", cssAnimationStyle: "from-right", timeout: 3000 }));
+    };
+
+    const formDataHasEmptyFields = (formData: FormData) => {
+        for (const pair of Array.from(formData.entries())) {
+            const [, value] = pair;
+            if (!value) {
+                return true;
             };
-            Notify.success("Mensagem enviada com sucesso!", {
-                position: "right-bottom",
-                cssAnimationStyle: "from-right",
-                timeout: 3000,
-            });
-        }, 1000);
+        };
+        return false;
     };
 
     return (
@@ -47,7 +44,7 @@ function ContactPage () {
                 <p>Se precisar de ajuda ou quiser conversar, fique à vontade para me enviar um email.</p>
             </div>
             <div data-aos="fade-right" className="contact-content">
-                <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+                <form ref={formRef} name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit}>
                     <div className="forms-content">
                         <div className="forms-content--item">
                             <span>Nome:</span>
