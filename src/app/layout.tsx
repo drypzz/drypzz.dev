@@ -18,6 +18,9 @@ export default function RootLayout({
     <html lang='pt-br'>
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta property='og:image' content='/images/0.jpg' />
+        <meta property='og:url' content='https://drypzz.netlify.app/' />
+        <meta property='og:type' content='website' />
       </head>
       <body className={inter.className}>
         <main className='gradient-bg-welcome'>
