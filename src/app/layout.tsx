@@ -6,7 +6,29 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'DRYPZZ - DEV',
+  applicationName: 'DRYPZZ - DEV',
   description: 'Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.',
+  creator: 'DRYPZZ',
+  viewport: { width: 'device-width', initialScale: 1 },
+  themeColor: '#037edb',
+  authors: [{ name: 'Next.js Team', url: 'https://nextjs.org' }],
+  generator: 'NextJS',
+  keywords: ['DRYPZZ', 'DEV', 'portfolio', 'projetos', 'tecnologias', 'desenvolvimento', 'web', 'mobile', 'front-end', 'back-end', 'fullstack', 'programação', 'programador', 'desenvolvedor', 'webdev', 'webdeveloper', 'webdesign'],
+  twitter: {
+    site: '@drypzz',
+    card: 'summary_large_image',
+    images: '/images/0.jpg',
+  },
+  openGraph: {
+    title: 'DRYPZZ - DEV',
+    description: 'Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.',
+    siteName: 'DRYPZZ - DEV',
+    type: 'website',
+    url: 'https://drypzz.netlify.app/',
+    images: [{url: '/images/0.jpg'}],
+    countryName: 'Brazil',
+    locale: 'pt_BR',
+  },
 };
 
 export default function RootLayout({
@@ -16,14 +38,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-br'>
-      <head>
-        <meta name='viewport' content={'width=device-width, initial-scale=1.0'} />
-        <meta property='og:image' content={'/images/0.jpg'} />
-        <meta property='og:url' content={'https://drypzz.netlify.app/'} />
-        <meta property='og:type' content={'website'} />
-        <meta property='og:color' content={'#037edb'} />
-        <meta property='twitter:color' content={'#037edb'} />
-      </head>
       <body className={inter.className}>
         <main className='gradient-bg-welcome'>
           {children}
