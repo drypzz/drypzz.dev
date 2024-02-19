@@ -2,26 +2,21 @@
 
 import { useEffect, useState } from "react";
 
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from "react-tooltip";
 
 import { BsDiscord, BsFacebook, BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
 
 import { messagesDevs } from "@/utils/messages";
+import { AlertNotify } from "@/utils/notify";
 
 import "@/styles/header.css";
-
-import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 function HeaderPage() {
 
     const [currentMessageIndex, setCurrentMessageIndex] = useState<number>(0);
 
     const clipDiscord = () => {
-        Notify.success("Discord copiado com sucesso!", {
-            position: "right-bottom",
-            cssAnimationStyle: "from-right",
-            timeout: 3000,
-        });
+        AlertNotify("success", "Discord copiado com sucesso!");
         navigator.clipboard.writeText("drypzz");
     };
 
@@ -35,7 +30,7 @@ function HeaderPage() {
 
     return (
         <div className="header-container">
-            <div data-aos='fade-right'>
+            <div data-aos="fade-right">
                 <div className="header-content">
                     <h4>Hello everyone 👋</h4>
                 </div>
@@ -65,7 +60,7 @@ function HeaderPage() {
             </div>
 
             <div>
-                <div data-aos='fade-left'  className="header-content icons">
+                <div data-aos="fade-left"  className="header-content icons">
                     <a href="https://github.com/drypzz/" target="_blank"><BsGithub size={35} /></a>
                     <a href="https://www.instagram.com/_gustavoaap/" target="_blank" rel="noreferrer"><BsInstagram size={35} /></a>
                     <a href="https://www.linkedin.com/in/gustavoaap/" target="_blank" rel="noreferrer"><BsLinkedin size={35} /></a>
@@ -73,7 +68,7 @@ function HeaderPage() {
                     <a data-tooltip-id="tooltip-discord" data-tooltip-content="Copiar Discord" style={{cursor: "pointer"}} onClick={clipDiscord} target="_blank" rel="noreferrer"><BsDiscord size={35} /></a>
                 </div>
 
-                <div data-aos='fade-right' className="header-content infos">
+                <div data-aos="fade-right" className="header-content infos">
                     <p className="fadeinText">
                         {`" ${messagesDevs.toast[currentMessageIndex]["message"]} "`}
                     </p>
@@ -86,8 +81,8 @@ function HeaderPage() {
             </div>
             <Tooltip
                 id={`tooltip-discord`}
-                arrowColor='rgba(3, 126, 219, 0.4)'
-                style={{ backgroundColor: 'rgba(3, 126, 219, 0.4)', borderRadius: '5px' }}
+                arrowColor="rgba(3, 126, 219, 0.4)"
+                style={{ backgroundColor: "rgba(3, 126, 219, 0.4)", borderRadius: "5px" }}
             />
         </div>
     );

@@ -25,7 +25,7 @@ function HomePage() {
       Aos.init(
         { 
           duration: 2000,
-          easing: 'ease',
+          easing: "ease",
           once: true,
           offset: 0
         }
@@ -43,9 +43,9 @@ function HomePage() {
       <>
         <div className="div--pages">
           <HeaderPage />
-          <hr data-aos='fade' />
+          <hr data-aos="fade" />
           <SkillsPage />
-          <hr id="a" data-aos='fade' />
+          <hr id="a" data-aos="fade" />
           <Projects />
         </div>
         <Footer />

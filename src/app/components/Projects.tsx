@@ -1,9 +1,9 @@
-import React from 'react';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "@/styles/projects.css";
 
-import { projects } from '@/utils/projects';
-import ProjectCarousel from '@/utils/carousel';
+import { projects } from "@/utils/projects";
+import ProjectCarousel from "@/utils/carousel";
 
 function Projects() {
     return (
