@@ -4,7 +4,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
- 
+
 export const viewport: Viewport = {
   themeColor: "#037edb",
   initialScale: 1,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "DRYPZZ - DEV",
     type: "website",
     url: "https://drypzz.netlify.app/",
-    images: [{url: "/images/0.jpg"}],
+    images: [{ url: "/images/0.jpg" }],
     countryName: "Brazil",
     locale: "pt_BR",
   },

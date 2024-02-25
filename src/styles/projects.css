@@ -1,11 +1,11 @@
-.projects-container{
+.projects-container {
     position: relative;
     width: 100%;
     margin: 0 auto;
     text-align: center;
 }
 
-.projects-container-content{
+.projects-container-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -13,46 +13,46 @@
     margin-top: 30px;
 }
 
-.projects-carousel-content--carousel{
+.projects-carousel-content--carousel {
     cursor: pointer;
     transition: all .3s ease-in-out;
 }
 
-.projects-carousel-content--carousel:hover{
+.projects-carousel-content--carousel:hover {
     opacity: .7;
 }
 
-.projects-carousel-content{
+.projects-carousel-content {
     max-width: 700px;
     padding: 20px;
     border: 1px solid var(--primary-color-variant);
     border-radius: 12px;
 }
 
-.projects-carousel-content--title{
+.projects-carousel-content--title {
     font-weight: "bold";
     margin-bottom: 10px;
 }
 
-.projects-carousel-content--title h2 span{
+.projects-carousel-content--title h2 span {
     color: var(--primary-color);
     font-style: italic;
     font-weight: 400;
 }
 
-.projects-carousel-content--carousel .image-carousel{
+.projects-carousel-content--carousel .image-carousel {
     margin: 5px;
 }
 
-.carousel .slide img{
-    width: 100%!important;
-    border: 4px solid var(--primary-color)!important;
+.carousel .slide img {
+    width: 100% !important;
+    border: 4px solid var(--primary-color) !important;
 }
 
 
 
 
-.projects-technology{
+.projects-technology {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,12 +61,12 @@
     gap: 20px;
 }
 
-.projects-technology .technology svg{
+.projects-technology .technology svg {
     width: 50px;
     transition: all .3s ease-in-out;
 }
 
-.projects-technology .technology svg:hover{
+.projects-technology .technology svg:hover {
     transform: scale(1.2);
 }
 
@@ -76,7 +76,7 @@
 
 /* Modal */
 
-.modal-container{
+.modal-container {
     padding: 20px;
     display: flex;
     position: fixed;
@@ -94,7 +94,7 @@
     flex-direction: column;
 }
 
-.modal-content{
+.modal-content {
     width: 75%;
     pointer-events: auto;
     position: relative;
@@ -102,11 +102,11 @@
     border: none;
 }
 
-.modal-content-close{
+.modal-content-close {
     margin-top: 10px;
 }
 
-.modal-content-close button{
+.modal-content-close button {
     padding: 10px 50px;
     color: red;
     background: none;
@@ -118,7 +118,7 @@
     background: none;
 }
 
-.modal-content-close button:hover{
+.modal-content-close button:hover {
     background: red;
     color: white;
 }
@@ -128,16 +128,16 @@
 
 /* Media Queries */
 
-@media screen and (max-width: 960px){
-    .projects-carousel-content{
+@media screen and (max-width: 960px) {
+    .projects-carousel-content {
         max-width: 100%;
     }
 
-    .modal-content{
+    .modal-content {
         width: 100%;
     }
 
-    .projects-technology .technology svg{
+    .projects-technology .technology svg {
         width: 40px;
     }
 }

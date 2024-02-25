@@ -30,11 +30,11 @@ export const projects = [
             "/images/_p1/09.png",
         ],
         technologies: [
-            {Component: SkillCSS3, tooltipContent: "CSS3" },
-            {Component: SkillHTML5, tooltipContent: "HTML5" },
-            {Component: SkillNextJS, tooltipContent: "NextJS" },
+            { Component: SkillCSS3, tooltipContent: "CSS3" },
+            { Component: SkillHTML5, tooltipContent: "HTML5" },
+            { Component: SkillNextJS, tooltipContent: "NextJS" },
             // {Component: SkillJavaScript, tooltipContent: "JavaScript" },
-            {Component: SkillJSX, tooltipContent: "JSX" },
+            { Component: SkillJSX, tooltipContent: "JSX" },
         ],
     },
 
@@ -58,9 +58,9 @@ export const projects = [
             "/images/_p2/09.png",
         ],
         technologies: [
-            {Component: SkillCSS3, tooltipContent: "CSS3" },
-            {Component: SkillHTML5, tooltipContent: "HTML5" },
-            {Component: SkillPHP, tooltipContent: "PHP" },
+            { Component: SkillCSS3, tooltipContent: "CSS3" },
+            { Component: SkillHTML5, tooltipContent: "HTML5" },
+            { Component: SkillPHP, tooltipContent: "PHP" },
         ],
     },
     {
@@ -75,11 +75,11 @@ export const projects = [
             "/images/_p3/02.png",
         ],
         technologies: [
-            {Component: SkillCSS3, tooltipContent: "CSS3" },
-            {Component: SkillHTML5, tooltipContent: "HTML5" },
-            {Component: SkillNextJS, tooltipContent: "NextJS" },
+            { Component: SkillCSS3, tooltipContent: "CSS3" },
+            { Component: SkillHTML5, tooltipContent: "HTML5" },
+            { Component: SkillNextJS, tooltipContent: "NextJS" },
             // {Component: SkillTypeScript, tooltipContent: "TypeScript" },
-            {Component: SkillTSX, tooltipContent: "TSX" },
+            { Component: SkillTSX, tooltipContent: "TSX" },
         ],
     },
 ];

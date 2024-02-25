@@ -24,7 +24,7 @@ function HeaderPage() {
         const interval = setInterval(() => {
             setCurrentMessageIndex(prevIndex => (prevIndex + 1) % messagesDevs.toast.length);
         }, 5000);
-      
+
         return () => clearInterval(interval);
     }, []);
 
@@ -60,12 +60,12 @@ function HeaderPage() {
             </div>
 
             <div>
-                <div data-aos="fade-left"  className="header-content icons">
+                <div data-aos="fade-left" className="header-content icons">
                     <a href="https://github.com/drypzz/" target="_blank"><BsGithub size={35} /></a>
                     <a href="https://www.instagram.com/_gustavoaap/" target="_blank" rel="noreferrer"><BsInstagram size={35} /></a>
                     <a href="https://www.linkedin.com/in/gustavoaap/" target="_blank" rel="noreferrer"><BsLinkedin size={35} /></a>
                     <a href="https://www.facebook.com/igustavoaap/" target="_blank" rel="noreferrer"><BsFacebook size={35} /></a>
-                    <a data-tooltip-id="tooltip-discord" data-tooltip-content="Copiar Discord" style={{cursor: "pointer"}} onClick={clipDiscord} target="_blank" rel="noreferrer"><BsDiscord size={35} /></a>
+                    <a data-tooltip-id="tooltip-discord" data-tooltip-content="Copiar Discord" style={{ cursor: "pointer" }} onClick={clipDiscord} target="_blank" rel="noreferrer"><BsDiscord size={35} /></a>
                 </div>
 
                 <div data-aos="fade-right" className="header-content infos">

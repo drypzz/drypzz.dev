@@ -2,7 +2,7 @@ import { Notify, INotifyOptions } from "notiflix/build/notiflix-notify-aio";
 
 type NotifyType = "error" | "success" | "info" | "warning";
 
-const defaultNotifyStyle: INotifyOptions  = {
+const defaultNotifyStyle: INotifyOptions = {
     position: "right-bottom",
     cssAnimationStyle: "from-right",
     timeout: 3000,

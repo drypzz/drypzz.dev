@@ -24,7 +24,7 @@ function HomePage() {
     setTimeout(() => {
       setLoading(false);
       Aos.init(
-        { 
+        {
           duration: 2000,
           easing: "ease",
           once: true,
@@ -40,19 +40,19 @@ function HomePage() {
         <div className="loading">
           <BounceLoader color={"#037edb"} loading={loading} size={150} />
         </div>
-      :
-      <>
-        <div className="div--pages">
-          <HeaderPage />
-          <hr data-aos="fade" />
-          <SkillsPage />
-          <hr id="a" data-aos="fade" />
-          <Projects />
-          <hr id="b" data-aos="fade" />
-          <ContactPage />
-        </div>
-        <Footer />
-      </>
+        :
+        <>
+          <div className="div--pages">
+            <HeaderPage />
+            <hr data-aos="fade" />
+            <SkillsPage />
+            <hr id="a" data-aos="fade" />
+            <Projects />
+            <hr id="b" data-aos="fade" />
+            <ContactPage />
+          </div>
+          <Footer />
+        </>
       }
     </>
   );

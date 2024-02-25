@@ -44,7 +44,7 @@ function ProjectCarousel({ title, description, images, secondaryImages, technolo
         return () => {
             body?.classList.remove("__className_e29382");
         };
-    }, [ showModal ]);
+    }, [showModal]);
 
     return (
         <>

@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", "Roboto", sans-serif;
 }
 
-:root{
+:root {
     --primary-color: #037edb;
     --primary-color-rgb: rgb(3, 126, 219);
     --primary-color-variant: rgba(3, 126, 219, .4);
@@ -36,11 +36,11 @@
     background: var(--primary-color);
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-body{
+body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "Poppins", sans-serif;
@@ -49,11 +49,15 @@ body{
     overflow-x: hidden;
 }
 
-body.__className_e29382{
+body.__className_e29382 {
     overflow: hidden;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-weight: 500;
 }
 
@@ -61,7 +65,7 @@ h1 {
     font-size: 2.5rem;
 }
 
-.loading{
+.loading {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,11 +75,11 @@ h1 {
 
 .gradient-bg-welcome {
     background: radial-gradient(at 0% 0%, var(--primary-color-variant), transparent 70%),
-    radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%),
-    radial-gradient(at 100% 0%, var(--secondary-color-variant), transparent 50%);
+        radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%),
+        radial-gradient(at 100% 0%, var(--secondary-color-variant), transparent 50%);
 }
 
-.div--pages{
+.div--pages {
     display: flex;
     padding: 20px;
     flex-direction: column;
@@ -85,26 +89,31 @@ h1 {
     gap: 2rem;
 }
 
-hr, hr#a, hr#b{
+hr,
+hr#a,
+hr#b {
     width: 80%;
     border: 1px solid rgba(53, 153, 204, .2);
     margin: 1rem 0;
 }
 
-hr#a{
+hr#a {
     width: 70%;
 }
 
-hr#b{
+hr#b {
     width: 50%;
 }
 
-@media screen and (max-width: 960px){
-    hr, hr#a, hr#b {
+@media screen and (max-width: 960px) {
+
+    hr,
+    hr#a,
+    hr#b {
         width: 100%;
     }
 
-    h1{
+    h1 {
         font-size: 2rem;
     }
 }

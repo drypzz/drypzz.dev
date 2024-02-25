@@ -5,7 +5,7 @@ import { AlertNotify } from "@/utils/notify";
 
 import "@/styles/contact.css";
 
-function ContactPage () {
+function ContactPage() {
     const formRef = useRef<HTMLFormElement>(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -42,7 +42,7 @@ function ContactPage () {
             }
 
             formRef.current?.reset();
-            
+
             AlertNotify("success", "Mensagem enviada com sucesso!");
         } catch (error) {
             AlertNotify("error", "Erro ao tentar enviar o email.");
