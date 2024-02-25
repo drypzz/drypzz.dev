@@ -37,16 +37,17 @@ function ContactPage () {
             if (!response.ok) {
                 AlertNotify("error", "Erro ao enviar mensagem!");
                 setIsLoading(false);
+                formRef.current?.reset();
                 return;
             }
 
-            if (formRef.current) {
-                formRef.current.reset();
-            };
+            formRef.current?.reset();
             
             AlertNotify("success", "Mensagem enviada com sucesso!");
         } catch (error) {
-            AlertNotify("error", String(error));
+            AlertNotify("error", "Erro ao tentar enviar o email.");
+            console.error("Error:", error);
+            setIsLoading(false);
         } finally {
             setIsLoading(false);
         }
