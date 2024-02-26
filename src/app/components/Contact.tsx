@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
+
 import { FaSpinner } from 'react-icons/fa';
+
+import emailjs from "@emailjs/browser";
 
 import { AlertNotify } from "@/utils/notify";
 
@@ -15,12 +18,7 @@ function ContactPage() {
 
         const formData = new FormData(e.currentTarget);
 
-        let isEmpty = false;
-        formData.forEach((value) => {
-            if (!value) {
-                isEmpty = true;
-            }
-        });
+        const isEmpty = Array.from(formData.values()).some(value => !value);
 
         if (isEmpty) {
             AlertNotify("error", "Preencha todos os campos!");
@@ -28,26 +26,19 @@ function ContactPage() {
             return;
         }
 
+        const template = {
+            from_name: formData.get('name') as string,
+            message: formData.get('message') as string,
+            email: formData.get('email') as string,
+        };
+
         try {
-            const response = await fetch("https://formsubmit.co/gugapalmeiraa@gmail.com", {
-                method: "POST",
-                body: formData
-            });
-
-            if (!response.ok) {
-                AlertNotify("error", "Erro ao enviar mensagem!");
-                setIsLoading(false);
-                formRef.current?.reset();
-                return;
-            }
-
-            formRef.current?.reset();
-
+            const response = await emailjs.send('service_swpwf1z', 'template_zot8bas', template, 'hYhCh-3mtaW-47Sub');
             AlertNotify("success", "Mensagem enviada com sucesso!");
+            formRef.current?.reset();
         } catch (error) {
+            console.error('FAILED...', error);
             AlertNotify("error", "Erro ao tentar enviar o email.");
-            console.error("Error:", error);
-            setIsLoading(false);
         } finally {
             setIsLoading(false);
         }
@@ -60,7 +51,7 @@ function ContactPage() {
                 <p>Se precisar de ajuda ou quiser conversar, fique à vontade para me enviar um email.</p>
             </div>
             <div data-aos="fade-right" className="contact-content">
-                <form name="contact" action="#" method="POST" onSubmit={handleSubmit} ref={formRef}>
+                <form name="contact" onSubmit={handleSubmit} ref={formRef}>
                     <div className="forms-content">
                         <div className="forms-content--item">
                             <span>Nome:</span>
@@ -94,6 +85,6 @@ function ContactPage() {
             </div>
         </div>
     );
-};
+}
 
 export default ContactPage;

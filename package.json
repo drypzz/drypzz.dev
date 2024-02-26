@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.1.0",
     "aos": "^2.3.4",
     "next": "14.1.0",
     "notiflix": "^3.2.7",
