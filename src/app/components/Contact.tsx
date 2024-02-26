@@ -30,6 +30,8 @@ function ContactPage() {
             from_name: formData.get('name') as string,
             message: formData.get('message') as string,
             email: formData.get('email') as string,
+            hours: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+            year: new Date().getFullYear(),
         };
 
         try {
