@@ -33,9 +33,13 @@ function ContactPage() {
         };
 
         try {
-            const response = await emailjs.send('service_swpwf1z', 'template_zot8bas', template, 'hYhCh-3mtaW-47Sub');
-            AlertNotify("success", "Mensagem enviada com sucesso!");
-            formRef.current?.reset();
+            const response = await emailjs.send('service_swpwf1z', 'template_zot8bas', template, 'hYhCh-3mtaW-47Sub').then((response) => {
+                AlertNotify("success", "Mensagem enviada com sucesso!");
+                formRef.current?.reset();
+            }).catch((error) => {
+                console.error('FAILED...', error);
+                AlertNotify("error", "Erro ao tentar enviar o email.");
+            });
         } catch (error) {
             console.error('FAILED...', error);
             AlertNotify("error", "Erro ao tentar enviar o email.");
