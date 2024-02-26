@@ -16,46 +16,54 @@ import ContactPage from "./components/Contact";
 import "./globals.css";
 
 function HomePage() {
+    const [loading, setLoading] = useState<boolean>(true);
 
-  const [loading, setLoading] = useState<boolean>(false);
+    useEffect(() => {
+        const initAos = () => {
+            Aos.init({
+                duration: 2000,
+                easing: "ease",
+                once: true,
+                offset: 0
+            });
+        };
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      Aos.init(
-        {
-          duration: 2000,
-          easing: "ease",
-          once: true,
-          offset: 0
-        }
-      );
-    }, 5000);
-  }, []);
+        const timeoutId = setTimeout(() => {
+          setLoading(false);
+          initAos();
+        }, 5000);
 
-  return (
-    <>
-      {loading ?
-        <div className="loading">
-          <BounceLoader color={"#037edb"} loading={loading} size={150} />
-        </div>
-        :
+        return () => clearTimeout(timeoutId);
+    }, []);
+
+    const renderContent = () => {
+        return (
+            <>
+                <div className="div--pages">
+                    <HeaderPage />
+                    <hr data-aos="fade" />
+                    <SkillsPage />
+                    <hr id="a" data-aos="fade" />
+                    <Projects />
+                    <hr id="b" data-aos="fade" />
+                    <ContactPage />
+                </div>
+                <Footer />
+            </>
+        );
+    };
+
+    return (
         <>
-          <div className="div--pages">
-            <HeaderPage />
-            <hr data-aos="fade" />
-            <SkillsPage />
-            <hr id="a" data-aos="fade" />
-            <Projects />
-            <hr id="b" data-aos="fade" />
-            <ContactPage />
-          </div>
-          <Footer />
+            {loading ? (
+                <div className="loading">
+                    <BounceLoader color={"#037edb"} loading={loading} size={150} />
+                </div>
+            ) : (
+                renderContent()
+            )}
         </>
-      }
-    </>
-  );
+    );
 }
 
 export default HomePage;

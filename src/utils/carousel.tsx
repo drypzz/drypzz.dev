@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 import { Carousel } from "react-responsive-carousel";
 
 import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 type Technology = {
     Component: React.ComponentType<any>;

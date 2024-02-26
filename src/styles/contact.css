@@ -29,6 +29,7 @@
 
 .contact-content form input[type="text"],
 .contact-content form input[type="email"],
+.contact-content form input[type="number"],
 .contact-content form textarea {
     background: none;
     border: 1px solid var(--primary-color);
@@ -43,6 +44,22 @@
 .forms-content {
     margin-top: 20px;
     margin-bottom: 10px;
+}
+
+.forms-content--item .error{
+    color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.forms-content--item .error div svg{
+    vertical-align: middle;
 }
 
 .forms-content#btn {

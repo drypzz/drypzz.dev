@@ -1,7 +1,7 @@
-"use client";
-
 import { useEffect } from "react";
+
 import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 import {
     SkillCSS3,
@@ -18,7 +18,7 @@ import {
 } from "@/utils/skills";
 
 import "@/styles/skills.css";
-import "react-tooltip/dist/react-tooltip.css";
+
 
 function SkillsPage() {
     useEffect(() => {
@@ -39,9 +39,8 @@ function SkillsPage() {
         { SkillComponent: SkillTSX, tooltipContent: "TSX" }
     ];
 
-    return (
-        <div className="skills-container">
-            <h1 data-aos="fade-left">My Technologies 📋</h1>
+    const renderSkills = () => {
+        return (
             <div data-aos="fade-right" className="skills-technologies">
                 {skills.map((skill, index) => (
                     <div
@@ -54,14 +53,25 @@ function SkillsPage() {
                     </div>
                 ))}
             </div>
-            {skills.map((skill, index) => (
-                <Tooltip
-                    id={`tooltip-${index}`}
-                    key={index}
-                    arrowColor="rgba(3, 126, 219, 0.4)"
-                    style={{ backgroundColor: "rgba(3, 126, 219, 0.4)", borderRadius: "5px" }}
-                />
-            ))}
+        );
+    };
+
+    const renderTooltips = () => {
+        return skills.map((skill, index) => (
+            <Tooltip
+                id={`tooltip-${index}`}
+                key={index}
+                arrowColor="rgba(3, 126, 219, 0.4)"
+                style={{ backgroundColor: "rgba(3, 126, 219, 0.4)", borderRadius: "5px" }}
+            />
+        ));
+    };
+
+    return (
+        <div className="skills-container">
+            <h1 data-aos="fade-left">My Technologies 📋</h1>
+            {renderSkills()}
+            {renderTooltips()}
         </div>
     );
 }
