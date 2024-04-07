@@ -34,9 +34,7 @@ function SkillsPage() {
         { SkillComponent: SkillHTML5, tooltipContent: "HTML5" },
         { SkillComponent: SkillCSS3, tooltipContent: "CSS3" },
         { SkillComponent: SkillLua, tooltipContent: "Lua" },
-        { SkillComponent: SkillMySQL, tooltipContent: "MySQL" },
-        { SkillComponent: SkillJSX, tooltipContent: "JSX" },
-        { SkillComponent: SkillTSX, tooltipContent: "TSX" }
+        { SkillComponent: SkillMySQL, tooltipContent: "MySQL" }
     ];
 
     const renderSkills = () => {
