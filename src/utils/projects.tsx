@@ -33,8 +33,8 @@ export const projects = [
             { Component: SkillCSS3, tooltipContent: "CSS3" },
             { Component: SkillHTML5, tooltipContent: "HTML5" },
             { Component: SkillNextJS, tooltipContent: "NextJS" },
-            // {Component: SkillJavaScript, tooltipContent: "JavaScript" },
-            { Component: SkillJSX, tooltipContent: "JSX" },
+            {Component: SkillJavaScript, tooltipContent: "JavaScript" },
+            // { Component: SkillJSX, tooltipContent: "JSX" },
         ],
     },
 
@@ -78,8 +78,8 @@ export const projects = [
             { Component: SkillCSS3, tooltipContent: "CSS3" },
             { Component: SkillHTML5, tooltipContent: "HTML5" },
             { Component: SkillNextJS, tooltipContent: "NextJS" },
-            // {Component: SkillTypeScript, tooltipContent: "TypeScript" },
-            { Component: SkillTSX, tooltipContent: "TSX" },
+            {Component: SkillTypeScript, tooltipContent: "TypeScript" },
+            // { Component: SkillTSX, tooltipContent: "TSX" },
         ],
     },
 ];

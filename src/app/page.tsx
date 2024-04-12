@@ -18,6 +18,12 @@ import "./globals.css";
 function HomePage() {
     const [loading, setLoading] = useState<boolean>(true);
 
+    function getRandomTimer() {
+        const result = (Math.random() * 4) + 1;
+
+        return Math.floor(result);
+    };
+
     useEffect(() => {
         const initAos = () => {
             Aos.init({
@@ -31,27 +37,10 @@ function HomePage() {
         const timeoutId = setTimeout(() => {
           setLoading(false);
           initAos();
-        }, 5000);
+        }, (getRandomTimer() * 1000));
 
         return () => clearTimeout(timeoutId);
     }, []);
-
-    const renderContent = () => {
-        return (
-            <>
-                <div className="div--pages">
-                    <HeaderPage />
-                    <hr data-aos="fade" />
-                    <SkillsPage />
-                    <hr id="a" data-aos="fade" />
-                    <Projects />
-                    <hr id="b" data-aos="fade" />
-                    <ContactPage />
-                </div>
-                <Footer />
-            </>
-        );
-    };
 
     return (
         <>
@@ -60,10 +49,21 @@ function HomePage() {
                     <BounceLoader color={"#037edb"} loading={loading} size={150} />
                 </div>
             ) : (
-                renderContent()
+                <>
+                    <div className="div--pages">
+                        <HeaderPage />
+                        <hr data-aos="fade" />
+                        <SkillsPage />
+                        <hr id="a" data-aos="fade" />
+                        <Projects />
+                        <hr id="b" data-aos="fade" />
+                        <ContactPage />
+                    </div>
+                    <Footer />
+                </>
             )}
         </>
     );
-}
+};
 
 export default HomePage;
