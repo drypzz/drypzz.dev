@@ -80,7 +80,7 @@ export const projects = [
         ],
     },
     {
-        title: "Coderocker Front-end",
+        title: "Coderockr Front-end",
         description: "Teste",
         link: "https://github.com/drypzz/coderockr-frontTest",
         images: [
