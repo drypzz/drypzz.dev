@@ -14,13 +14,14 @@ type Technology = {
 
 type ProjectProps = {
     title: string;
+    link: string;
     description: string;
     images: string[];
     secondaryImages: string[];
     technologies: Technology[];
 }
 
-function ProjectCarousel({ title, description, images, secondaryImages, technologies }: ProjectProps) {
+function ProjectCarousel({ title, link, description, images, secondaryImages, technologies }: ProjectProps) {
 
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<any>(null);
@@ -52,7 +53,7 @@ function ProjectCarousel({ title, description, images, secondaryImages, technolo
         <>
             <div data-aos="fade-left" className="projects-carousel-content">
                 <div className="projects-carousel-content--title">
-                    <h2>{title} <span>({description})</span></h2>
+                    <a target="_blank" href={link}>{title} <span>({description})</span></a>
                 </div>
                 <div className="projects-carousel-content--carousel">
                     <Carousel autoPlay transitionTime={1500} interval={5000} showThumbs={false} stopOnHover={false} showStatus={false} infiniteLoop showArrows={true}>

@@ -19,7 +19,7 @@
 }
 
 .projects-carousel-content--carousel:hover {
-    opacity: .7;
+    opacity: .5;
 }
 
 .projects-carousel-content {
@@ -34,7 +34,18 @@
     margin-bottom: 10px;
 }
 
-.projects-carousel-content--title h2 span {
+.projects-carousel-content--title a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all .2s ease-in-out;
+}
+
+.projects-carousel-content--title a:hover{
+    color: var(--primary-color);
+}
+
+.projects-carousel-content--title a span {
     color: var(--primary-color);
     font-style: italic;
     font-weight: 400;

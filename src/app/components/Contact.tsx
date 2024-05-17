@@ -161,8 +161,7 @@ function ContactPage() {
     return (
         <div className="contact-container">
             <div data-aos="fade-left" className="contact-content">
-                <h1>Contato ✉️</h1>
-                <p>Se precisar de ajuda ou quiser conversar, fique à vontade para me enviar um email.</p>
+                <h1>Contact ✉️</h1>
             </div>
             <div data-aos="fade-right" className="contact-content">
                 <ContactForm
