@@ -5,6 +5,7 @@ import {
     SkillJavaScript,
     SkillNextJS,
     SkillPHP,
+    SkillMySQL,
 } from "./skills";
 
 export const projects = [
@@ -59,6 +60,7 @@ export const projects = [
             { Component: SkillCSS3, tooltipContent: "CSS3" },
             { Component: SkillHTML5, tooltipContent: "HTML5" },
             { Component: SkillPHP, tooltipContent: "PHP" },
+            { Component: SkillMySQL, tooltipContent: "MySQL"}
         ],
     },
     {
