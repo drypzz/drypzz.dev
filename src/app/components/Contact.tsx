@@ -152,7 +152,7 @@ function ContactPage() {
 
     const sendEmail = async (template: TemplateDataProps) => {
         try {
-            await emailjs.send('service_swpwf1z', 'template_zot8bas', template, 'hYhCh-3mtaW-47Sub');
+            await emailjs.send('service_6mp012k', 'template_zot8bas', template, 'hYhCh-3mtaW-47Sub');
         } catch (error) {
             throw error;
         }
