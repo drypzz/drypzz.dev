@@ -33,10 +33,10 @@ const ContactForm: ForwardRefExoticComponent<ContactFormProps & RefAttributes<HT
         <form name="contact" onSubmit={onSubmit} ref={ref}>
             <div className="forms-content">
                 <div className="forms-content--item">
-                    <span>Nome:</span>
+                    <span>Name:</span>
                 </div>
                 <div className="forms-content--item">
-                    <input placeholder="Digite seu nome..." type="text" name="name" />
+                    <input placeholder="Type your name..." type="text" name="name" />
                 </div>
             </div>
             <div className="forms-content">
@@ -44,15 +44,15 @@ const ContactForm: ForwardRefExoticComponent<ContactFormProps & RefAttributes<HT
                     <span>Email:</span>
                 </div>
                 <div className="forms-content--item">
-                    <input placeholder="Digite seu email..." type="email" name="email" />
+                    <input placeholder="Type your email..." type="email" name="email" />
                 </div>
             </div>
             <div className="forms-content">
                 <div className="forms-content--item">
-                    <span>Mensagem:</span>
+                    <span>Message:</span>
                 </div>
                 <div className="forms-content--item">
-                    <textarea placeholder="Olá..." name="message" />
+                    <textarea placeholder="Type your message..." name="message" />
                 </div>
             </div>
             <div className="forms-content">
@@ -82,8 +82,6 @@ const ContactForm: ForwardRefExoticComponent<ContactFormProps & RefAttributes<HT
     );
 });
 
-ContactForm.displayName = 'ContactForm';
-
 function ContactPage() {
     const formRef = useRef<HTMLFormElement>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -97,8 +95,8 @@ function ContactPage() {
     }, []);
 
     const generateRandomNumbers = () => {
-        const randomNumber1 = Math.floor(Math.random() * 10);
-        const randomNumber2 = Math.floor(Math.random() * 10);
+        const randomNumber1 = Math.floor(Math.random() * 100);
+        const randomNumber2 = Math.floor(Math.random() * 100);
         setNum1(randomNumber1);
         setNum2(randomNumber2);
     };
