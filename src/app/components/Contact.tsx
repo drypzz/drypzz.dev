@@ -75,7 +75,7 @@ const ContactForm: ForwardRefExoticComponent<ContactFormProps & RefAttributes<HT
             </div>
             <div id="btn" className="forms-content">
                 <button type="submit" id={String(isLoading)} disabled={isLoading}>
-                    {isLoading ? <FaSpinner className="spinner" /> : 'Enviar'}
+                    {isLoading ? <FaSpinner className="spinner" /> : 'Submit'}
                 </button>
             </div>
         </form>
