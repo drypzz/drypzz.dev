@@ -82,6 +82,8 @@ const ContactForm: ForwardRefExoticComponent<ContactFormProps & RefAttributes<HT
     );
 });
 
+ContactForm.displayName = "ContactForm";
+
 function ContactPage() {
     const formRef = useRef<HTMLFormElement>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -109,13 +111,13 @@ function ContactPage() {
         const isEmpty = Array.from(formData.values()).some(value => !value);
 
         if (isEmpty) {
-            AlertNotify("error", "Preencha todos os campos!");
+            AlertNotify("error", "Fill in all the fields!");
             setIsLoading(false);
             return;
         }
 
         if (captchaValue.trim() !== (num1 + num2).toString()) {
-            setCaptchaError("Resposta incorreta.");
+            setCaptchaError("Incorrect answer.");
             setIsLoading(false);
             return;
         }
@@ -130,11 +132,11 @@ function ContactPage() {
 
         try {
             await sendEmail(template);
-            AlertNotify("success", "Mensagem enviada com sucesso!");
+            AlertNotify("success", "Message sent successfully!");
             formRef.current?.reset();
         } catch (error) {
             console.error('FAILED...', error);
-            AlertNotify("error", "Erro ao tentar enviar o email.");
+            AlertNotify("error", "Error when trying to send the email.");
         } finally {
             setIsLoading(false);
             setCaptchaValue("");
