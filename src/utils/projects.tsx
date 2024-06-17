@@ -122,4 +122,25 @@ export const projects = [
             { Component: SkillJavaScript, tooltipContent: "JavaScript" },
         ],
     },
+    {
+        title: "Museu de Informática",
+        description: "Estudo",
+        link: "https://museuinfo.netlify.app",
+        images: [
+            "/images/_p6/01.png",
+            "/images/_p6/02.png",
+            "/images/_p6/03.png",
+        ],
+        secondaryImages: [
+            "/images/_p6/01.png",
+            "/images/_p6/02.png",
+            "/images/_p6/03.png",
+            "/images/_p6/04.png",
+        ],
+        technologies: [
+            { Component: SkillCSS3, tooltipContent: "CSS3" },
+            { Component: SkillHTML5, tooltipContent: "HTML5" },
+            { Component: SkillJavaScript, tooltipContent: "JavaScript" },
+        ],
+    },
 ];
