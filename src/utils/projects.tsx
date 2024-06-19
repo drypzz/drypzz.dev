@@ -11,7 +11,7 @@ import {
 export const projects = [
     {
         title: "Guns Airsoft Arena",
-        description: "Estudo",
+        description: "Course",
         link: "https://github.com/drypzz/gunsairsoftarena",
         images: [
             "/images/_p1/01.png",
@@ -38,7 +38,7 @@ export const projects = [
 
     {
         title: "Sr. & Sra. Bem Estar",
-        description: "Estudo",
+        description: "Course",
         link: "https://github.com/drypzz/2022_",
         images: [
             "/images/_p2/01.png",
@@ -65,7 +65,7 @@ export const projects = [
     },
     {
         title: "Portfólio",
-        description: "Pessoal",
+        description: "Personal",
         link: "https://github.com/drypzz/drypzz.dev",
         images: [
             "/images/_p3/01.png",
@@ -83,7 +83,7 @@ export const projects = [
     },
     {
         title: "Coderockr Front-end",
-        description: "Teste",
+        description: "Test",
         link: "https://github.com/drypzz/coderockr-frontTest",
         images: [
             "/images/_p4/01.png",
@@ -103,7 +103,7 @@ export const projects = [
     },
     {
         title: "Ilhabela RP",
-        description: "Estudo",
+        description: "Study",
         link: "https://ilhabelaroleplay.netlify.app",
         images: [
             "/images/_p5/01.png",
@@ -124,7 +124,7 @@ export const projects = [
     },
     {
         title: "Museu de Informática",
-        description: "Estudo",
+        description: "Course",
         link: "https://museuinfo.netlify.app",
         images: [
             "/images/_p6/01.png",
