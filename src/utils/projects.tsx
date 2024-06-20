@@ -70,10 +70,12 @@ export const projects = [
         images: [
             "/images/_p3/01.png",
             "/images/_p3/02.png",
+            "/images/_p3/03.png",
         ],
         secondaryImages: [
             "/images/_p3/01.png",
             "/images/_p3/02.png",
+            "/images/_p3/03.png",
         ],
         technologies: [
             { Component: SkillCSS3, tooltipContent: "CSS3" },
