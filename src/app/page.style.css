@@ -1,0 +1,49 @@
+header{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+}
+
+header div h3{
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+header div h5{
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--gray);
+}
+
+header div span#locale{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--gray);
+}
+
+header div:last-child img{
+    width: 90%;
+    border-radius: 50%;
+    user-select: none;
+    border: 2px solid var(--primary-color);
+}
+
+@media screen and (max-width: 960px) {
+
+    header{
+        gap: 20px;
+    }
+
+    header div h3{
+        font-size: 1.8rem;
+    }
+    
+    header div:last-child img{
+        width: 70%;
+    }
+
+}

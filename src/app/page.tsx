@@ -1,67 +1,49 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import BounceLoader from "react-spinners/BounceLoader";
+import LoadingScreen from "./components/loading";
+import HandlingEmoji from "./components/handling";
 
-import Aos from "aos";
-import "@/styles/dataos.css";
+import "./page.style.css";
 
-import HeaderPage from "./components/Header";
-import SkillsPage from "./components/Skills";
-import Projects from "./components/Projects";
-import Footer from "./components/Footer";
-import ContactPage from "./components/Contact";
+const HomePage = () => {
 
-import "./globals.css";
-
-function HomePage() {
-    const [loading, setLoading] = useState<boolean>(true);
-
-    function getRandomTimer() {
-        const result = (Math.random() * 4) + 1;
-
-        return Math.floor(result);
-    };
+    const [ loading, setLoading ] = useState<boolean>(true);
 
     useEffect(() => {
-        const initAos = () => {
-            Aos.init({
-                duration: 2000,
-                easing: "ease",
-                once: true,
-                offset: 0
-            });
-        };
-
-        const timeoutId = setTimeout(() => {
-          setLoading(false);
-          initAos();
-        }, (getRandomTimer() * 1000));
-
-        return () => clearTimeout(timeoutId);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }, []);
 
     return (
         <>
-            {loading ? (
-                <div className="loading">
-                    <BounceLoader color={"#037edb"} loading={loading} size={150} />
+        {loading ?
+            <LoadingScreen />
+        :
+            <header>
+                <div>
+                    <h3>Hello everyone <HandlingEmoji /></h3>
                 </div>
-            ) : (
-                <>
-                    <div className="div--pages">
-                        <HeaderPage />
-                        <hr data-aos="fade" />
-                        <SkillsPage />
-                        <hr id="a" data-aos="fade" />
-                        <Projects />
-                        <hr id="b" data-aos="fade" />
-                        <ContactPage />
-                    </div>
-                    <Footer />
-                </>
-            )}
+
+                <div>
+                    <h1>{"I'm DRYPZZ"}</h1>
+                </div>
+
+                <div>
+                    <h5>Programming Student and Front-end Developer</h5>
+                </div>
+
+                <div>
+                    <span id="locale">From Brazil - SC</span>
+                </div>
+
+                <div>
+                    <img draggable={false} src="/me.png" alt="Foto de Perfil de Gustavo" />
+                </div>
+            </header>
+        }
         </>
     );
 };

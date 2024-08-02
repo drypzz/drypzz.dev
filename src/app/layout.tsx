@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const viewport: Viewport = {
   themeColor: "#037edb",
@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <main className="gradient-bg-welcome">
+        <main className="dev-background">
           {children}
         </main>
       </body>
