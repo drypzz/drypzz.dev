@@ -42,6 +42,14 @@ html {
     scroll-behavior: smooth;
 }
 
+hr.dev{
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid var(--primary-color-variant);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 body{
     background: var(--background-body);
     height: 100%;
@@ -49,7 +57,14 @@ body{
 }
 
 .dev-background {
-    height: 100vh;
+    padding: 20px;
     background: radial-gradient(at 0% 0%, var(--primary-color-variant), transparent 70%),
     radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%)
+}
+
+@media screen and (max-width: 960px) {
+    
+    hr.dev{
+        width: 100%;
+    }
 }
