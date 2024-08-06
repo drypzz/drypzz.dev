@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
   themeColor: "#037edb",
   initialScale: 1,
+  maximumScale: 1,
   width: "device-width",
 }
 

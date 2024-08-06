@@ -54,10 +54,12 @@ body{
     background: var(--background-body);
     height: 100%;
     color: #fff;
+    text-align: center;
 }
 
 .dev-background {
     padding: 20px;
+    height: 100%;
     background: radial-gradient(at 0% 0%, var(--primary-color-variant), transparent 70%),
     radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%)
 }
