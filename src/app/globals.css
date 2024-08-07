@@ -42,12 +42,16 @@ html {
     scroll-behavior: smooth;
 }
 
-hr.dev{
-    width: 60%;
+hr.dev, hr#two.dev{
+    width: 70%;
     margin: 0 auto;
     border: 1px solid var(--primary-color-variant);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+hr#two.dev{
+    width: 50%;
 }
 
 body{
@@ -55,6 +59,10 @@ body{
     height: 100%;
     color: #fff;
     text-align: center;
+}
+
+.dev-title{
+    font-size: 2rem;
 }
 
 .dev-background {
@@ -66,7 +74,7 @@ body{
 
 @media screen and (max-width: 960px) {
     
-    hr.dev{
+    hr#one.dev, hr#two.dev{
         width: 100%;
     }
 }

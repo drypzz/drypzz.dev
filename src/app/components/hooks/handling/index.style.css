@@ -9,7 +9,7 @@
     100% { transform: rotate(0deg); }
 }
 
-span.dev-emoji{
+.dev-emoji{
     display: inline-block;
     animation: wave 2s infinite;
     transform-origin: 70% 70%;

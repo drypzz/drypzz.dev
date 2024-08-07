@@ -1,0 +1,8 @@
+.dev-projects-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 50px;
+}
