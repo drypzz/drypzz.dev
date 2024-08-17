@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { Images } from "@/app/utils/image.props";
 
-import "./Techs.style.css";
+import "./index.style.css";
 
 const Techs = () => {
 
@@ -25,18 +25,20 @@ const Techs = () => {
     }, []);
 
     return (
-        <section className="dev-techs">
-            <div>
-                <h1 className="dev-title">👨‍💻 My Techs and Tools</h1>
-            </div>
-            <div className="dev-techs-container">
-                {techsAndTools.map((item, index) => (
-                    <div key={index}>
-                        <img draggable={false} src={item.src} alt={item.alt} title={item.title} />
-                    </div>
-                ))}
-            </div>
-        </section>
+        <>
+            <section className="dev-techs">
+                <div>
+                    <h1 className="dev-title">👨‍💻 My Techs and Tools</h1>
+                </div>
+                <div className="dev-techs-container">
+                    {techsAndTools.map((item, index) => (
+                        <div key={index}>
+                            <img draggable={false} src={item.src} alt={item.alt} title={item.title} />
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </>
     );
 };
 

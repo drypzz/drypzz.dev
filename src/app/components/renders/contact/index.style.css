@@ -1,0 +1,115 @@
+.dev-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50vw;
+    border: 1px solid rgba(3, 126, 219, 0.2);
+    padding: 20px;
+    gap: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
+}
+
+.styled-form {
+    width: 100%;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px 10px 15px 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background: none;
+    color: #f4f4f4;
+    font-size: 16px;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease, padding-left 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    padding-left: 20px;
+    box-shadow: inset 0 -2px 0 var(--primary-color);
+}
+
+.form-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 16px;
+    color: #7f8c8d;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.form-input:not(:placeholder-shown) + .form-label,
+.form-input:focus + .form-label {
+    top: -10px;
+    left: 15px;
+    font-size: 12px;
+    background: #000;
+    border: 1px solid var(--primary-color);
+    padding: 0 5px;
+    color: #fff;
+}
+
+.form-textarea {
+    height: 150px;
+    resize: none;
+}
+
+.form-button {
+    padding: .5em 5em;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: green;
+    background: none;
+    transition: all .7s;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    outline: 2px solid green;
+}
+
+.form-button:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+    outline: 2px solid var(--primary-color);
+    box-shadow: 4px 5px 17px -4px var(--primary-color);
+}
+
+.form-button::before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width .7s;
+}
+
+.form-button:hover::before {
+    width: 250%;
+}
+
+@media screen and (max-width: 960px) {
+    .dev-contact {
+        width: 100%;
+    }
+}

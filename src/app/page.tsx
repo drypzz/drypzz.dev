@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 
 import LoadingScreen from "./components/pages/loading";
 
-import Header from "./components/renders/Header";
-import Techs from "./components/renders/Techs";
-import Projects from "./components/renders/Projects";
+import Header from "./components/renders/header";
+import Techs from "./components/renders/techs";
+import Projects from "./components/renders/projects";
+import Contact from "./components/renders/contact";
 
 const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);
@@ -28,6 +29,8 @@ const Home = () => {
                 <Techs />
                 <hr id="two" className="dev" />
                 <Projects />
+                <hr id="two" className="dev" />
+                <Contact />
             </>
         )}
         </>

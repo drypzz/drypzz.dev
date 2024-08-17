@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { FaGithub, FaInstagram, FaFacebook, FaDiscord, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 
-import HandlingEmoji from "../hooks/handling";
+import HandlingEmoji from "../../hooks/handling";
 
-import "./Header.style.css";
+import "./index.style.css";
 
 const Header = () => {
     return (
@@ -28,28 +28,23 @@ const Header = () => {
             </header>
             <section className="dev-social">
                 <div>
-                    <Link href="">
+                    <Link target="_blank" href="https://github.com/drypzz">
                         <FaGithub />
                     </Link>
                 </div>
                 <div>
-                    <Link href="">
+                    <Link target="_blank" href="https://www.instagram.com/_gustavoaap/">
                         <FaInstagram />
                     </Link>
                 </div>
                 <div>
-                    <Link href="">
+                    <Link target="_blank" href="https://www.linkedin.com/in/gustavoaap/">
                         <FaLinkedin />
                     </Link>
                 </div>
                 <div>
-                    <Link href="">
+                    <Link target="_blank" href="https://www.facebook.com/igustavoaap/">
                         <FaFacebook />
-                    </Link>
-                </div>
-                <div>
-                    <Link href="">
-                        <FaDiscord />
                     </Link>
                 </div>
             </section>

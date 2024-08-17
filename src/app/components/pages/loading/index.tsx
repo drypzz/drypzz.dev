@@ -4,9 +4,11 @@ import "./index.style.css";
 
 const LoadingScreen = () => {
     return (
-        <div className="dev-loading">
-            <SkewLoader color={"#037edb"} loading size={50} />
-        </div>
+        <>
+            <div className="dev-loading">
+                <SkewLoader color={"#037edb"} loading size={50} />
+            </div>
+        </>
     );
 };
 
