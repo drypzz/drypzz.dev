@@ -7,7 +7,6 @@
     border: 1px solid rgba(3, 126, 219, 0.2);
     padding: 20px;
     gap: 1rem;
-    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     margin: 0 auto;
 }
@@ -29,7 +28,6 @@
     width: 100%;
     padding: 15px 10px 15px 15px;
     border: 1px solid var(--primary-color);
-    border-radius: 5px;
     background: none;
     color: #f4f4f4;
     font-size: 16px;
@@ -72,7 +70,6 @@
 .form-button {
     padding: .5em 5em;
     border: none;
-    border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
     color: green;

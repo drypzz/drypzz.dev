@@ -8,6 +8,8 @@ import Header from "./components/renders/header";
 import Techs from "./components/renders/techs";
 import Projects from "./components/renders/projects";
 import Contact from "./components/renders/contact";
+import Footer from "./components/renders/footer";
+import ScrollToTopButton from "./components/hooks/scrolltotopbutton";
 
 const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);
@@ -29,8 +31,10 @@ const Home = () => {
                 <Techs />
                 <hr id="two" className="dev" />
                 <Projects />
-                <hr id="two" className="dev" />
+                <hr id="three" className="dev" />
                 <Contact />
+                <Footer />
+                <ScrollToTopButton />
             </>
         )}
         </>

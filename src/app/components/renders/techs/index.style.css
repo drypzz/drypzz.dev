@@ -13,6 +13,9 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
+    padding: 20px;
+    border: 1px solid rgba(3, 126, 219, .2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .dev-techs-container img{
@@ -28,9 +31,6 @@
 @media screen and (max-width: 960px) {
 
     .dev-techs-container{
-        background-color: rgba(3, 126, 219, .2);
-        border: 1px solid rgba(3, 126, 219, 1);
-        border-radius: 12px;
         padding: 10px;
     }
 

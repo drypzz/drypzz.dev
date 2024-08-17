@@ -42,7 +42,7 @@ html {
     scroll-behavior: smooth;
 }
 
-hr.dev, hr#two.dev{
+hr.dev, hr#two.dev, hr#three.dev{
     width: 70%;
     margin: 0 auto;
     border: 1px solid var(--primary-color-variant);
@@ -52,6 +52,10 @@ hr.dev, hr#two.dev{
 
 hr#two.dev{
     width: 50%;
+}
+
+hr#three.dev{
+    width: 30%;
 }
 
 body{
@@ -74,7 +78,7 @@ body{
 
 @media screen and (max-width: 960px) {
     
-    hr#one.dev, hr#two.dev{
+    hr#one.dev, hr#two.dev, hr#three.dev{
         width: 100%;
     }
 }

@@ -1,0 +1,64 @@
+.dev-button-top {
+    position: fixed;
+    bottom: 35px;
+    right: 30px;
+    padding: 20px;
+    font-size: 18px;
+    background: none;
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.7s ease-in-out;
+    font-weight: bold;
+    overflow: hidden;
+    outline: 2px solid transparent;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dev-button-top:hover {
+    color: #fff;
+    transform: scale(1.1);
+    outline: 2px solid var(--primary-color);
+    box-shadow: 4px 5px 17px -4px var(--primary-color);
+}
+
+.dev-button-top::before {
+    content: "";
+    position: absolute;
+    left: -50%;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width .3s ease-in-out;
+}
+
+.dev-button-top:hover::before {
+    width: 250%;
+}
+
+.dev-button-top span {
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid var(--primary-color);
+    transition: all .3s ease-in-out;
+}
+
+.dev-button-top:hover span {
+    border-bottom: 15px solid #fff;
+}
+
+@media screen and (max-width: 960px) {
+    .dev-button-top{
+        display: none;
+    }
+}

@@ -48,6 +48,14 @@ const Header = () => {
                     </Link>
                 </div>
             </section>
+            <section className="dev-phrases">
+                <div className="dev-phrases-content">
+                    <p>“Você tem tudo o que precisa para construir algo muito maior do que você mesmo.” </p>
+                    <div className="dev-phrases-author">
+                        <span>- Seth Godin</span>
+                    </div>
+                </div>
+            </section>
         </>
     );
 };
