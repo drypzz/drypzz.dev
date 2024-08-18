@@ -2,7 +2,7 @@ import SkewLoader from "react-spinners/SkewLoader";
 
 import "./index.style.css";
 
-const LoadingScreen = () => {
+const Loading = () => {
     return (
         <>
             <div className="dev-loading">
@@ -12,4 +12,4 @@ const LoadingScreen = () => {
     );
 };
 
-export default LoadingScreen;
+export default Loading;

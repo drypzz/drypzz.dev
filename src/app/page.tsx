@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
-import LoadingScreen from "./components/pages/loading";
-
+import Loading from "./components/renders/loading";
 import Header from "./components/renders/header";
 import Techs from "./components/renders/techs";
 import Projects from "./components/renders/projects";
@@ -23,7 +22,7 @@ const Home = () => {
     return (
         <>
         {loading ? (
-            <LoadingScreen />
+            <Loading />
         ) : (
             <>
                 <Header />
