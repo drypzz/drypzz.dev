@@ -1,22 +1,91 @@
 "use client";
 
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { setPersistence, browserLocalPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/app/database/config";
+
+import Loading from '@/app/components/renders/loading';
 import Checkbox from "@/app/components/hooks/checkbox";
+
+import { showNotify } from '@/app/utils/notify';
 
 import "@/app/components/renders/contact/index.style.css";
 
+
 const LoginPage = () => {
 
-    const submitForm = (e: React.FormEvent) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+    const router = useRouter();
 
-        console.log(data);
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: "",
+        remember: false
+    });
+
+    const [loading, setLoading] = useState(true);
+
+    const submitForm = async (e: React.FormEvent) => {
+        e.preventDefault();
+    
+        try {
+
+            if (inputs.email === "" || inputs.password === "") {
+                showNotify("error", "Email and password are required!");
+                return;
+            };
+
+            if (inputs.remember) {
+                await setPersistence(auth, browserLocalPersistence);
+                localStorage.setItem("savedEmail", inputs.email);
+                localStorage.setItem("savedChecked", "true");
+            }else{
+                localStorage.removeItem("savedEmail");
+                localStorage.removeItem("savedChecked");
+            }
+            
+            const userCredential = await signInWithEmailAndPassword(auth, inputs.email, inputs.password).then((userCredential) => {
+                showNotify("success", "Successfully logged in.");
+                setTimeout(() => {
+                    router.push("/dashboard");
+                }, 1000);
+            }).catch((error) => {
+                showNotify("error", "Failed to login.");
+            });
+        } catch (error) {
+            console.error(error);
+            alert('Failed to login.');
+        }
     }
 
+    useEffect(() => {
+        const logged = auth.onAuthStateChanged(async (user) => { 
+            if (user) {
+                router.push('/dashboard');
+            }else{
+                const savedEmail = localStorage.getItem("savedEmail");
+                const savedChecked = localStorage.getItem("savedChecked");
+                if (savedEmail) {
+                    setInputs((prev) => ({ ...prev, email: savedEmail, remember: Boolean(savedChecked) }));
+                }
+                setTimeout(() => {
+                    setLoading(false);
+                }, 5000);
+            }
+        });
+
+        return () => {
+            logged();
+        };
+    }, [router]);
+
+    if (loading) {
+        return <Loading />;
+    };
+
     return (
-        <>
+        <>  
             <section style={{height: "100dvh"}}>
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", height: "100%"}}>
                     <div>
@@ -25,22 +94,35 @@ const LoginPage = () => {
                     <div className="dev-contact">
                         <form onSubmit={submitForm} className="styled-form">
                             <div className="form-group">
-                                <input type="email" placeholder="" required name="email" id="email" className="form-input" />
+                                <input
+                                    type="email"
+                                    value={inputs.email}
+                                    placeholder=""
+                                    onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+                                    name="email"
+                                    id="email"
+                                    className="form-input"
+                                />
                                 <label className="form-label">Email</label>
                             </div>
                             <div className="form-group">
-                                <input type="password" placeholder="" required name="password" id="password" className="form-input" />
+                                <input
+                                    type="password"
+                                    value={inputs.password}
+                                    placeholder=""
+                                    onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+                                    name="password"
+                                    id="password"
+                                    className="form-input"
+                                />
                                 <label className="form-label">Password</label>
                             </div>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "flex-start",
-                                    marginBottom: 20,
-                                }}
-                            >
-                                <Checkbox parameter="remember" />
+                            <div style={{display: "flex", alignItems: "center", justifyContent: "flex-start", marginBottom: 20}}>
+                                <Checkbox
+                                    checked={inputs.remember}
+                                    onChange={(e) => setInputs({ ...inputs, remember: e.target.checked })}
+                                    id="remember"
+                                />
                                 <label htmlFor="remember" style={{cursor: "pointer", userSelect: "none"}}>Remember me?</label>
                             </div>
                             <div className="form-group">

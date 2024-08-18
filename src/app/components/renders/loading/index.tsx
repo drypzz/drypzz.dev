@@ -6,7 +6,7 @@ const Loading = () => {
     return (
         <>
             <div className="dev-loading">
-                <SkewLoader color={"#037edb"} loading size={50} />
+                <SkewLoader color="#037edb" loading size={50} />
             </div>
         </>
     );

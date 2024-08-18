@@ -1,14 +1,70 @@
+"use client";
+
+import React, { useState, useRef } from 'react';
+import { SkewLoader } from 'react-spinners';
+
+import emailjs from "@emailjs/browser";
+
+import { showNotify } from '@/app/utils/notify';
+
+import TemplateDataProps from "./index.props";
+
 import "./index.style.css";
 
+
 const Contact = () => {
+    const [inputs, setInputs] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
 
-    const submitForm = (e: any) => {
+    const [loading, setLoading] = useState(false);
+
+    const formRef = useRef<HTMLFormElement>(null);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const name = e.target.name.value;
-        const email = e.target.email.value;
-        const message = e.target.message.value;
 
-        console.log(name, email, message);
+        if (inputs.name === '' || inputs.email === '' || inputs.message === '') {
+            showNotify("error", "Please fill all the fields.");
+            return;
+        }
+
+        const template: TemplateDataProps = {
+            from_name: inputs.name,
+            message: inputs.message,
+            email: inputs.email,
+            hours: `${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}h - ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+            year: new Date().getFullYear(),
+        };
+
+        try {
+            setLoading(true);
+            await sendEmail(template);
+            showNotify("success", "Message sent successfully!");
+            if (formRef.current) {
+                formRef.current.reset();
+            }
+            setInputs({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error('FAILED...', error);
+            showNotify("error", "Failed to send message.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const sendEmail = async (template: TemplateDataProps) => {
+        try {
+            const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID || '';
+            const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID || '';
+            const userId = process.env.NEXT_PUBLIC_USER_ID || '';
+
+            await emailjs.send(serviceId, templateId, template, userId);
+        } catch (error) {
+            throw error;
+        }
     };
 
     return (
@@ -19,28 +75,58 @@ const Contact = () => {
                         <h1 className="dev-title" style={{marginBottom: 20}}>✉️ Contact Me</h1>
                     </div>
                     <div className="dev-contact">
-                        <form onSubmit={submitForm} className="styled-form">
+                        <form ref={formRef} onSubmit={handleSubmit} className="styled-form">
                             <div className="form-group">
-                                <input type="text" placeholder="" name="name" id="name" className="form-input" />
+                                <input
+                                    type="text"
+                                    placeholder=""
+                                    value={inputs.name}
+                                    onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
+                                    name="name"
+                                    id="name"
+                                    className="form-input"
+                                    disabled={loading}
+                                />
                                 <label className="form-label">Name</label>
                             </div>
                             <div className="form-group">
-                                <input type="email" placeholder="" name="email" id="email" className="form-input" />
+                                <input
+                                    type="email"
+                                    placeholder=""
+                                    value={inputs.email}
+                                    onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+                                    name="email"
+                                    id="email"
+                                    className="form-input"
+                                    disabled={loading}
+                                />
                                 <label className="form-label">Email</label>
                             </div>
                             <div className="form-group">
-                                <textarea name="message" placeholder="" id="message" className="form-input form-textarea"></textarea>
+                                <textarea
+                                    name="message"
+                                    placeholder=""
+                                    value={inputs.message}
+                                    onChange={(e) => setInputs({ ...inputs, message: e.target.value })}
+                                    id="message"
+                                    className="form-input form-textarea"
+                                    disabled={loading}
+                                ></textarea>
                                 <label className="form-label">Message</label>
                             </div>
                             <div className="form-group">
-                                <button type="submit" className="form-button">Send</button>
+                                {loading ? (
+                                    <SkewLoader color="#037edb" loading={loading} size={30} />
+                                ) : (
+                                    <button type="submit" className="form-button">Send</button>
+                                )}
                             </div>
                         </form>
                     </div>
                 </div>
             </section>
         </>
-    )
+    );
 };
 
 export default Contact;

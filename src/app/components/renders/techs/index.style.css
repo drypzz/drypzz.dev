@@ -16,6 +16,12 @@
     padding: 20px;
     border: 1px solid rgba(3, 126, 219, .2);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all .2s ease-in-out;
+}
+
+.dev-techs-container:hover{
+    transform: scale(1.01);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .dev-techs-container img{

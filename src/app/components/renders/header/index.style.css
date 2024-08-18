@@ -31,7 +31,7 @@
     border-radius: 50%;
     user-select: none;
     border: 5px solid var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     animation: float 3s ease-in-out infinite;
 }
 
@@ -71,20 +71,27 @@
     width: 100%;
 }
 
-.dev-phrases .dev-phrases-content{
+.dev-phrases-content{
     border: 1px solid rgba(3, 126, 219, .3);
     padding: 15px 25px;
     width: 500px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all .3s ease-in-out;
+    user-select: none;
 }
 
-.dev-phrases .dev-phrases-content p{
+.dev-phrases-content:hover{
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dev-phrases-content p{
     position: relative;
     font-weight: 500;
     text-align: left;
 }
 
-.dev-phrases .dev-phrases-content p::before{
+.dev-phrases-content p::before{
     content: '';
     position: absolute;
     top: 0;
@@ -95,7 +102,7 @@
     background-color: var(--primary-color);
 }
 
-.dev-phrases .dev-phrases-author{
+.dev-phrases-author{
     font-weight: 400;
     margin-top: 10px;
     text-align: right;

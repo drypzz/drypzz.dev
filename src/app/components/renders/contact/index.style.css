@@ -9,6 +9,12 @@
     gap: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     margin: 0 auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.dev-contact:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .styled-form {

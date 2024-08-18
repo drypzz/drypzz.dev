@@ -1,14 +1,14 @@
 import "./index.style.css";
 
-const Checkbox = ({parameter}: {parameter: string}) => {
+type CheckboxProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+const Checkbox = ({ id, ...props }: CheckboxProps) => {
     return (
-        <>
-            <div className="dev-checkbox-container">
-                <input type="checkbox" id={parameter} className="dev-checkbox-input" />
-                <label htmlFor={parameter} className="dev-checkbox-label"></label>
-            </div>
-        </>
-    )
+        <div className="dev-checkbox-container">
+            <input {...props} type="checkbox" id={id} className="dev-checkbox-input" />
+            <label htmlFor={id} className="dev-checkbox-label"></label>
+        </div>
+    );
 }
 
 export default Checkbox;
