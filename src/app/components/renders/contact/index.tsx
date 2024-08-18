@@ -21,15 +21,15 @@ const Contact = () => {
                     <div className="dev-contact">
                         <form onSubmit={submitForm} className="styled-form">
                             <div className="form-group">
-                                <input type="text" placeholder=" " name="name" id="name" className="form-input" />
+                                <input type="text" placeholder="" name="name" id="name" className="form-input" />
                                 <label className="form-label">Name</label>
                             </div>
                             <div className="form-group">
-                                <input type="email" placeholder=" " name="email" id="email" className="form-input" />
+                                <input type="email" placeholder="" name="email" id="email" className="form-input" />
                                 <label className="form-label">Email</label>
                             </div>
                             <div className="form-group">
-                                <textarea name="message" placeholder=" " id="message" className="form-input form-textarea"></textarea>
+                                <textarea name="message" placeholder="" id="message" className="form-input form-textarea"></textarea>
                                 <label className="form-label">Message</label>
                             </div>
                             <div className="form-group">

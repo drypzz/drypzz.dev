@@ -32,6 +32,16 @@
     user-select: none;
     border: 5px solid var(--primary-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .dev-social{

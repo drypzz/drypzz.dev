@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import "./index.style.css";
 
 const Projects = () => {
@@ -9,26 +10,28 @@ const Projects = () => {
                     <h1 className="dev-title">📊 My Projects</h1>
                 </div>
                 <div className="dev-projects-container">
-                    <div>
-                        <h2>Project 1</h2>
-                        <p>Project 1 Description</p>
-                    </div>
-                    <div>
-                        <h2>Project 2</h2>
-                        <p>Project 2 Description</p>
-                    </div>
-                    <div>
-                        <h2>Project 3</h2>
-                        <p>Project 3 Description</p>
-                    </div>
-                    <div>
-                        <h2>Project 4</h2>
-                        <p>Project 4 Description</p>
-                    </div>
-                    <div>
-                        <h2>Project 5</h2>
-                        <p>Project 5 Description</p>
-                    </div>
+
+                    <main className="dev-cards">
+                        <div className="dev-cards-img">
+                            <img src="https://github.com/drypzz/drypzz.dev/blob/master/public/images/_p1/01.png?raw=true" />
+                        </div>
+                        <div className="dev-cards-title">
+                            <h2>Teste (Course)</h2>
+                        </div>
+                        <div className="dev-cards-icons">
+                            <div>
+                                <img src="/svg/techs/css.svg" />
+                            </div>
+                            <div>
+                                <img src="/svg/techs/html.svg" />
+                            </div>
+                            <div>
+                                <img src="/svg/techs/typescript.svg" />
+                            </div>
+                        </div>
+                        <Link className="dev-cards-btn" href="#">View on Github</Link>
+                    </main>
+
                 </div>
             </section>
         </>

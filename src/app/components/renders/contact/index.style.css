@@ -5,7 +5,7 @@
     flex-direction: column;
     width: 50vw;
     border: 1px solid rgba(3, 126, 219, 0.2);
-    padding: 20px;
+    padding: 50px;
     gap: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     margin: 0 auto;
@@ -27,7 +27,7 @@
 .form-input {
     width: 100%;
     padding: 15px 10px 15px 15px;
-    border: 1px solid var(--primary-color);
+    border: 1px solid rgba(3, 126, 219, 0.5);
     background: none;
     color: #f4f4f4;
     font-size: 16px;
@@ -38,6 +38,10 @@
 
 .form-input:focus {
     padding-left: 20px;
+    box-shadow: inset 0 -2px 0 var(--primary-color);
+}
+
+.form-input:hover{
     box-shadow: inset 0 -2px 0 var(--primary-color);
 }
 
@@ -108,5 +112,6 @@
 @media screen and (max-width: 960px) {
     .dev-contact {
         width: 100%;
+        padding: 20px;
     }
 }
