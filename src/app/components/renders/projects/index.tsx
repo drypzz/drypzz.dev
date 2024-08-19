@@ -8,13 +8,14 @@ import { ref as dbRef, onValue, remove } from "firebase/database";
 
 import { SkewLoader } from 'react-spinners';
 
-import { ProjectProps, ImageProps } from './index.props';
+import Image from "@/app/utils/image.props";
+import ProjectProps from './index.props';
 
 import "./index.style.css";
 
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectProps[]>([]);
-    const [techsAndTools, setTechsAndTools] = useState<ImageProps[]>([]);
+    const [techsAndTools, setTechsAndTools] = useState<Image[]>([]);
     const [loading, setLoading] = useState(true);
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -35,7 +36,7 @@ const Projects = () => {
         const fetchTechsAndTools = async () => {
             try {
                 const response = await fetch("/api/getImages");
-                const data: ImageProps[] = await response.json();
+                const data: Image[] = await response.json();
                 setTechsAndTools(data);
             } catch (error) {
                 console.error("Failed to fetch techs and tools:", error);
@@ -95,38 +96,40 @@ const Projects = () => {
     }
 
     return (
-        <section>
-            <div>
-                <h1 className="dev-title">📊 My Projects</h1>
-            </div>
-            <div className="dev-projects-container">
-                {projects.map((e: ProjectProps, index: number) => (
-                    <main className="dev-cards" key={index}>
-                        <div className="dev-cards-img">
-                            <img src={e.imageUrl} alt={e.title} />
-                        </div>
-                        <div className="dev-cards-title">
-                            <h2>{e.title}</h2>
-                        </div>
-                        <div className="dev-cards-icons">
-                            {e.techs.map((tech, index) => (
-                                <div key={index}>
-                                    <img 
-                                        src={findImageUrl(tech)} 
-                                        alt={tech}
-                                        title={tech}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                        <Link target="_blank" className="dev-cards-btn" href={e.link}>View on Github</Link>
-                        {loggedIn && (
-                            <button onClick={() => deleteProject(e.title)} className="dev-cards-btn delete">Delete</button>
-                        )}
-                    </main>
-                ))}
-            </div>
-        </section>
+        <>
+            <section>
+                <div>
+                    <h1 className="dev-title">📊 My Projects</h1>
+                </div>
+                <div className="dev-projects-container">
+                    {projects.map((e: ProjectProps, index: number) => (
+                        <main className="dev-cards" key={index}>
+                            <div className="dev-cards-img">
+                                <img src={e.imageUrl} alt={e.title} />
+                            </div>
+                            <div className="dev-cards-title">
+                                <h2>{e.title}</h2>
+                            </div>
+                            <div className="dev-cards-icons">
+                                {e.techs.map((tech, index) => (
+                                    <div key={index}>
+                                        <img 
+                                            src={findImageUrl(tech)} 
+                                            alt={tech}
+                                            title={tech}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            <Link target="_blank" className="dev-cards-btn" href={e.link}>View on Github</Link>
+                            {loggedIn && (
+                                <button onClick={() => deleteProject(e.title)} className="dev-cards-btn delete">Delete</button>
+                            )}
+                        </main>
+                    ))}
+                </div>
+            </section>
+        </>
     );
 };
 

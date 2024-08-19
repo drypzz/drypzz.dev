@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { SkewLoader } from 'react-spinners';
+
 import { setPersistence, browserLocalPersistence, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/app/database/config";
 
@@ -12,8 +14,6 @@ import Checkbox from "@/app/components/hooks/checkbox";
 import { showNotify } from '@/app/utils/notify';
 
 import "@/app/components/renders/contact/index.style.css";
-import { SkewLoader } from 'react-spinners';
-
 
 const LoginPage = () => {
 
