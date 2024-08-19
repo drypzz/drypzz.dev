@@ -1,5 +1,9 @@
+import { setLogLevel } from "firebase/app";
+setLogLevel('warn');
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
+import { getStorage } from "firebase/storage";
 import { getDatabase, ref, get, child, set, onValue, remove } from 'firebase/database';
 
 const firebaseConfig = {
@@ -15,5 +19,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app)
+const storage = getStorage(app);
 
-export { db, ref, get, child, set, auth, onValue, remove };
+export { db, ref, get, child, set, auth, onValue, remove, storage };

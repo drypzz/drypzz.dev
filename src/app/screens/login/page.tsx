@@ -12,6 +12,7 @@ import Checkbox from "@/app/components/hooks/checkbox";
 import { showNotify } from '@/app/utils/notify';
 
 import "@/app/components/renders/contact/index.style.css";
+import { SkewLoader } from 'react-spinners';
 
 
 const LoginPage = () => {
@@ -25,6 +26,8 @@ const LoginPage = () => {
     });
 
     const [loading, setLoading] = useState(true);
+
+    const [loadingLogin, setLoadingLogin] = useState(false);
 
     const submitForm = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -44,18 +47,20 @@ const LoginPage = () => {
                 localStorage.removeItem("savedEmail");
                 localStorage.removeItem("savedChecked");
             }
+
+            setLoadingLogin(true);
             
             const userCredential = await signInWithEmailAndPassword(auth, inputs.email, inputs.password).then((userCredential) => {
                 showNotify("success", "Successfully logged in.");
-                setTimeout(() => {
-                    router.push("/dashboard");
-                }, 1000);
+                router.push("/dashboard");
             }).catch((error) => {
                 showNotify("error", "Failed to login.");
             });
         } catch (error) {
             console.error(error);
             alert('Failed to login.');
+        } finally{
+            setLoadingLogin(false);
         }
     }
 
@@ -71,7 +76,7 @@ const LoginPage = () => {
                 }
                 setTimeout(() => {
                     setLoading(false);
-                }, 5000);
+                }, 2000);
             }
         });
 
@@ -102,6 +107,7 @@ const LoginPage = () => {
                                     name="email"
                                     id="email"
                                     className="form-input"
+                                    disabled={loading}
                                 />
                                 <label className="form-label">Email</label>
                             </div>
@@ -114,6 +120,7 @@ const LoginPage = () => {
                                     name="password"
                                     id="password"
                                     className="form-input"
+                                    disabled={loading}
                                 />
                                 <label className="form-label">Password</label>
                             </div>
@@ -122,11 +129,15 @@ const LoginPage = () => {
                                     checked={inputs.remember}
                                     onChange={(e) => setInputs({ ...inputs, remember: e.target.checked })}
                                     id="remember"
+                                    title="Remember me?"
                                 />
-                                <label htmlFor="remember" style={{cursor: "pointer", userSelect: "none"}}>Remember me?</label>
                             </div>
                             <div className="form-group">
-                                <button type="submit" className="form-button">Confirm</button>
+                                {loadingLogin ? (
+                                    <SkewLoader color="#037edb" loading={loadingLogin} size={30} />
+                                ) : (
+                                    <button type="submit" className="form-button">Confirm</button>
+                                )}
                             </div>
                         </form>
                     </div>

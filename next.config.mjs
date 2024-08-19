@@ -10,6 +10,10 @@ const nextConfig = {
                 source: '/dashboard',
                 destination: '/screens/dashboard',
             },
+            {
+                source: '/dashboard/create',
+                destination: '/screens/dashboard/create',
+            },
         ];
     },
 };

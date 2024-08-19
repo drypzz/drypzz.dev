@@ -26,7 +26,6 @@
 
 .dev-techs-container img{
     user-select: none;
-    cursor: pointer;
     transition: all .2s ease-in-out;
 }
 

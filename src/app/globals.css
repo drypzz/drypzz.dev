@@ -26,6 +26,10 @@
     --gray: rgba(255, 255, 255, .6);
 }
 
+a{
+    text-decoration: none;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -62,6 +66,7 @@ body{
     background: var(--background-body);
     height: 100%;
     color: #fff;
+    display: block;
     text-align: center;
 }
 
