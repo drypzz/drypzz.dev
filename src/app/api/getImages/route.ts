@@ -3,7 +3,7 @@ import path from 'path';
 
 import { NextResponse } from 'next/server';
 
-import { Images } from '@/app/utils/image.props';
+import Images from '@/app/utils/image.props';
 
 export async function GET() {
   try {

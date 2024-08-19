@@ -105,7 +105,7 @@ const Projects = () => {
                     {projects.map((e: ProjectProps, index: number) => (
                         <main className="dev-cards" key={index}>
                             <div className="dev-cards-img">
-                                <img src={e.imageUrl} alt={e.title} />
+                                <img draggable="false" src={e.imageUrl} alt={e.title} title={`Printscreen do projeto: ${e.title}`} />
                             </div>
                             <div className="dev-cards-title">
                                 <h2>{e.title}</h2>
@@ -121,7 +121,7 @@ const Projects = () => {
                                     </div>
                                 ))}
                             </div>
-                            <Link target="_blank" className="dev-cards-btn" href={e.link}>View on Github</Link>
+                            <Link target="_blank" className="dev-cards-btn" href={e.link}>View project</Link>
                             {loggedIn && (
                                 <button onClick={() => deleteProject(e.title)} className="dev-cards-btn delete">Delete</button>
                             )}

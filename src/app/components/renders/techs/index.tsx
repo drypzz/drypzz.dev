@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { Images } from "@/app/utils/image.props";
+import Images from "@/app/utils/image.props";
 
 import "./index.style.css";
 
