@@ -3,16 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 
+import { SkewLoader } from 'react-spinners';
+
 import { db, auth } from "@/app/database/config";
 import { ref as dbRef, onValue, remove } from "firebase/database";
 
-import { SkewLoader } from 'react-spinners';
+import CustomTooltip from '@/app/components/hooks/tooltip';
 
 import Image from "@/app/utils/image.props";
 import ProjectProps from './index.props';
 
 import "./index.style.css";
-import CustomTooltip from '../../hooks/tooltip';
+import Modal from '../../hooks/modal';
 
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectProps[]>([]);
@@ -20,6 +22,19 @@ const Projects = () => {
     const [loading, setLoading] = useState(true);
 
     const [loggedIn, setLoggedIn] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalImage, setModalImage] = useState({ src: '', alt: '' });
+
+    const openModal = (src: string, alt: string) => {
+        setModalImage({ src, alt });
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
 
     useEffect(() => {
         const fetchProjects = () => {
@@ -106,7 +121,13 @@ const Projects = () => {
                     {projects.map((e: ProjectProps, index: number) => (
                         <main className="dev-cards" key={index}>
                             <div className="dev-cards-img">
-                                <img draggable="false" src={e.imageUrl} alt={e.title} title={`Printscreen do projeto: ${e.title}`} />
+                                <img
+                                    draggable="false"
+                                    src={e.imageUrl}
+                                    alt={e.title}
+                                    title={`Printscreen do projeto: ${e.title}`}
+                                    onClick={() => openModal(e.imageUrl, e.title)}
+                                />
                             </div>
                             <div className="dev-cards-title">
                                 <h2>{e.title}</h2>
@@ -124,7 +145,9 @@ const Projects = () => {
                                     </div>
                                 ))}
                             </div>
-                            <Link target="_blank" className="dev-cards-btn" href={e.link}>View project</Link>
+                            <Link target="_blank" className="dev-cards-btn" href={e.link}>
+                                View {e.link.includes("github") ? "on GitHub" : "Project"}
+                            </Link>
                             {loggedIn && (
                                 <button onClick={() => deleteProject(e.title)} className="dev-cards-btn delete">Delete</button>
                             )}
@@ -132,6 +155,12 @@ const Projects = () => {
                     ))}
                 </div>
             </section>
+            <Modal
+                isOpen={isModalOpen} 
+                onClose={closeModal} 
+                imageUrl={modalImage.src} 
+                altText={modalImage.alt} 
+            />
         </>
     );
 };

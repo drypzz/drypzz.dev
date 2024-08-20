@@ -26,7 +26,13 @@
 
 .dev-cards-img img{
     width: 600px;
+    cursor: pointer;
     border: 5px solid rgba(3, 126, 219, 0.5);
+    transition: all .3s ease-in-out;
+}
+
+.dev-cards-img img:hover{
+    opacity: .5;
 }
 
 .dev-cards-icons{
