@@ -1,0 +1,134 @@
+.dev-header{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+}
+
+.dev-header div h3{
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 50px;
+}
+
+.dev-header div h5{
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--gray);
+}
+
+.dev-header div span#locale{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--gray);
+}
+
+.dev-header div:last-child img{
+    width: 350px;
+    border-radius: 50%;
+    user-select: none;
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.dev-social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.dev-social div a svg{
+    font-size: 2.5rem;
+    fill: var(--gray);
+    transition: all .2s ease-in-out;
+}
+
+.dev-social div a svg:hover{
+    transform: scale(1.2);
+    fill: var(--primary-color);
+}
+
+.dev-phrases{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.dev-phrases-content{
+    border: 1px solid rgba(3, 126, 219, .3);
+    padding: 15px 25px;
+    width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all .3s ease-in-out;
+    user-select: none;
+}
+
+.dev-phrases-content:hover{
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dev-phrases-content p{
+    position: relative;
+    font-weight: 500;
+    text-align: left;
+}
+
+.dev-phrases-content p::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    left: -10px;
+    font-size: 2rem;
+    background-color: var(--primary-color);
+}
+
+.dev-phrases-author{
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: right;
+    color: var(--gray);
+}
+
+
+@media screen and (max-width: 960px) {
+
+    .dev-header{
+        gap: 20px;
+    }
+
+    .dev-header div h3{
+        font-size: 1.8rem;
+    }
+    
+    .dev-header div:last-child img{
+        width: 250px;
+    }
+
+    .dev-header div h5{
+        font-size: 1.1rem;
+    }
+
+    .dev-social div a svg{
+        font-size: 2rem;
+    }
+}

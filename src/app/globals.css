@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", "Roboto", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 :root {
@@ -22,6 +22,12 @@
     --background-body: #0f0e13;
     --background-bg: #1f1f38;
     --background-bg-variant: #2c2c6c;
+
+    --gray: rgba(255, 255, 255, .6);
+}
+
+a{
+    text-decoration: none;
 }
 
 ::-webkit-scrollbar {
@@ -40,80 +46,44 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: "Poppins", sans-serif;
-    color: #fff;
-    background-color: var(--background-body);
-    overflow-x: hidden;
-}
-
-body.__className_e29382 {
-    overflow: hidden;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-weight: 500;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-}
-
-.gradient-bg-welcome {
-    background: radial-gradient(at 0% 0%, var(--primary-color-variant), transparent 70%),
-        radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%),
-        radial-gradient(at 100% 0%, var(--secondary-color-variant), transparent 50%);
-}
-
-.div--pages {
-    display: flex;
-    padding: 20px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 2rem;
-}
-
-hr,
-hr#a,
-hr#b {
-    width: 80%;
-    border: 1px solid rgba(53, 153, 204, .2);
-    margin: 1rem 0;
-}
-
-hr#a {
+hr.dev, hr#two.dev, hr#three.dev{
     width: 70%;
+    margin: 0 auto;
+    border: 1px solid var(--primary-color-variant);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-hr#b {
+hr#two.dev{
     width: 50%;
 }
 
+hr#three.dev{
+    width: 30%;
+}
+
+body{
+    background: var(--background-body);
+    height: 100%;
+    color: #fff;
+    display: block;
+    text-align: center;
+}
+
+.dev-title{
+    font-size: 2rem;
+}
+
+.dev-background {
+    padding: 20px;
+    height: 100%;
+    background: radial-gradient(at 0% 0%, var(--primary-color-variant), transparent 70%),
+    radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%)
+}
+
 @media screen and (max-width: 960px) {
-
-    hr,
-    hr#a,
-    hr#b {
+    
+    hr#one.dev, hr#two.dev, hr#three.dev{
         width: 100%;
-    }
-
-    h1 {
-        font-size: 2rem;
     }
 }

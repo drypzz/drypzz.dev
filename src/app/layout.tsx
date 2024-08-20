@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
 export const viewport: Viewport = {
   themeColor: "#037edb",
   initialScale: 1,
+  maximumScale: 1,
   width: "device-width",
 }
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     site: "@drypzz",
     card: "summary_large_image",
-    images: "/images/0.jpg",
+    images: "/me.png",
   },
   openGraph: {
     title: "DRYPZZ - DEV",
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "DRYPZZ - DEV",
     type: "website",
     url: "https://drypzz.netlify.app/",
-    images: [{ url: "/images/0.jpg" }],
+    images: [{ url: "/me.png" }],
     countryName: "Brazil",
     locale: "pt_BR",
   },
@@ -45,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <main className="gradient-bg-welcome">
+        <main className="dev-background">
           {children}
         </main>
       </body>

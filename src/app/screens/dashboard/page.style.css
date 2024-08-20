@@ -1,0 +1,121 @@
+.dev-dashboard-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.dev-dashboard-button button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+}
+
+.dev-dashboard-button button#logout{
+    background-color: #e74c3c;
+}
+
+.dev-dashboard-button button:hover {
+    opacity: .5;
+}
+
+
+.table-container {
+    width: 80vw;
+    overflow-x: auto;
+    margin: 20px auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: 600;
+}
+
+.table td {
+    padding: 12px 15px;
+    color: #fff;
+    text-align: left;
+    border: 1px solid var(--primary-color);
+}
+
+.table tr{
+    transition: all 0.3s ease-in-out;
+}
+
+.table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.table tr:hover {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.actions a,
+.actions button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.actions a:hover,
+.actions button:hover {
+    opacity: .5;
+}
+
+.actions button.delete {
+    background-color: #e74c3c;
+}
+
+.actions button.delete:hover {
+    opacity: .5;
+}
+
+.table td img {
+    width: 30px;
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .table th, 
+    .table td {
+        padding: 10px 8px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

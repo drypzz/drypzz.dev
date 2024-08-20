@@ -1,0 +1,125 @@
+.dev-projects-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.dev-cards{
+    padding: 20px;
+    border: 1px solid rgba(3, 126, 219, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    transition: all .3s ease-in-out;
+}
+
+.dev-cards:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dev-cards-img img{
+    width: 600px;
+    cursor: pointer;
+    border: 5px solid rgba(3, 126, 219, 0.5);
+    transition: all .3s ease-in-out;
+}
+
+.dev-cards-img img:hover{
+    opacity: .5;
+}
+
+.dev-cards-icons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.dev-cards-icons img{
+    transition: all .3s;
+}
+
+.dev-cards-icons img:hover{
+    transform: scale(1.2);
+}
+
+.dev-cards-btn {
+    display: block;
+    width: 50%;
+    padding: .5em 5em;
+    outline: none;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    background: none;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+    text-align: center;
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: all .7s;
+}
+
+.dev-cards-btn.delete{
+    color: red;
+    margin: 0;
+    border: 2px solid red;
+}
+
+.dev-cards-btn:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+    outline: 2px solid var(--primary-color);
+    box-shadow: 4px 5px 17px -4px var(--primary-color);
+}
+
+.dev-cards-btn.delete:hover {
+    outline: 2px solid red;
+    box-shadow: 4px 5px 17px -4px red;
+}
+
+.dev-cards-btn::before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width .7s;
+}
+
+.dev-cards-btn.delete::before{
+    background-color: red;
+}
+
+.dev-cards-btn:hover::before {
+    width: 250%;
+}
+
+@media screen and (max-width: 960px){
+    .dev-projects-container{
+        flex-direction: column;
+    }
+
+    .dev-cards-img img{
+        width: 100%;
+    }
+
+    .dev-cards-btn {
+        width: 100%;
+    }
+    
+}
