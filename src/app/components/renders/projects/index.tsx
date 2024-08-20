@@ -13,16 +13,15 @@ import CustomTooltip from '@/app/components/hooks/tooltip';
 import Image from "@/app/utils/image.props";
 import ProjectProps from './index.props';
 
-import "./index.style.css";
 import Modal from '../../hooks/modal';
+
+import "./index.style.css";
 
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectProps[]>([]);
     const [techsAndTools, setTechsAndTools] = useState<Image[]>([]);
     const [loading, setLoading] = useState(true);
-
     const [loggedIn, setLoggedIn] = useState(false);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalImage, setModalImage] = useState({ src: '', alt: '' });
 
@@ -34,7 +33,6 @@ const Projects = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
-
 
     useEffect(() => {
         const fetchProjects = () => {
@@ -59,20 +57,20 @@ const Projects = () => {
             }
         };
 
-        const unsubscribe = auth.onAuthStateChanged(user => { 
-            if (!user) {
-                setLoggedIn(false);
-            } else {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
                 setLoggedIn(true);
+            } else {
+                setLoggedIn(false);
             }
         });
-
+        
+        fetchProjects();
+        fetchTechsAndTools();
+        
         return () => {
             unsubscribe();
-            fetchTechsAndTools();
-            fetchProjects();
         };
-        
     }, []);
 
     const deleteProject = (title: string) => {
@@ -135,7 +133,7 @@ const Projects = () => {
                             <div className="dev-cards-icons">
                                 {e.techs.map((tech, index) => (
                                     <div key={index}>
-                                        <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(tech == "cplusplus" ? "C++" : tech)}>
+                                        <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(tech === "cplusplus" ? "C++" : tech)}>
                                             <img 
                                                 src={findImageUrl(tech)} 
                                                 alt={tech}

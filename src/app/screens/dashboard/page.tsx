@@ -47,7 +47,7 @@ const DashboardPage = () => {
             }
         };
 
-        const unsubscribe = auth.onAuthStateChanged(user => { 
+        const unsubscribe = auth.onAuthStateChanged(user => {
             if (!user) {
                 router.push('/login');
             } else {
@@ -55,7 +55,7 @@ const DashboardPage = () => {
                 fetchTechsAndTools();
             }
         });
-
+    
         return () => {
             unsubscribe();
         };
