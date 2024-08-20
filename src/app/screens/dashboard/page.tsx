@@ -87,7 +87,7 @@ const DashboardPage = () => {
     }
 
     return (
-        <section style={{ height: "100vh" }}>
+        <section style={{ height: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <h1 className="dev-title">Dashboard</h1>
 
             <div className="dev-dashboard-button">
