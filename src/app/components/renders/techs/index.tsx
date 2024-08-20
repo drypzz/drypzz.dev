@@ -6,6 +6,8 @@ import Images from "@/app/utils/image.props";
 
 import "./index.style.css";
 
+import CustomTooltip from "../../hooks/tooltip";
+
 const Techs = () => {
 
     const [techsAndTools, setTechsAndTools] = useState<Images[]>([]);
@@ -33,7 +35,9 @@ const Techs = () => {
                 <div className="dev-techs-container">
                     {techsAndTools.map((item, index) => (
                         <div key={index}>
-                            <img draggable={false} src={item.src} alt={item.alt} title={item.title} />
+                            <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(item.title == "cplusplus" ? "C++" : item.title)}>
+                                <img draggable={false} src={item.src} alt={item.alt} title={item.title} />
+                            </CustomTooltip>
                         </div>
                     ))}
                 </div>

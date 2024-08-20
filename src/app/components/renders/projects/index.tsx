@@ -12,6 +12,7 @@ import Image from "@/app/utils/image.props";
 import ProjectProps from './index.props';
 
 import "./index.style.css";
+import CustomTooltip from '../../hooks/tooltip';
 
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectProps[]>([]);
@@ -113,11 +114,13 @@ const Projects = () => {
                             <div className="dev-cards-icons">
                                 {e.techs.map((tech, index) => (
                                     <div key={index}>
-                                        <img 
-                                            src={findImageUrl(tech)} 
-                                            alt={tech}
-                                            title={tech}
-                                        />
+                                        <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(tech == "cplusplus" ? "C++" : tech)}>
+                                            <img 
+                                                src={findImageUrl(tech)} 
+                                                alt={tech}
+                                                title={tech}
+                                            />
+                                        </CustomTooltip>
                                     </div>
                                 ))}
                             </div>
