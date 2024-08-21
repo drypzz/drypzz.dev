@@ -68,6 +68,7 @@ body{
     color: #fff;
     display: block;
     text-align: center;
+    overflow-x: hidden;
 }
 
 .dev-title{

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { motion } from 'framer-motion';
+
 import { FaGithub, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 import HandlingEmoji from "../../hooks/handling";
@@ -9,7 +11,12 @@ import "./index.style.css";
 const Header = () => {
     return (
         <>
-            <header className="dev-header">
+            <motion.header
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2 }}
+                className="dev-header"
+            >
                 <div>
                     <h3>Hello everyone <HandlingEmoji /></h3>
                 </div>
@@ -25,8 +32,13 @@ const Header = () => {
                 <div>
                     <img draggable={false} src="/me.png" alt="Foto de Perfil de Gustavo" />
                 </div>
-            </header>
-            <section className="dev-social">
+            </motion.header>
+            <motion.section
+                className="dev-social"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2 }}
+            >
                 <div>
                     <Link target="_blank" href="https://github.com/drypzz">
                         <FaGithub />
@@ -47,15 +59,20 @@ const Header = () => {
                         <FaFacebook />
                     </Link>
                 </div>
-            </section>
-            <section className="dev-phrases">
+            </motion.section>
+            <motion.section
+                className="dev-phrases"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2 }}
+            >
                 <div className="dev-phrases-content">
                     <p>“Você tem tudo o que precisa para construir algo muito maior do que você mesmo.” </p>
                     <div className="dev-phrases-author">
                         <span>- Seth Godin</span>
                     </div>
                 </div>
-            </section>
+            </motion.section>
         </>
     );
 };
