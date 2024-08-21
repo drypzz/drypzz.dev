@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import { SkewLoader } from 'react-spinners';
 
+import { motion } from 'framer-motion';
+
 import { db, auth } from "@/app/database/config";
 import { ref as dbRef, onValue, remove } from "firebase/database";
 
@@ -113,9 +115,20 @@ const Projects = () => {
         <>
             <section>
                 <div>
-                    <h1 className="dev-title">📊 My Projects</h1>
+                    <motion.h1
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 2 }}
+                    className="dev-title">
+                        📊 My Projects
+                    </motion.h1>
                 </div>
-                <div className="dev-projects-container">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 2 }}
+                    className="dev-projects-container"
+                >
                     {projects.map((e: ProjectProps, index: number) => (
                         <main className="dev-cards" key={index}>
                             <div className="dev-cards-img">
@@ -151,7 +164,7 @@ const Projects = () => {
                             )}
                         </main>
                     ))}
-                </div>
+                </motion.div>
             </section>
             <Modal
                 isOpen={isModalOpen} 

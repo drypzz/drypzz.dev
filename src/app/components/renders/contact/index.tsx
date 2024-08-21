@@ -9,8 +9,9 @@ import { showNotify } from '@/app/utils/notify';
 
 import TemplateDataProps from "./index.props";
 
-import "./index.style.css";
+import { motion } from 'framer-motion';
 
+import "./index.style.css";
 
 const Contact = () => {
     const [inputs, setInputs] = useState({
@@ -72,9 +73,21 @@ const Contact = () => {
             <section>
                 <div>
                     <div>
-                        <h1 className="dev-title" style={{marginBottom: 20}}>✉️ Contact Me</h1>
+                        <motion.h1
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 2 }}
+                        style={{marginBottom: 20}}
+                        className="dev-title">
+                            ✉️ Contact Me
+                        </motion.h1>
                     </div>
-                    <div className="dev-contact">
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 2 }}
+                        className="dev-contact"
+                    >
                         <form ref={formRef} onSubmit={handleSubmit} className="styled-form">
                             <div className="form-group">
                                 <input
@@ -100,7 +113,7 @@ const Contact = () => {
                                     className="form-input"
                                     disabled={loading}
                                 />
-                                <label className="form-label">Email</label>
+                                <label className="form-label">E-mail</label>
                             </div>
                             <div className="form-group">
                                 <textarea
@@ -122,7 +135,7 @@ const Contact = () => {
                                 )}
                             </div>
                         </form>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
         </>

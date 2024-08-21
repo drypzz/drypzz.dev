@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 
 import Images from "@/app/utils/image.props";
 
-import "./index.style.css";
-
 import CustomTooltip from "../../hooks/tooltip";
+
+import { motion } from 'framer-motion';
+
+import "./index.style.css";
 
 const Techs = () => {
 
@@ -30,9 +32,20 @@ const Techs = () => {
         <>
             <section className="dev-techs">
                 <div>
-                    <h1 className="dev-title">👨‍💻 My Techs and Tools</h1>
+                    <motion.h1
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 2 }}
+                    className="dev-title">
+                        👨‍💻 My Techs and Tools
+                    </motion.h1>
                 </div>
-                <div className="dev-techs-container">
+                <motion.div
+                    initial={{ opacity: 0, scale: .7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 2 }}
+                    className="dev-techs-container"
+                >
                     {techsAndTools.map((item, index) => (
                         <div key={index}>
                             <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(item.title == "cplusplus" ? "C++" : item.title)}>
@@ -40,7 +53,7 @@ const Techs = () => {
                             </CustomTooltip>
                         </div>
                     ))}
-                </div>
+                </motion.div>
             </section>
         </>
     );
