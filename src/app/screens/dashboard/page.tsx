@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { db, auth } from "@/app/database/config";
+import { db, auth, storage } from "@/app/database/config";
+import { ref as storageRef, deleteObject, listAll } from "firebase/storage";
 import { ref as dbRef, onValue, remove } from "firebase/database";
 
 import { FaPaperclip, FaRegTrashCan } from 'react-icons/fa6';
@@ -61,21 +62,28 @@ const DashboardPage = () => {
         };
     }, [router]);
 
-    const deleteProject = (title: string) => {
+    const deleteProject = async (title: string) => {
         if (!confirm(`Are you sure you want to delete the project "${title}"?`)) {
             return;
         }
-
+    
         const projectRef = dbRef(db, `projects/${title}`);
-        remove(projectRef)
-            .then(() => {
-                showNotify( "success", "Project deleted successfully.",);
-                setProjects(prevProjects => prevProjects.filter(project => project.title !== title));
-            })
-            .catch((error) => {
-                console.error("Error deleting project:", error);
-            });
+        const folderRef = storageRef(storage, `images/${title}`);
+    
+        try {
+            await remove(projectRef);
+            showNotify("success", "Project deleted successfully.");
+    
+            const listResult = await listAll(folderRef);
+            const deletePromises = listResult.items.map(item => deleteObject(item));
+            await Promise.all(deletePromises);
+            
+            setProjects(prevProjects => prevProjects.filter(project => project.title !== title));
+        } catch (error) {
+            console.error("Error deleting project or files:", error);
+        }
     };
+    
 
     const findImageUrl = (tech: string) => {
         const image = techsAndTools.find(img => img.title.toLowerCase() === tech.toLowerCase());

@@ -7,7 +7,8 @@ import { SkewLoader } from 'react-spinners';
 
 import { motion } from 'framer-motion';
 
-import { db, auth } from "@/app/database/config";
+import { db, auth, storage } from "@/app/database/config";
+import { ref as storageRef, deleteObject, listAll } from "firebase/storage";
 import { ref as dbRef, onValue, remove } from "firebase/database";
 
 import CustomTooltip from '@/app/components/hooks/tooltip';
@@ -18,6 +19,7 @@ import ProjectProps from './index.props';
 import Modal from '../../hooks/modal';
 
 import "./index.style.css";
+import { showNotify } from '@/app/utils/notify';
 
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectProps[]>([]);
@@ -75,21 +77,28 @@ const Projects = () => {
         };
     }, []);
 
-    const deleteProject = (title: string) => {
+    const deleteProject = async (title: string) => {
         if (!confirm(`Are you sure you want to delete the project "${title}"?`)) {
             return;
         }
-
+    
         const projectRef = dbRef(db, `projects/${title}`);
-        remove(projectRef)
-            .then(() => {
-                console.log(`Project "${title}" deleted successfully.`);
-                setProjects(prevProjects => prevProjects.filter(project => project.title !== title));
-            })
-            .catch((error) => {
-                console.error("Error deleting project:", error);
-            });
+        const folderRef = storageRef(storage, `images/${title}`);
+    
+        try {
+            await remove(projectRef);
+            showNotify("success", "Project deleted successfully.");
+    
+            const listResult = await listAll(folderRef);
+            const deletePromises = listResult.items.map(item => deleteObject(item));
+            await Promise.all(deletePromises);
+            
+            setProjects(prevProjects => prevProjects.filter(project => project.title !== title));
+        } catch (error) {
+            console.error("Error deleting project or files:", error);
+        }
     };
+    
 
     const findImageUrl = (tech: string): string | undefined => {
         const image = techsAndTools.find(img => img.title.toLowerCase() === tech.toLowerCase());
