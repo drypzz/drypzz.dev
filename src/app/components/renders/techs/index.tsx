@@ -48,7 +48,7 @@ const Techs = () => {
                 >
                     {techsAndTools.map((item, index) => (
                         <div key={index}>
-                            <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(item.title == "cplusplus" ? "C++" : item.title)}>
+                            <CustomTooltip id={`dev-tooltip-${String(index)}-${item.title}`} content={(item.title == "cplusplus" ? "C++" : item.title)}>
                                 <img draggable={false} src={item.src} alt={item.alt} title={item.title} />
                             </CustomTooltip>
                         </div>
