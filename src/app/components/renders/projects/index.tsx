@@ -153,9 +153,9 @@ const Projects = () => {
                                 <h2>{e.title}</h2>
                             </div>
                             <div className="dev-cards-icons">
-                                {e.techs.map((tech, index) => (
+                                {e.techs.map((tech, techIndex) => (
                                     <div key={index}>
-                                        <CustomTooltip id={`dev-tooltip-${String(index)}`} content={(tech === "cplusplus" ? "C++" : tech)}>
+                                        <CustomTooltip id={`dev-tooltip-${index}-${techIndex}-${tech}`} content={(tech === "cplusplus" ? "C++" : tech)}>
                                             <img 
                                                 src={findImageUrl(tech)} 
                                                 alt={tech}
