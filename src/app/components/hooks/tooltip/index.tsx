@@ -17,9 +17,9 @@ const CustomTooltip = ({ id, content, children }: TooltipProps) => {
             </div>
             <Tooltip
                 id={id}
-                arrowColor="rgba(3, 126, 219, 0.4)"
+                arrowColor="rgba(3, 126, 219, .8)"
                 style={{
-                    backgroundColor: "rgba(3, 126, 219, 0.4)",
+                    backgroundColor: "rgba(3, 126, 219, .8)",
                     borderRadius: "5px",
                     textTransform: "capitalize",
                     color: "white",
