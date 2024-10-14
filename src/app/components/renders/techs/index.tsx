@@ -1,32 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-import Images from "@/app/utils/image.props";
-
 import CustomTooltip from "../../hooks/tooltip";
 
 import { motion } from 'framer-motion';
+
+import useTechs from "./index.rules";
 
 import "./index.style.css";
 
 const Techs = () => {
 
-    const [techsAndTools, setTechsAndTools] = useState<Images[]>([]);
-
-    useEffect(() => {
-        const fetchTechsAndTools = async () => {
-            try {
-                const response = await fetch("/api/getImages");
-                const data = await response.json();
-                setTechsAndTools(data);
-            } catch (error) {
-                console.error("Failed to fetch techs and tools:", error);
-            }
-        };
-
-        fetchTechsAndTools();
-    }, []);
+    const { techsAndTools } = useTechs();
 
     return (
         <>
