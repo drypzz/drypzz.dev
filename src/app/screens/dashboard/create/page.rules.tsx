@@ -103,7 +103,7 @@ const useCreate = () => {
 
     useEffect(() => {
         fetchTechsAndTools();
-    }, [fetchTechsAndTools]);
+    }, []);
 
     return {
         loading,

@@ -11,7 +11,7 @@ const useTechs = () => {
 
     useEffect(() => {
         fetchTechsAndTools();
-    }, [fetchTechsAndTools]);
+    }, []);
 
     return {
         techsAndTools
