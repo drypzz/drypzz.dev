@@ -13,7 +13,7 @@
     ᲼᲼᲼*v3.0 - 2024*
 </details>
 
-- Ultima atualização: 14/10/24 - 16:20
+- Ultima atualização: 16/10/24 - 00:15
 
 ---
 
