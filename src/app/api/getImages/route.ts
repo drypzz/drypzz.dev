@@ -3,7 +3,11 @@ import path from 'path';
 
 import { NextResponse } from 'next/server';
 
-import Images from '@/app/utils/image.props';
+interface Images {
+  src: string;
+  alt: string;
+  title: string;
+}
 
 export async function GET() {
   try {

@@ -3,7 +3,7 @@
 import { SkewLoader } from 'react-spinners';
 
 import Loading from '@/app/components/renders/loading';
-import Checkbox from "@/app/components/hooks/checkbox";
+import Checkbox from "@/app/components/interactions/checkbox";
 
 import useLogin from './page.rules';
 
