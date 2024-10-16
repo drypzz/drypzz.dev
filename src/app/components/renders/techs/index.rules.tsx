@@ -1,20 +1,16 @@
-import { useEffect } from "react";
-
-import useGlobal from "@/app/hook/global";
+import { useState } from "react";
 
 const useTechs = () => {
 
-    const { 
-        fetchTechsAndTools,
-        techsAndTools
-    } = useGlobal();
+    const [ getType, setType ] = useState("tech");
 
-    useEffect(() => {
-        fetchTechsAndTools();
-    }, []);
+    const handleType = () => {
+        setType(prevType => (prevType === "tech" ? "tool" : "tech"));
+    };
 
     return {
-        techsAndTools
+        getType,
+        handleType
     };
 };
 

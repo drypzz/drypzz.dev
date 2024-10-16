@@ -14,7 +14,7 @@ import useGlobal from '@/app/hook/global';
 const useCreate = () => {
     const router = useRouter();
 
-    const { fetchTechsAndTools, techsAndTools } = useGlobal();
+    const { techsAndTools } = useGlobal();
 
     const [loading, setLoading] = useState(true);
     const [loadingRegister, setLoadingRegister] = useState(false);
@@ -100,10 +100,6 @@ const useCreate = () => {
             unsubscribe();
         };
     }, [router]);
-
-    useEffect(() => {
-        fetchTechsAndTools();
-    }, []);
 
     return {
         loading,
