@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { showNotify } from "@/app/utils/notify";
 
@@ -19,6 +19,7 @@ interface gImagesProps {
     src: string;
     alt: string;
     title: string;
+    type: string;
 }
 
 const useGlobal = () => {
@@ -68,6 +69,11 @@ const useGlobal = () => {
             console.error("Error deleting project or files:", error);
         }
     };
+
+    useEffect(() => {
+        fetchProjects();
+        fetchTechsAndTools();
+    }, []);
 
     return {
         projects,
