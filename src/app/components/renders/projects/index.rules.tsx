@@ -45,7 +45,7 @@ const useProjects = () => {
             unsubscribeRef.current && unsubscribeRef.current();
         };
 
-    }, [fetchProjects, fetchTechsAndTools]);
+    }, []);
 
     const findImageUrl = (tech: string): string | undefined => {
         const image = techsAndTools.find(img => img.title.toLowerCase() === tech.toLowerCase());

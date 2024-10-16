@@ -33,7 +33,7 @@ const useDashboard = () => {
         return () => {
             unsubscribe();
         };
-    }, [router, fetchProjects, fetchTechsAndTools]);
+    }, [router]);
     
 
     const findImageUrl = (tech: string) => {
