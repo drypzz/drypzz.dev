@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b79dab-4723-4c27-bf51-cccf9ac0a9a3/deploy-status)](https://app.netlify.com/sites/drypzz/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d1b79dab-4723-4c27-bf51-cccf9ac0a9a3/deploy-status)](https://drypzz.netlify.app)
 
 # Portfolio v3 - 2024
 
