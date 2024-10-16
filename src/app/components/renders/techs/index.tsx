@@ -1,6 +1,6 @@
 "use client";
 
-import CustomTooltip from "../../hooks/tooltip";
+import CustomTooltip from "../../interactions/tooltip";
 
 import { motion } from 'framer-motion';
 

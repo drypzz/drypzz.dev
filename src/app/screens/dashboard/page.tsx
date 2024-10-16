@@ -2,8 +2,6 @@
 
 import { FaPaperclip, FaRegTrashCan } from 'react-icons/fa6';
 
-import Loading from '@/app/components/renders/loading';
-
 import useDashboard from './page.rules';
 
 import "./page.style.css";
@@ -12,16 +10,11 @@ const DashboardPage = () => {
    
     const { 
         projects,
-        loading,
         auth,
         router,
         deleteProject,
         findImageUrl
     } = useDashboard();
-
-    if (loading) {
-        return <Loading />;
-    }
 
     return (
         <section style={{ height: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>

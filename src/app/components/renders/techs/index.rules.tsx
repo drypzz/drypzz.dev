@@ -1,25 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import Images from "@/app/utils/image.props";
+import useGlobal from "@/app/hook/global";
 
 const useTechs = () => {
-    const [techsAndTools, setTechsAndTools] = useState<Images[]>([]);
+
+    const { 
+        fetchTechsAndTools,
+        techsAndTools
+    } = useGlobal();
 
     useEffect(() => {
-        const fetchTechsAndTools = async () => {
-            try {
-                const response = await fetch("/api/getImages");
-                const data = await response.json();
-                setTechsAndTools(data);
-            } catch (error) {
-                console.error("Failed to fetch techs and tools:", error);
-            }
-        };
-
         fetchTechsAndTools();
-    }, []);
+    }, [fetchTechsAndTools]);
 
-    return { techsAndTools };
+    return {
+        techsAndTools
+    };
 };
 
 export default useTechs;

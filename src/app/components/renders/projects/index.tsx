@@ -3,12 +3,11 @@
 import React from 'react';
 import Link from "next/link";
 
-import { SkewLoader } from 'react-spinners';
 import { motion } from 'framer-motion';
 
-import CustomTooltip from '@/app/components/hooks/tooltip';
+import CustomTooltip from '@/app/components/interactions/tooltip';
 
-import Modal from '../../hooks/modal';
+import Modal from '../../interactions/modal';
 
 import useProjects from './index.rules';
 
@@ -17,7 +16,6 @@ import "./index.style.css";
 const Projects = () => {
     const {
         projects,
-        loading,
         loggedIn,
         isModalOpen,
         modalImage,
@@ -26,10 +24,6 @@ const Projects = () => {
         deleteProject,
         findImageUrl,
     } = useProjects();
-
-    if (loading) {
-        return <SkewLoader color="#037edb" loading size={30} />;
-    }
 
     if (projects.length === 0) {
         return (

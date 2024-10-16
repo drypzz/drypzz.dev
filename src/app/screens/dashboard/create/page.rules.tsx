@@ -8,15 +8,17 @@ import { ref as dbRef, set } from "firebase/database";
 import { ref as storageRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import { showNotify } from '@/app/utils/notify';
-import Image from "@/app/utils/image.props";
+
+import useGlobal from '@/app/hook/global';
 
 const useCreate = () => {
     const router = useRouter();
 
+    const { fetchTechsAndTools, techsAndTools } = useGlobal();
+
     const [loading, setLoading] = useState(true);
     const [loadingRegister, setLoadingRegister] = useState(false);
 
-    const [techsAndTools, setTechsAndTools] = useState<Image[]>([]);
     const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
     const [image, setImage] = useState<File | null>(null);
     const [inputs, setInputs] = useState({
@@ -100,18 +102,8 @@ const useCreate = () => {
     }, [router]);
 
     useEffect(() => {
-        const fetchTechsAndTools = async () => {
-            try {
-                const response = await fetch("/api/getImages");
-                const data = await response.json();
-                setTechsAndTools(data);
-            } catch (error) {
-                console.error("Failed to fetch techs and tools:", error);
-            }
-        };
-
         fetchTechsAndTools();
-    }, []);
+    }, [fetchTechsAndTools]);
 
     return {
         loading,
