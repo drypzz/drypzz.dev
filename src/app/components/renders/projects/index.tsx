@@ -27,12 +27,21 @@ const Projects = () => {
 
     if (projects.length === 0) {
         return (
-            <p style={{
-                color: "red",
-                fontSize: "20px",
-                textAlign: "center",
-                marginTop: "20px"
-            }}>No projects found.</p>
+            <div
+                style={{
+                    color: "red",
+                    fontSize: "20px",
+                    textAlign: "center",
+                    width: "500px",
+                    margin: "0 auto",
+                    padding: "20px",
+                    border: "1px solid rgba(255, 0, 0, .4)",
+                    background: "rgba(255, 0, 0, .1)",
+                    userSelect: "none",
+                }}
+            >
+                <p>❌ No projects found.</p>
+            </div>
         );
     }
 

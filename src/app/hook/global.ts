@@ -6,7 +6,7 @@ import { showNotify } from "@/app/utils/notify";
 
 import { db, storage } from "@/app/database/config";
 import { ref as storageRef, deleteObject, listAll } from "firebase/storage";
-import { ref as dbRef, onValue, remove } from "firebase/database";
+import { ref as dbRef, get, remove } from "firebase/database";
 
 interface gProjectsProps {
     title: string;
@@ -27,15 +27,16 @@ const useGlobal = () => {
     const [projects, setProjects] = useState<gProjectsProps[]>([]);
     const [techsAndTools, setTechsAndTools] = useState<gImagesProps[]>([]);
 
-    const fetchProjects = () => {
+    const fetchProjects = async () => {
         const projectsRef = dbRef(db, 'projects');
-        onValue(projectsRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const projectList = Object.values(data) as gProjectsProps[];
-                setProjects(projectList);
-            }
-        });
+        const snapshot = await get(projectsRef);
+        const data = snapshot.val();
+        if (data) {
+            const projectList = Object.values(data) as gProjectsProps[];
+            setProjects(projectList);
+        }else{
+            setProjects([]);
+        };
     };
 
     const fetchTechsAndTools = async () => {
@@ -71,8 +72,8 @@ const useGlobal = () => {
     };
 
     useEffect(() => {
-        fetchProjects();
         fetchTechsAndTools();
+        fetchProjects();
     }, []);
 
     return {
