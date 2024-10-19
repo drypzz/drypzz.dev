@@ -27,7 +27,10 @@ const Projects = () => {
 
     if (projects.length === 0) {
         return (
-            <div
+            <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2 }}
                 style={{
                     color: "red",
                     fontSize: "20px",
@@ -41,7 +44,7 @@ const Projects = () => {
                 }}
             >
                 <p>❌ No projects found.</p>
-            </div>
+            </motion.div>
         );
     }
 
