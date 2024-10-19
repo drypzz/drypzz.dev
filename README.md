@@ -15,7 +15,7 @@
     ᲼᲼᲼*v3.0 - 2024*
 </details>
 
-- Ultima atualização: 19/10/24 - 00:45
+- Ultima atualização: 19/10/24 - 15:17
 
 ---
 
