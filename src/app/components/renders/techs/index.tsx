@@ -21,44 +21,42 @@ const Techs = () => {
             <section className="dev-techs">
                 <div>
                     <motion.h1
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 2 }}
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 0 }}
+                    transition={{ duration: 1 }}
+                    key={getType}
                     className="dev-title">
                         👨‍💻 My <span style={{textTransform: "capitalize"}}>{(getType == "tech" ? "technologie" : getType)}s</span>
                     </motion.h1>
                 </div>
-                <div className="dev-techs-buttons">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 2 }}
-                    >
+                <motion.div 
+                    className="dev-techs-buttons"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 2 }}>
+                    <div>
                         <button
                             onClick={handleType}
                             disabled={getType === "tech"}
                             >
                             💻 My Techs
                         </button>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 2 }}
-                    >
+                    </div>
+                    <div>
                         <button
                             onClick={handleType}
                             disabled={getType === "tool"}
                             >
                             🔨 My Tools
                         </button>
-                    </motion.div>
-                </div>
+                    </div>
+                </motion.div>
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 2 }}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 0 }}
+                    transition={{ duration: 1 }}
                     className="dev-techs-container"
                     key={getType}
                 >
