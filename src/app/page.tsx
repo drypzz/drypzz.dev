@@ -8,10 +8,9 @@ import Techs from "./components/renders/techs";
 import Projects from "./components/renders/projects";
 import Contact from "./components/renders/contact";
 import Footer from "./components/renders/footer";
+import SnowfallComponent from "./components/renders/snowfall";
 
 import ScrollToTopButton from "./components/interactions/scrolltotopbutton";
-
-import SnowfallComponent from "./components/renders/snowfall";
 
 const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);

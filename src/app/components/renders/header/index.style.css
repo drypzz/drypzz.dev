@@ -72,7 +72,7 @@
 }
 
 .dev-phrases-content{
-    border: 1px solid rgba(3, 126, 219, .3);
+    border: 1px solid var(--content-border-color-variant);
     padding: 15px 25px;
     width: 500px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
