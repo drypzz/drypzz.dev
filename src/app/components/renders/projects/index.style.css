@@ -9,7 +9,7 @@
 
 .dev-cards{
     padding: 20px;
-    border: 1px solid rgba(3, 126, 219, 0.2);
+    border: 1px solid var(--content-border-color-variant);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
 .dev-cards-img img{
     width: 600px;
     cursor: pointer;
-    border: 5px solid rgba(3, 126, 219, 0.5);
+    border: 5px solid var(--content-border-color);
     transition: all .3s ease-in-out;
 }
 

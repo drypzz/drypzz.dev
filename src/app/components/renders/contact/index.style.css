@@ -4,7 +4,7 @@
     align-items: center;
     flex-direction: column;
     width: 50vw;
-    border: 1px solid rgba(3, 126, 219, 0.2);
+    border: 1px solid var(--content-border-color-variant);
     padding: 50px;
     gap: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -33,7 +33,7 @@
 .form-input {
     width: 100%;
     padding: 15px 10px 15px 15px;
-    border: 1px solid rgba(3, 126, 219, 0.5);
+    border: 1px solid var(--content-border-color);
     background: none;
     color: #f4f4f4;
     font-size: 16px;
@@ -57,7 +57,7 @@
 
 .form-input[type = "file"]::file-selector-button{
     padding: 10px;
-    border: 1px solid rgba(3, 126, 219, 0.5);
+    border: 1px solid var(--content-border-color);
     background-color: var(--primary-color);
     color: #f4f4f4;
     font-size: 16px;
@@ -90,7 +90,7 @@
     left: 15px;
     font-size: 12px;
     background: #000;
-    border: 1px solid rgba(3, 126, 219, 0.5);
+    border: 1px solid var(--content-border-color);
     padding: 0 5px;
     color: #fff;
 }
