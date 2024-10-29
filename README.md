@@ -30,6 +30,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ---
 
+## 🪪 Licença
+Este projeto é licenciado sob a Licença Apache 2.0 - consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
 ## 💻 Projeto
 
 - Esse projeto foi criado para o intuito de conter mais informações das minhas Tecnologias e projetos já desenvolvidos.
