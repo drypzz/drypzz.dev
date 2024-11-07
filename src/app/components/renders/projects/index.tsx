@@ -93,7 +93,7 @@ const Projects = () => {
                                     </div>
                                 ))}
                             </div>
-                            <Link target="_blank" className="dev-cards-btn" href={e.link}>
+                            <Link target="_blank" className="dev-cards-btn" rel="noopener noreferrer" href={e.link}>
                                 View {e.link.includes("github") ? "on GitHub" : "Project"}
                             </Link>
                             {loggedIn && (

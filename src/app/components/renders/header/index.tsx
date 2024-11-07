@@ -40,22 +40,22 @@ const Header = () => {
                 transition={{ duration: 2 }}
             >
                 <div>
-                    <Link target="_blank" href="https://github.com/drypzz">
+                    <Link target="_blank" rel="noopener noreferrer" href="https://github.com/drypzz">
                         <FaGithub />
                     </Link>
                 </div>
                 <div>
-                    <Link target="_blank" href="https://www.instagram.com/_gustavoaap/">
+                    <Link target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/_gustavoaap/">
                         <FaInstagram />
                     </Link>
                 </div>
                 <div>
-                    <Link target="_blank" href="https://www.linkedin.com/in/gustavoaap/">
+                    <Link target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/gustavoaap/">
                         <FaLinkedin />
                     </Link>
                 </div>
                 <div>
-                    <Link target="_blank" href="https://www.facebook.com/igustavoaap/">
+                    <Link target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/igustavoaap/">
                         <FaFacebook />
                     </Link>
                 </div>
