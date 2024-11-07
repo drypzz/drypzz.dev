@@ -16,7 +16,7 @@ const Footer = () => {
                     <p>2021 - {new Date().getFullYear()} © All rights reserved</p>
                 </div>
                 <div>
-                    <p>Developed by <Link target="_blank" href="https://github.com/drypzz">@drypzz</Link></p>
+                    <p>Developed by <Link target="_blank" rel="noopener noreferrer" href="https://github.com/drypzz">@drypzz</Link></p>
                 </div>
             </motion.footer>
         </>
