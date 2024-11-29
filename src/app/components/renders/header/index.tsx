@@ -21,7 +21,7 @@ const Header = () => {
                     <h3>Hello everyone <HandlingEmoji /></h3>
                 </div>
                 <div>
-                    <h1 className="dev-title">{"I'm DRYPZZ"}</h1>
+                    <h1 id="gorro" className="dev-title">{"I'm DRYPZZ"}</h1>
                 </div>
                 <div>
                     <h5>Programming Student and Front-end Developer</h5>
