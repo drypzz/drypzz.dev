@@ -76,6 +76,37 @@ body{
     font-size: 2rem;
 }
 
+.dev-title#gorro{
+    position: relative;
+    z-index: 10000;
+}
+
+@keyframes waveGorro {
+    0% { transform: rotate(0deg) scaleX(-1) scale(0.8); }
+    10% { transform: rotate(14deg) scaleX(-1) scale(0.8); }
+    20% { transform: rotate(-8deg) scaleX(-1) scale(0.8); }
+    30% { transform: rotate(14deg) scaleX(-1) scale(0.8); }
+    40% { transform: rotate(-4deg) scaleX(-1) scale(0.8); }
+    50% { transform: rotate(10deg) scaleX(-1) scale(0.8); }
+    60% { transform: rotate(0deg) scaleX(-1) scale(0.8); }
+    100% { transform: rotate(0deg) scaleX(-1) scale(0.8); }
+}
+
+.dev-title#gorro::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("/gorro.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: -10px;
+    left: 90px;
+    animation: waveGorro 3s infinite;
+    transform-origin: 50% 50%;
+}
+
 .dev-background {
     padding: 20px;
     height: 100%;

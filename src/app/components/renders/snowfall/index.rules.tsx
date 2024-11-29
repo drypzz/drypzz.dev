@@ -8,7 +8,7 @@ const useSnowFall = () => {
 
     const checkChristmasDay = () => {
         const today = new Date();
-        const christmasDay = new Date(today.getFullYear(), 11, 15);
+        const christmasDay = new Date(today.getFullYear(), 10, 29);
         const christmasDayEnd = new Date(today.getFullYear(), 11, 29);
 
         const result = today >= christmasDay && today <= christmasDayEnd;

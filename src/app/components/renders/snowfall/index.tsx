@@ -16,6 +16,7 @@ const SnowfallComponent = () => {
 
     return (
         <Snowfall 
+            snowflakeCount={150}
             style={{
                 position: "fixed",
                 top: 0,
@@ -23,7 +24,9 @@ const SnowfallComponent = () => {
                 right: 0,
                 bottom: 0,
                 zIndex: 1,
-                opacity: .7
+                opacity: .5,
+                userSelect: "none",
+                pointerEvents: "none"
             }}
         />
     );
