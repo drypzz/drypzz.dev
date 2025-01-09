@@ -2,12 +2,12 @@
 
 import { SkewLoader } from 'react-spinners';
 
-import Loading from '@/app/components/renders/loading';
-import Checkbox from "@/app/components/interactions/checkbox";
+import Loading from '@/app/components/layout/loading';
+import Checkbox from "@/app/components/common/checkbox";
 
 import useLogin from './page.rules';
 
-import "@/app/components/renders/contact/index.style.css";
+import "@/app/components/section/contact/index.style.css";
 
 const LoginPage = () => {
 

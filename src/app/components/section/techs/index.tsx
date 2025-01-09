@@ -1,10 +1,12 @@
 "use client";
 
-import CustomTooltip from "../../interactions/tooltip";
+import { useEffect } from "react";
+
+import CustomTooltip from "../../common/tooltip";
 
 import { motion } from 'framer-motion';
 
-import useGlobal from "@/app/hook/global";
+import useGlobal from "@/app/global/global";
 
 import useTechs from "./index.rules";
 
@@ -14,7 +16,11 @@ const Techs = () => {
 
     const { getType, handleType } = useTechs();
 
-    const { techsAndTools } = useGlobal();
+    const { techsAndTools, fetchTechsAndTools } = useGlobal();
+
+    useEffect(() => {
+        fetchTechsAndTools();
+    }, []);
 
     return (
         <>

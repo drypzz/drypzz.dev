@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { auth } from "@/app/database/config";
 
-import useGlobal from '@/app/hook/global';
+import useGlobal from '@/app/global/global';
 
 const useDashboard = () => {
     const router = useRouter();

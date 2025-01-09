@@ -4,16 +4,16 @@ import { useState, useEffect, useRef } from 'react';
 
 import { auth } from "@/app/database/config";
 
-import useGlobal from '@/app/hook/global';
+import useGlobal from '@/app/global/global';
 
 const useProjects = () => {
 
     const {
-        fetchProjects,
         deleteProject,
         projects,
         techsAndTools,
-        fetchTechsAndTools,
+        fetchProjects,
+        fetchTechsAndTools
     } = useGlobal();
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -37,14 +37,13 @@ const useProjects = () => {
         unsubscribeRef.current = auth.onAuthStateChanged(user => {
             setLoggedIn(!!user);
         });
-        
+
         fetchProjects();
         fetchTechsAndTools();
 
         return () => {
             unsubscribeRef.current && unsubscribeRef.current();
         };
-
     }, []);
 
     const findImageUrl = (tech: string): string | undefined => {
