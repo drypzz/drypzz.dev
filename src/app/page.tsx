@@ -2,19 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 
-import Loading from "./components/renders/loading";
-import Header from "./components/renders/header";
-import Techs from "./components/renders/techs";
-import Projects from "./components/renders/projects";
-import Contact from "./components/renders/contact";
-import Footer from "./components/renders/footer";
-import SnowfallComponent from "./components/renders/snowfall";
+import Loading from "./components/layout/loading";
+import SnowfallComponent from "./components/layout/snowfall";
 
-import ScrollToTopButton from "./components/interactions/scrolltotopbutton";
+import Header from "./components/section/header";
+import Techs from "./components/section/techs";
+import Projects from "./components/section/projects";
+import Contact from "./components/section/contact";
+import Footer from "./components/section/footer";
+
+import ScrollToTopButton from "./components/common/scrolltotopbutton";
+
 
 const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);
-
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);

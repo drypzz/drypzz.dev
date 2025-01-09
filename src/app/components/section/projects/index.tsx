@@ -1,13 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from "next/link";
 
 import { motion } from 'framer-motion';
 
-import CustomTooltip from '@/app/components/interactions/tooltip';
-
-import Modal from '../../interactions/modal';
+import CustomTooltip from '@/app/components/common/tooltip';
+import Modal from '@/app/components/common/modal';
 
 import useProjects from './index.rules';
 
@@ -24,6 +23,7 @@ const Projects = () => {
         deleteProject,
         findImageUrl,
     } = useProjects();
+
 
     if (projects.length === 0) {
         return (

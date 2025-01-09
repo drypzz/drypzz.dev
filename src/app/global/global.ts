@@ -72,8 +72,8 @@ const useGlobal = () => {
     };
 
     useEffect(() => {
-        fetchTechsAndTools();
         fetchProjects();
+        fetchTechsAndTools();
     }, []);
 
     return {

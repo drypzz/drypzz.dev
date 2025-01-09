@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const useTechs = () => {
-
     const [ getType, setType ] = useState("tech");
 
     const handleType = () => {

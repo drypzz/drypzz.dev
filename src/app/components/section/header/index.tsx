@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import { FaGithub, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 
-import HandlingEmoji from "../../interactions/handling";
+import HandlingEmoji from "@/app/components/common/handling";
 
 import "./index.style.css";
 

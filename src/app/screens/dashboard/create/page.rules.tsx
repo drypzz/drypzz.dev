@@ -9,7 +9,7 @@ import { ref as storageRef, uploadBytesResumable, getDownloadURL } from "firebas
 
 import { showNotify } from '@/app/utils/notify';
 
-import useGlobal from '@/app/hook/global';
+import useGlobal from '@/app/global/global';
 
 const useCreate = () => {
     const router = useRouter();
