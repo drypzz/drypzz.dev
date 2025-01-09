@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d1b79dab-4723-4c27-bf51-cccf9ac0a9a3/deploy-status)](https://drypzz.netlify.app)
 
-# Portfolio v3 - 2024
+# Portfolio v3 - 2025
 
 ## 📰 Informações
 
@@ -12,10 +12,10 @@
     <br />
     ᲼᲼᲼᲼v2.0 - 2023
     <br />
-    ᲼᲼᲼*v3.0 - 2024*
+    ᲼᲼᲼*v3.0 - 2024 - 2025*
 </details>
 
-- Ultima atualização: 07/11/24 - 03:12
+- Ultima atualização: 09/01/25 - 14:30
 
 ---
 
@@ -56,6 +56,7 @@ Este projeto é licenciado sob a Licença Apache 2.0 - consulte o arquivo [LICEN
     "react-dom": "^18",
     "react-icons": "^5.3.0",
     "react-responsive-carousel": "^3.2.23",
+    "react-snowfall": "^2.1.1",
     "react-spinners": "^0.13.8",
     "react-tooltip": "^5.28.0"
   },
@@ -73,4 +74,4 @@ Este projeto é licenciado sob a Licença Apache 2.0 - consulte o arquivo [LICEN
 
 ---
 
-Feito com ♥ by drypzz
+by drypzz
