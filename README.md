@@ -15,7 +15,7 @@
     ᲼᲼᲼*v3.0 - 2024 - 2025*
 </details>
 
-- Ultima atualização: 09/01/25 - 14:30
+- Ultima atualização: 07/02/25 - 02:19 AM
 
 ---
 
