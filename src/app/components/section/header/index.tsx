@@ -5,10 +5,19 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 import HandlingEmoji from "@/app/components/common/handling";
+import CustomTooltip from "@/app/components/common/tooltip";
 
 import "./index.style.css";
 
 const Header = () => {
+
+    const links = [
+        {name: "Github", url: "https://github.com/drypzz", icon: <FaGithub />},
+        {name: "Instagram", url: "https://www.instagram.com/_gustavoaap/", icon: <FaInstagram />},
+        {name: "Linkedin", url: "https://www.linkedin.com/in/gustavoaap/", icon: <FaLinkedin />},
+        {name: "Facebook", url: "https://www.facebook.com/igustavoaap/", icon: <FaFacebook />}
+    ]
+
     return (
         <>
             <motion.header
@@ -39,26 +48,17 @@ const Header = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 2 }}
             >
-                <div>
-                    <Link target="_blank" rel="noopener noreferrer" href="https://github.com/drypzz">
-                        <FaGithub />
-                    </Link>
-                </div>
-                <div>
-                    <Link target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/_gustavoaap/">
-                        <FaInstagram />
-                    </Link>
-                </div>
-                <div>
-                    <Link target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/gustavoaap/">
-                        <FaLinkedin />
-                    </Link>
-                </div>
-                <div>
-                    <Link target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/igustavoaap/">
-                        <FaFacebook />
-                    </Link>
-                </div>
+                
+                {links.map((link, index) => (
+                    <div key={index}>
+                        <CustomTooltip id={`dev-tooltip-${String(index)}-${link.name}`} content={link.name}>
+                            <Link target="_blank" rel="noopener noreferrer" href={link.url}>
+                                {link.icon}
+                            </Link>
+                        </CustomTooltip>
+                    </div>
+                ))}
+
             </motion.section>
             <motion.section
                 className="dev-phrases"
