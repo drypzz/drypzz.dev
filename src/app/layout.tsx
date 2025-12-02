@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
+import ChristmasThemeController from "./components/layout/christmas-theme";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -46,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
+        <ChristmasThemeController />
         <main className="dev-background">
           {children}
         </main>

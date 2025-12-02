@@ -1,16 +1,14 @@
 "use client";
-
 import React from "react";
 
 import Snowfall from "react-snowfall";
 
-import useSnowFall from "./index.rules";
+import useChristmas from "@/app/hooks/useChristmas";
 
 const SnowfallComponent = () => {
+    const { isChristmas } = useChristmas();
 
-    const { getChristmasDay } = useSnowFall();
-
-    if (!getChristmasDay) {
+    if (!isChristmas) {
         return null;
     };
 

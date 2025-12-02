@@ -7,15 +7,19 @@ import { FaGithub, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 import HandlingEmoji from "@/app/components/common/handling";
 import CustomTooltip from "@/app/components/common/tooltip";
 
+import useChristmas from "@/app/hooks/useChristmas";
+
 import "./index.style.css";
 
 const Header = () => {
 
+    const { isChristmas } = useChristmas();
+
     const links = [
-        {name: "Github", url: "https://github.com/drypzz", icon: <FaGithub />},
-        {name: "Instagram", url: "https://www.instagram.com/_gustavoaap/", icon: <FaInstagram />},
-        {name: "Linkedin", url: "https://www.linkedin.com/in/gustavoaap/", icon: <FaLinkedin />},
-        {name: "Facebook", url: "https://www.facebook.com/igustavoaap/", icon: <FaFacebook />}
+        { name: "Github", url: "https://github.com/drypzz", icon: <FaGithub /> },
+        { name: "Instagram", url: "https://www.instagram.com/_gustavoaap/", icon: <FaInstagram /> },
+        { name: "Linkedin", url: "https://www.linkedin.com/in/gustavoaap/", icon: <FaLinkedin /> },
+        { name: "Facebook", url: "https://www.facebook.com/igustavoaap/", icon: <FaFacebook /> }
     ]
 
     return (
@@ -33,12 +37,20 @@ const Header = () => {
                     <h1 className="dev-title">{"I'm DRYPZZ"}</h1>
                 </div>
                 <div>
-                    <h5>Programming Student and Front-end Developer</h5>
+                    <h5>Programming Student and Full-Stack Developer</h5>
                 </div>
                 <div>
                     <span id="locale">From Brazil - SC</span>
                 </div>
-                <div>
+                <div style={{ position: 'relative' }}>
+                    {isChristmas && (
+                        <img
+                            src="/hat.png"
+                            alt="Santa Hat"
+                            className="santa-hat"
+                            draggable={false}
+                        />
+                    )}
                     <img draggable={false} src="/me.jpeg" alt="Foto de Perfil de Gustavo" />
                 </div>
             </motion.header>
@@ -48,7 +60,7 @@ const Header = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 2 }}
             >
-                
+
                 {links.map((link, index) => (
                     <div key={index}>
                         <CustomTooltip id={`dev-tooltip-${String(index)}-${link.name}`} content={link.name}>
