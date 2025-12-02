@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     site: "@drypzz",
     card: "summary_large_image",
-    images: "/me.png",
+    images: "/me.jpeg",
   },
   openGraph: {
     title: "DRYPZZ - DEV",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "DRYPZZ - DEV",
     type: "website",
     url: "https://drypzz.netlify.app/",
-    images: [{ url: "/me.png" }],
+    images: [{ url: "/me.jpeg" }],
     countryName: "Brazil",
     locale: "pt_BR",
   },

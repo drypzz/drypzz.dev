@@ -28,6 +28,7 @@
 
 .dev-header div:last-child img{
     width: 350px;
+    height: 335px;
     border-radius: 50%;
     user-select: none;
     border: 5px solid var(--primary-color);
