@@ -39,7 +39,7 @@ const Header = () => {
                     <span id="locale">From Brazil - SC</span>
                 </div>
                 <div>
-                    <img draggable={false} src="/me.png" alt="Foto de Perfil de Gustavo" />
+                    <img draggable={false} src="/me.jpeg" alt="Foto de Perfil de Gustavo" />
                 </div>
             </motion.header>
             <motion.section
