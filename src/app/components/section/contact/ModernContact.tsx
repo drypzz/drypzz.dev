@@ -64,7 +64,7 @@ const ModernContact = () => {
     return (
         <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
 
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none hidden md:block">
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-electric-violet/10 blur-[100px] rounded-full" />
             </div>
 

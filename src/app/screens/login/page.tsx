@@ -40,10 +40,10 @@ const Login = () => {
                         type="button"
                         onClick={handleDiscordLogin}
                         disabled={loading}
-                        className="w-full py-4 rounded-xl bg-[#5865F2] text-white font-bold font-sans uppercase tracking-widest hover:bg-[#4752C4] hover:shadow-[0_0_30px_rgba(88,101,242,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50"
+                        className="w-full py-4 rounded-xl bg-[#5865F2] text-white font-bold font-sans uppercase tracking-widest hover:bg-[#4752C4] hover:shadow-[0_0_30px_rgba(88,101,242,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? (
-                            <span className="animate-pulse">Conectando...</span>
+                            <span className="animate-pulse">Verificando...</span>
                         ) : (
                             <>
                                 <FaDiscord size={20} /> Entrar com Discord
@@ -67,7 +67,7 @@ const Login = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="block w-full py-4 pl-8 pr-0 text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-electric-violet peer font-mono placeholder-transparent"
+                                className="block w-full py-4 pl-8 pr-0 text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-electric-violet peer font-mono placeholder-transparent disabled:opacity-50"
                                 placeholder="Email"
                                 disabled={loading}
                             />
@@ -84,7 +84,7 @@ const Login = () => {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="block w-full py-4 pl-8 pr-0 text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-electric-violet peer font-mono placeholder-transparent"
+                                className="block w-full py-4 pl-8 pr-0 text-white bg-transparent border-0 border-b border-white/20 appearance-none focus:outline-none focus:ring-0 focus:border-electric-violet peer font-mono placeholder-transparent disabled:opacity-50"
                                 placeholder="Senha"
                                 disabled={loading}
                             />
@@ -96,9 +96,9 @@ const Login = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-gray-300 font-bold font-sans uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-3 text-xs"
+                            className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-gray-300 font-bold font-sans uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 text-xs"
                         >
-                            {loading ? "Autenticando..." : (
+                            {loading ? "Carregando..." : (
                                 <>Entrar <FaSignInAlt /></>
                             )}
                         </button>

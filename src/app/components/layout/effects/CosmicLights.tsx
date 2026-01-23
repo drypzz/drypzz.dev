@@ -1,10 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const CosmicLights = () => {
+    const [isMobile, setIsMobile] = useState(false);
 
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    if (isMobile) {
+        return (
+            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-40">
+                <div className="absolute top-[-5%] left-[-10%] w-[300px] h-[300px] rounded-full bg-electric-violet blur-[90px]" />
+                <div className="absolute bottom-[-5%] right-[-10%] w-[300px] h-[300px] rounded-full bg-neon-cyan blur-[90px]" />
+            </div>
+        );
+    }
     const transitionSettings = {
         duration: 25,
         repeat: Infinity,
@@ -13,7 +32,6 @@ const CosmicLights = () => {
 
     return (
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-
             <motion.div
                 className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-electric-violet mix-blend-screen blur-[120px]"
                 animate={{

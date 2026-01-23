@@ -25,7 +25,7 @@ const ModernFooter = () => {
     return (
         <footer className="relative pt-20 pb-10 overflow-hidden border-t border-white/5">
 
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-electric-violet/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-electric-violet/5 blur-[120px] rounded-full pointer-events-none hidden md:block" />
 
             <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
 

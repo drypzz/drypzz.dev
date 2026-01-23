@@ -26,6 +26,12 @@ const useCreate = () => {
             if (!user) {
                 router.push("/screens/login");
             } else {
+                const role = localStorage.getItem("admin_role");
+                if (role !== "super") {
+                    showNotify("error", "Apenas Super Admins podem criar projetos.");
+                    router.push("/screens/dashboard");
+                    return;
+                }
                 setPageLoading(false);
             }
         });

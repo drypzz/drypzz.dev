@@ -1,14 +1,18 @@
 "use client";
 
 import React, { useEffect } from "react";
+import dynamic from 'next/dynamic';
 
 import ModernHero from "./components/section/hero/ModernHero";
-import ModernTechs from "./components/section/techs/ModernTechs";
-import ModernProjects from "./components/section/projects/ModernProjects";
-import ModernContact from "./components/section/contact/ModernContact";
-import ModernFooter from "./components/section/footer/ModernFooter";
-
 import Preloader from "./components/layout/Preloader";
+
+const ModernTechs = dynamic(() => import("./components/section/techs/ModernTechs"));
+const ModernProjects = dynamic(() => import("./components/section/projects/ModernProjects"));
+const ModernContact = dynamic(() => import("./components/section/contact/ModernContact"));
+const ModernFooter = dynamic(() => import("./components/section/footer/ModernFooter"));
+
+const CosmicLights = dynamic(() => import("./components/layout/effects/CosmicLights"), { ssr: false });
+const CosmicSnowfall = dynamic(() => import("./components/layout/effects/CosmicSnowfall"), { ssr: false });
 
 export default function Home() {
 
@@ -21,29 +25,36 @@ export default function Home() {
 
         const timer = setTimeout(() => {
             window.scrollTo(0, 0);
-        }, 10);
+        }, 50);
 
         return () => clearTimeout(timer);
     }, []);
 
     return (
-        <>
-            <Preloader />
-            <div className="flex flex-col w-full selection:bg-neon-cyan selection:text-black">
+        <main className="relative bg-[#030014] text-white overflow-hidden selection:bg-electric-violet/30 selection:text-neon-cyan">
 
+            <Preloader />
+
+            <CosmicLights />
+            <CosmicSnowfall />
+
+            <div className="relative z-10">
                 <ModernHero />
 
-                <ModernTechs />
+                <div id="techs">
+                    <ModernTechs />
+                </div>
 
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-electric-violet/30 to-transparent opacity-50" />
+                <div id="projects">
+                    <ModernProjects />
+                </div>
 
-                <ModernProjects />
-
-                <ModernContact />
+                <div id="contact">
+                    <ModernContact />
+                </div>
 
                 <ModernFooter />
-
             </div>
-        </>
+        </main>
     );
 };

@@ -1,16 +1,33 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 const LiquidCursor = () => {
   const dotRef = useRef<HTMLDivElement>(null);
   const dropsRef = useRef<(HTMLDivElement | null)[]>([]);
+  
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || window.matchMedia("(hover: none)").matches) return;
+    if (typeof window !== 'undefined') {
+      const checkDevice = () => {
+        const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        setIsDesktop(hasMouse);
+      };
+
+      checkDevice();
+
+      window.addEventListener('resize', checkDevice);
+      return () => window.removeEventListener('resize', checkDevice);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
 
     const dot = dotRef.current;
+    if (!dot) return;
 
     let mx = window.innerWidth / 2;
     let my = window.innerHeight / 2;
@@ -18,7 +35,7 @@ const LiquidCursor = () => {
     const onMouseMove = (e: MouseEvent) => {
       mx = e.clientX;
       my = e.clientY;
-      if (dot) gsap.set(dot, { x: mx, y: my });
+      gsap.set(dot, { x: mx, y: my });
     };
 
     window.addEventListener('mousemove', onMouseMove);
@@ -49,7 +66,9 @@ const LiquidCursor = () => {
       window.removeEventListener('mousemove', onMouseMove);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isDesktop]);
+
+  if (!isDesktop) return null;
 
   return (
     <>

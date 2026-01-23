@@ -2,10 +2,15 @@
 
 import React, { useEffect, useRef } from "react";
 
+import { useSeason } from "@/app/hooks/useSeason";
+
 const CosmicSnowfall = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const { isChristmas } = useSeason();
 
     useEffect(() => {
+        if (!isChristmas) return;
+
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -17,7 +22,9 @@ const CosmicSnowfall = () => {
         canvas.width = width;
         canvas.height = height;
 
-        const particleCount = 100;
+        const isMobile = width < 768;
+        const particleCount = isMobile ? 20 : 100;
+
         const particles: Particle[] = [];
 
         class Particle {
@@ -55,18 +62,11 @@ const CosmicSnowfall = () => {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 
-                const isChristmas = document.body.classList.contains("christmas-theme");
                 const isSpecial = Math.random() > 0.9;
 
-                if (isChristmas) {
-                    ctx.fillStyle = isSpecial
-                        ? `rgba(220, 38, 38, ${this.opacity})`
-                        : `rgba(255, 255, 255, ${this.opacity})`;
-                } else {
-                    ctx.fillStyle = isSpecial
-                        ? `rgba(124, 58, 237, ${this.opacity})`
-                        : `rgba(255, 255, 255, ${this.opacity})`;
-                }
+                ctx.fillStyle = isSpecial
+                    ? `rgba(220, 38, 38, ${this.opacity})`
+                    : `rgba(255, 255, 255, ${this.opacity})`;
 
                 ctx.shadowBlur = 5;
                 ctx.shadowColor = "white";
@@ -87,7 +87,7 @@ const CosmicSnowfall = () => {
             requestAnimationFrame(animate);
         };
 
-        animate();
+        const animationId = requestAnimationFrame(animate);
 
         const handleResize = () => {
             width = window.innerWidth;
@@ -97,8 +97,14 @@ const CosmicSnowfall = () => {
         };
 
         window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            cancelAnimationFrame(animationId);
+        };
+    }, [isChristmas]);
+
+    if (!isChristmas) return null;
 
     return (
         <canvas
