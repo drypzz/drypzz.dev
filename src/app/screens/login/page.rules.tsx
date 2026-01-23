@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import {
     signInWithEmailAndPassword,
-    signInWithRedirect,
     signInWithPopup,
-    getRedirectResult,
     OAuthProvider,
     signOut
 } from "firebase/auth";
@@ -14,7 +12,6 @@ import { showNotify } from '@/app/utils/notify';
 
 const useLogin = () => {
     const router = useRouter();
-    const isExplicitLogin = useRef(false);
     const successProcessed = useRef(false);
 
     const [email, setEmail] = useState("");
@@ -75,7 +72,7 @@ const useLogin = () => {
         const role = await getUserRole(userEmail);
 
         if (!role) {
-            console.error("⛔ [LOGIN] Acesso negado (Email não cadastrado):", userEmail);
+            console.error("⛔ [LOGIN] Acesso negado:", userEmail);
             showNotify("error", "Você não tem permissão de acesso.");
             await signOut(auth);
             setLoadingLogin(false);
@@ -90,11 +87,10 @@ const useLogin = () => {
         }
 
         let discordData = { banner: "", guildTag: "", guildBadge: "" };
+
         if (credential && credential.accessToken) {
             discordData = await fetchDiscordData(credential.accessToken);
         }
-
-        console.log(`🚀 [LOGIN] Sucesso. Nível: ${role}`);
 
         localStorage.setItem("admin_avatar", finalAvatar);
         localStorage.setItem("admin_name", user.displayName || "Admin");
@@ -102,7 +98,7 @@ const useLogin = () => {
         localStorage.setItem("admin_role", role);
 
         if (discordData.banner) localStorage.setItem("admin_banner", discordData.banner);
-        else if (credential) localStorage.removeItem("admin_banner");
+        else if (credential) localStorage.removeItem("admin_banner"); // Limpa se for novo login e não tiver
 
         if (discordData.guildTag) localStorage.setItem("admin_guild_tag", discordData.guildTag);
         else if (credential) localStorage.removeItem("admin_guild_tag");
@@ -129,55 +125,44 @@ const useLogin = () => {
     };
 
     const handleDiscordLogin = async () => {
-        isExplicitLogin.current = true;
         setLoadingLogin(true);
         const provider = new OAuthProvider('oidc.discord');
         provider.addScope('email');
         provider.addScope('identify');
 
         try {
-            if (window.location.hostname === 'localhost') {
-                const result = await signInWithPopup(auth, provider);
-                const credential = OAuthProvider.credentialFromResult(result);
-                await processUserAndRedirect(result.user, credential);
-            } else {
-                await signInWithRedirect(auth, provider);
-            }
+            const result = await signInWithPopup(auth, provider);
+            const credential = OAuthProvider.credentialFromResult(result);
+
+            await processUserAndRedirect(result.user, credential);
+
         } catch (error: any) {
-            console.error(error);
+            console.error("Erro no Popup:", error);
+            if (error.code === 'auth/popup-closed-by-user') {
+                showNotify("info", "Login cancelado.");
+            } else if (error.code === 'auth/cancelled-popup-request') {
+            } else {
+                showNotify("error", "Erro ao conectar com Discord.");
+            }
             setLoadingLogin(false);
-            isExplicitLogin.current = false;
         }
     };
 
     useEffect(() => {
         const safetyTimeout = setTimeout(() => {
             if (loadingLogin) setLoadingLogin(false);
-        }, 8000);
+        }, 6000);
 
-        const checkAuth = async () => {
-            try {
-                const result = await getRedirectResult(auth);
-                if (result && result.user) {
-                    const credential = OAuthProvider.credentialFromResult(result);
-                    await processUserAndRedirect(result.user, credential);
-                    clearTimeout(safetyTimeout);
-                    return;
-                }
-            } catch (error) { console.error(error); }
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                processUserAndRedirect(user, null);
+            } else {
+                setLoadingLogin(false);
+            }
+            clearTimeout(safetyTimeout);
+        });
 
-            const unsubscribe = auth.onAuthStateChanged((user) => {
-                if (isExplicitLogin.current) return;
-                if (user) {
-                    processUserAndRedirect(user, null);
-                } else {
-                    setLoadingLogin(false);
-                }
-                clearTimeout(safetyTimeout);
-            });
-            return unsubscribe;
-        };
-        checkAuth();
+        return () => unsubscribe();
     }, [router]);
 
     return {
