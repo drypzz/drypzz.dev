@@ -32,6 +32,13 @@ const EditProject = () => {
                 return;
             }
 
+            const role = localStorage.getItem("admin_role");
+            if (role !== "super") {
+                showNotify("error", "Apenas Super Admins podem editar projetos.");
+                router.push("/screens/dashboard");
+                return;
+            }
+
             if (projectId) {
                 try {
                     const snapshot = await get(ref(db, `projects/${projectId}`));

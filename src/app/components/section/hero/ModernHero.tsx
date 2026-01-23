@@ -1,13 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
+
 import { FaGithub, FaLinkedin, FaArrowDown, FaCode, FaHeadset } from "react-icons/fa";
 
 import Typewriter from "../../common/typewriter";
 
 const ModernHero = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+    }, []);
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -19,8 +26,8 @@ const ModernHero = () => {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-10">
 
-            <div className="absolute top-0 left-[-10%] w-[500px] h-[500px] bg-electric-violet/20 blur-[120px] rounded-full pointer-events-none mix-blend-screen animate-pulse-slow" />
-            <div className="absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-neon-cyan/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
+            <div className="absolute top-0 left-[-10%] w-[500px] h-[500px] bg-electric-violet/20 blur-[120px] rounded-full pointer-events-none mix-blend-screen md:animate-pulse-slow hidden md:block" />
+            <div className="absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-neon-cyan/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen hidden md:block" />
 
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20 pointer-events-none"></div>
 
@@ -28,7 +35,6 @@ const ModernHero = () => {
                 <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-20">
 
                     <div className="flex-1 text-center lg:text-left">
-
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -46,7 +52,6 @@ const ModernHero = () => {
                             className="text-5xl sm:text-6xl md:text-8xl font-bold font-sans tracking-tighter mb-4 min-h-[1.1em] w-full md:w-auto whitespace-nowrap"
                         >
                             <span className="text-white">I am </span>
-
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-violet via-white to-neon-cyan inline-block">
                                 <Typewriter text='"DRYPZZ"' delay={0.5} />
                             </span>
@@ -111,13 +116,13 @@ const ModernHero = () => {
                             className="relative w-72 h-72 md:w-96 md:h-96"
                         >
                             <motion.div
-                                animate={{ rotate: 360 }}
+                                animate={isMobile ? {} : { rotate: 360 }}
                                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                                 className="absolute inset-[-20px] border border-white/10 rounded-full border-dashed will-change-transform"
                             />
 
                             <motion.div
-                                animate={{ rotate: -360 }}
+                                animate={isMobile ? {} : { rotate: -360 }}
                                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                                 className="absolute inset-[-10px] border border-electric-violet/30 rounded-full border-t-transparent border-l-transparent will-change-transform"
                             />

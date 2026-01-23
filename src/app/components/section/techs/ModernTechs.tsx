@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaFigma, FaDocker, FaPython, FaJava
@@ -32,6 +32,11 @@ const CATEGORIES = ["All", "Frontend", "Backend", "Tools"];
 
 const ModernTechs = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   const filteredTechs = activeCategory === "All"
     ? TECH_DATA
@@ -92,8 +97,8 @@ const ModernTechs = () => {
           layout
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 min-h-[300px]"
         >
-          <AnimatePresence>
-            {filteredTechs.map((tech, index) => (
+          <AnimatePresence mode="popLayout">
+            {filteredTechs.map((tech) => (
               <motion.div
                 layout
                 key={tech.name}
@@ -104,8 +109,8 @@ const ModernTechs = () => {
                 className="group relative"
               >
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{
+                  animate={isMobile ? undefined : { y: [0, -5, 0] }}
+                  transition={isMobile ? undefined : {
                     duration: 3 + Math.random(),
                     repeat: Infinity,
                     ease: "easeInOut",

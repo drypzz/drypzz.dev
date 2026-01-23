@@ -9,26 +9,42 @@ const Preloader = () => {
     const [statusText, setStatusText] = useState("INITIALIZING SYSTEM...");
 
     useEffect(() => {
-        const interval = setInterval(() => {
+        let interval: NodeJS.Timeout;
+
+        const handleLoad = () => {
+            clearInterval(interval);
+            setProgress(100);
+
+            setTimeout(() => setIsLoading(false), 800);
+        };
+
+        interval = setInterval(() => {
             setProgress(prev => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => setIsLoading(false), 800);
-                    return 100;
+                if (prev >= 90) {
+                    return 90;
                 }
                 const increment = Math.floor(Math.random() * 5) + 1;
-                return Math.min(prev + increment, 100);
+                return Math.min(prev + increment, 90);
             });
-        }, 40);
+        }, 50);
 
-        return () => clearInterval(interval);
+        if (document.readyState === "complete") {
+            handleLoad();
+        } else {
+            window.addEventListener('load', handleLoad);
+        }
+
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('load', handleLoad);
+        };
     }, []);
 
     useEffect(() => {
         if (progress < 30) setStatusText("LOADING MODULES...");
         else if (progress < 60) setStatusText("VERIFYING ENCRYPTION...");
         else if (progress < 90) setStatusText("CONNECTING DATABASE...");
-        else setStatusText("ACCESS GRANTED");
+        else if (progress >= 100) setStatusText("ACCESS GRANTED");
     }, [progress]);
 
     return (
@@ -41,7 +57,6 @@ const Preloader = () => {
                         transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
                     }}
                 >
-
                     <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5 pointer-events-none" />
 
                     <div className="relative flex flex-col items-center z-10">
@@ -85,7 +100,7 @@ const Preloader = () => {
 
                         <div className="w-64 h-[2px] bg-white/10 rounded-full mt-8 overflow-hidden relative">
                             <motion.div
-                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-electric-violet to-neon-cyan"
+                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-electric-violet to-neon-cyan transition-all duration-300 ease-out"
                                 style={{ width: `${progress}%` }}
                             />
                             <motion.div

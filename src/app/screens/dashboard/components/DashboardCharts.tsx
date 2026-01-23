@@ -18,7 +18,7 @@ interface ChartsProps {
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-[#0a0a0a] border border-white/10 p-4 rounded-xl shadow-2xl backdrop-blur-xl">
+            <div className="border border-white/10 p-4 rounded-xl shadow-2xl backdrop-blur-xl">
                 <p className="text-white font-sans font-bold text-sm mb-1">{label}</p>
                 <p className="text-gray-400 font-mono text-xs">
                     <span style={{ color: payload[0].color }} className="mr-2">●</span>
