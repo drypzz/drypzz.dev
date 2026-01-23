@@ -1,39 +1,46 @@
-import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import React from "react";
 
-import ChristmasThemeController from "./components/layout/christmas-theme";
+import type { Metadata } from "next";
 
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import ClientLayout from "./components/layout/ClientLayout";
 
-export const viewport: Viewport = {
-  themeColor: "#037edb",
-  initialScale: 1,
-  maximumScale: 1,
-  width: "device-width",
-}
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: '--font-space',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://drypzz.netlify.app/"),
-  title: "DRYPZZ - DEV",
-  applicationName: "DRYPZZ - DEV",
+  metadataBase: new URL("https://drypzz.netlify.app"),
+  title: {
+    default: "DRYPZZ - DEV | Portfolio",
+    template: "%s | DRYPZZ"
+  },
+  applicationName: "DRYPZZ Portfolio",
   description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",
   creator: "DRYPZZ",
-  authors: [{ name: "Next.js Team", url: "https://nextjs.org" }],
-  generator: "NextJS",
-  keywords: ["DRYPZZ", "DEV", "portfolio", "projetos", "tecnologias", "desenvolvimento", "web", "mobile", "front-end", "back-end", "fullstack", "programação", "programador", "desenvolvedor", "webdev", "webdeveloper", "webdesign"],
+  authors: [{ name: "Gustavo", url: "https://drypzz.netlify.app" }],
+  generator: "Next.js",
+  keywords: ["DRYPZZ", "DEV", "portfolio", "fullstack", "react", "nextjs", "bitrix24", "developer"],
   twitter: {
-    site: "@drypzz",
     card: "summary_large_image",
     images: "/me.jpeg",
   },
   openGraph: {
-    title: "DRYPZZ - DEV",
-    description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",
-    siteName: "DRYPZZ - DEV",
+    title: "DRYPZZ - DEV | Portfolio",
+    description: "Desenvolvedor Full-Stack & Especialista Bitrix24.",
+    siteName: "DRYPZZ Portfolio",
     type: "website",
-    url: "https://drypzz.netlify.app/",
+    url: "https://drypzz.netlify.app",
     images: [{ url: "/me.jpeg" }],
     countryName: "Brazil",
     locale: "pt_BR",
@@ -47,12 +54,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
-        <ChristmasThemeController />
-        <main className="dev-background">
-          {children}
-        </main>
-      </body>
+      <ClientLayout fonts={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+        {children}
+      </ClientLayout>
     </html>
   );
 }

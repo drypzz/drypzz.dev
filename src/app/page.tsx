@@ -1,47 +1,49 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-import Loading from "./components/layout/loading";
-import SnowfallComponent from "./components/layout/snowfall";
+import ModernHero from "./components/section/hero/ModernHero";
+import ModernTechs from "./components/section/techs/ModernTechs";
+import ModernProjects from "./components/section/projects/ModernProjects";
+import ModernContact from "./components/section/contact/ModernContact";
+import ModernFooter from "./components/section/footer/ModernFooter";
 
-import Header from "./components/section/header";
-import Techs from "./components/section/techs";
-import Projects from "./components/section/projects";
-import Contact from "./components/section/contact";
-import Footer from "./components/section/footer";
+import Preloader from "./components/layout/Preloader";
 
-import ScrollToTopButton from "./components/common/scrolltotopbutton";
+export default function Home() {
 
-
-const Home = () => {
-    const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.scrollTo(0, 0);
+
+        const timer = setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 10);
+
+        return () => clearTimeout(timer);
     }, []);
 
     return (
         <>
-        {loading ? (
-            <Loading />
-        ) : (
-            <>
-                <SnowfallComponent />
-                <Header />
-                <hr id="one" className="dev" />
-                <Techs />
-                <hr id="two" className="dev" />
-                <Projects />
-                <hr id="three" className="dev" />
-                <Contact />
-                <Footer />
-                <ScrollToTopButton />
-            </>
-        )}
+            <Preloader />
+            <div className="flex flex-col w-full selection:bg-neon-cyan selection:text-black">
+
+                <ModernHero />
+
+                <ModernTechs />
+
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-electric-violet/30 to-transparent opacity-50" />
+
+                <ModernProjects />
+
+                <ModernContact />
+
+                <ModernFooter />
+
+            </div>
         </>
     );
 };
-
-export default Home;

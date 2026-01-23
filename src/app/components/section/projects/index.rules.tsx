@@ -1,27 +1,41 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { ref, get } from 'firebase/database';
+import { db } from '@/app/database/config';
 
-import { auth } from "@/app/database/config";
-
-import useGlobal from '@/app/global/global';
+import { Project } from '@/app/global/global'; 
 
 const useProjects = () => {
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    const {
-        deleteProject,
-        projects,
-        techsAndTools,
-        fetchProjects,
-        fetchTechsAndTools
-    } = useGlobal();
-
-    const [loggedIn, setLoggedIn] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalImage, setModalImage] = useState({ src: '', alt: '' });
 
-    const unsubscribeRef = useRef<(() => void) | null>(null);
+    const fetchProjects = async () => {
+        try {
+            const snapshot = await get(ref(db, 'projects'));
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                const formatted = Object.entries(data).map(([key, value]: [string, any]) => ({
+                    id: key,
+                    ...value,
+                    techs: value.techs || []
+                }));
+                setProjects(formatted);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchProjects();
+    }, []);
 
     const openModal = (src: string, alt: string) => {
         setModalImage({ src, alt });
@@ -31,35 +45,14 @@ const useProjects = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
-    
-    useEffect(() => {
-        
-        unsubscribeRef.current = auth.onAuthStateChanged(user => {
-            setLoggedIn(!!user);
-        });
-
-        fetchProjects();
-        fetchTechsAndTools();
-
-        return () => {
-            unsubscribeRef.current && unsubscribeRef.current();
-        };
-    }, []);
-
-    const findImageUrl = (tech: string): string | undefined => {
-        const image = techsAndTools.find(img => img.title.toLowerCase() === tech.toLowerCase());
-        return image ? image.src : undefined;
-    };
 
     return {
         projects,
-        loggedIn,
+        loading,
         isModalOpen,
         modalImage,
         openModal,
-        closeModal,
-        findImageUrl,
-        deleteProject
+        closeModal
     };
 };
 

@@ -1,128 +1,65 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-    --primary-color: #037edb;
-    --primary-color-rgb: rgb(3, 126, 219);
-    --primary-color-variant: rgba(3, 126, 219, .4);
+  --cursor-size: 20px;
 
-    --secondary-color: #359acc;
-    --secondary-color-rgb: rgb(53, 154, 204);
-    --secondary-color-variant: rgba(53, 154, 204, .4);
-
-    --content-bg-color: #037edb10;
-    --content-border-color: rgba(53, 153, 204, .5);
-    --content-border-color-variant: rgba(53, 153, 204, .2);
-
-    --background-body: #0f0e13;
-    --background-bg: #1f1f38;
-    --background-bg-variant: #2c2c6c;
-
-    --gray: rgba(255, 255, 255, .6);
+  /* TEMA PADRÃO (Deep Nebula) */
+  --electric-violet: #7c3aed; /* Roxo */
+  --neon-cyan: #06b6d4;     /* Ciano */
+  --bg-void: #030014;       /* Fundo Quase Preto */
 }
 
-a{
-    text-decoration: none;
+.christmas-theme {
+  --electric-violet: #dc2626; /* Vermelho Noel (Substitui o Roxo) */
+  --neon-cyan: #10b981;     /* Verde Pinheiro (Substitui o Ciano) */
 }
 
+body {
+  color: #fff;
+  background: var(--bg-void);
+  overflow-x: hidden;
+}
+
+/* Scrollbar Minimalista que combina com o fundo */
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-    background: var(--background-bg);
+  background: transparent; /* Track transparente para não cortar o site */
 }
-
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+  @apply bg-white/10 rounded-full hover:bg-electric-violet transition-colors;
 }
 
-html {
-    scroll-behavior: smooth;
+/* Utilitário para vidro consistente */
+@layer components {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/5;
+  }
 }
 
-hr.dev, hr#two.dev, hr#three.dev{
-    width: 70%;
-    margin: 0 auto;
-    border: 1px solid var(--primary-color-variant);
-    margin-top: 50px;
-    margin-bottom: 50px;
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.1); }
 }
 
-hr#two.dev{
-    width: 50%;
+.animate-pulse-slow {
+  animation: pulse-slow 8s infinite ease-in-out;
 }
 
-hr#three.dev{
-    width: 30%;
+/* Gooey Cursor Filters */
+.cursor-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: exclusion; 
+  filter: url('#liquid-goo'); 
 }
 
-body{
-    background: var(--background-body);
-    height: 100%;
-    color: #fff;
-    display: block;
-    text-align: center;
-    overflow-x: hidden;
-}
-
-body.christmas-mode {
-    --primary-color: #d42426;
-    --primary-color-rgb: rgb(212, 36, 38);
-    --primary-color-variant: rgba(212, 36, 38, .4);
-
-    --secondary-color: #f1c40f;
-    --secondary-color-rgb: rgb(241, 196, 15);
-    --secondary-color-variant: rgba(241, 196, 15, .4);
-
-    --content-bg-color: #d4242615;
-    --content-border-color: rgba(241, 196, 15, .5);
-    --content-border-color-variant: rgba(241, 196, 15, .2);
-    
-    --background-body: #0b0c10;
-    --background-bg: #15161a;
-    --background-bg-variant: #1f2026;
-}
-
-.santa-hat {
-    position: absolute;
-    top: -10px;
-    left: 125px;
-    right: 0px;
-    width: 100px !important;
-    height: auto !important;
-    z-index: 10;
-    border: none !important;
-    box-shadow: none !important;
-    filter: drop-shadow(2px 4px 6px black);
-}
-
-.dev-title{
-    font-size: 2rem;
-}
-
-.dev-background {
-    padding: 20px;
-    height: 100%;
-    background: radial-gradient(at 0% 0%, var(--primary-color-variant), transparent 70%),
-    radial-gradient(at 100% 100%, var(--primary-color-variant), transparent 50%)
-}
-
-@media screen and (max-width: 960px) {
-    
-    hr#one.dev, hr#two.dev, hr#three.dev{
-        width: 100%;
-    }
-
-    .santa-hat {
-        width: 70px !important;
-        top: -10px;
-        left: 90px;
-    }
+@media (hover: none) {
+  .cursor-wrapper, .custom-cursor-core { display: none !important; }
+  body { cursor: auto; }
 }
