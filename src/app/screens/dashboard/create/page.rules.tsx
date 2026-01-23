@@ -1,117 +1,95 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
-import { auth, db, storage } from "@/app/database/config";
-import { ref as dbRef, set } from "firebase/database";
-import { ref as storageRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
+import { ref, push, set } from "firebase/database";
+import { auth, db } from "@/app/database/config";
+import { onAuthStateChanged } from "firebase/auth";
 import { showNotify } from '@/app/utils/notify';
-
-import useGlobal from '@/app/global/global';
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const useCreate = () => {
     const router = useRouter();
 
-    const { techsAndTools } = useGlobal();
+    const [loading, setLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true);
 
-    const [loading, setLoading] = useState(true);
-    const [loadingRegister, setLoadingRegister] = useState(false);
+    const [title, setTitle] = useState("");
+    const [link, setLink] = useState("");
+    const [techs, setTechs] = useState<string[]>([]);
 
-    const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
-    const [image, setImage] = useState<File | null>(null);
-    const [inputs, setInputs] = useState({
-        title: "",
-        link: "",
-    });
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState("");
 
-    const handleTechSelection = (tech: string) => {
-        setSelectedTechs(prevState =>
-            prevState.includes(tech)
-                ? prevState.filter(item => item !== tech)
-                : [...prevState, tech]
-        );
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                router.push("/screens/login");
+            } else {
+                setPageLoading(false);
+            }
+        });
+        return () => unsubscribe();
+    }, [router]);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setImageFile(e.target.files[0]);
+            setImagePreview(URL.createObjectURL(e.target.files[0]));
+        }
     };
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0] || null;
-        setImage(file);
-    };
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const { title, link } = inputs;
-
-        if (!title || !link || selectedTechs.length === 0 || !image) {
-            showNotify("error", "Title, techs and image are required!");
+    const handleCreateProject = async () => {
+        if (!title || !link || techs.length === 0) {
+            showNotify("error", "Preencha todos os campos obrigatórios.");
             return;
         }
 
+        setLoading(true);
         try {
-            setLoadingRegister(true);
-            const storageReference = storageRef(storage, `images/${title}/${image.name}`);
-            const uploadTask = uploadBytesResumable(storageReference, image);
-        
-            uploadTask.on(
-                "state_changed",
-                () => {},
-                (error) => {
-                    console.error("Failed to upload image:", error);
-                    showNotify("error", "Failed to upload image.");
-                    setLoadingRegister(false);
-                },
-                async () => {
-                    const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
-                    await set(dbRef(db, `projects/${title}`), {
-                        title,
-                        techs: selectedTechs,
-                        imageUrl,
-                        link,
-                        createdAt: new Date().toISOString(),
-                    });
-                    setLoadingRegister(false);
-                    setInputs({ title: "", link: "" });
-                    setSelectedTechs([]);
-                    setImage(null);
-                    showNotify("success", "Project sent successfully!");
-                }
-            );
+            let finalImageUrl = "";
+
+            if (imageFile) {
+                const storage = getStorage();
+                const imageRef = storageRef(storage, `images/${Date.now()}_${imageFile.name}`);
+                await uploadBytes(imageRef, imageFile);
+                finalImageUrl = await getDownloadURL(imageRef);
+            } else {
+                showNotify("error", "Selecione uma imagem.");
+                setLoading(false);
+                return;
+            }
+            const projectsRef = ref(db, 'projects');
+            const newProjectRef = push(projectsRef);
+
+            await set(newProjectRef, {
+                id: newProjectRef.key,
+                title,
+                link,
+                techs,
+                imageUrl: finalImageUrl,
+                createdAt: new Date().toISOString()
+            });
+
+            showNotify("success", "Projeto criado com sucesso!");
+            router.push('/screens/dashboard');
+
         } catch (error) {
-            console.error("Failed to submit project:", error);
-            showNotify("error", "Failed to submit project.");
-            setLoadingRegister(false);
+            console.error(error);
+            showNotify("error", "Erro ao criar projeto.");
+        } finally {
+            setLoading(false);
         }
     };
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => { 
-            if (!user) {
-                router.push('/login');
-            } else {
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000);
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, [router]);
-
     return {
+        title, setTitle,
+        link, setLink,
+        techs, setTechs,
+        imagePreview, handleFileChange, setImageFile, setImagePreview,
+        handleCreateProject,
         loading,
-        loadingRegister,
-        techsAndTools,
-        selectedTechs,
-        image,
-        setInputs,
-        inputs,
-        handleTechSelection,
-        handleImageUpload,
-        handleSubmit,
+        pageLoading
     };
 };
 

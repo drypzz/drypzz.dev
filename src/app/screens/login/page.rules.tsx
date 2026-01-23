@@ -1,88 +1,107 @@
-"use client";
+import { useState, useEffect } from 'react';
 
-import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { setPersistence, browserLocalPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, OAuthProvider, signOut, getAdditionalUserInfo } from "firebase/auth";
+
 import { auth } from "@/app/database/config";
 
 import { showNotify } from '@/app/utils/notify';
 
+const ALLOWED_EMAILS = [
+    "gugapalmeiraa@gmail.com",
+    "zgustavofnt@gmail.com",
+];
+
 const useLogin = () => {
     const router = useRouter();
 
-    const [inputs, setInputs] = useState({
-        email: "",
-        password: "",
-        remember: false
-    });
-
-    const [loading, setLoading] = useState(true);
-
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [loadingLogin, setLoadingLogin] = useState(false);
 
-    const submitForm = async (e: React.FormEvent) => {
-        e.preventDefault();
-    
+    const handleLogin = async () => {
+        if (email === "" || password === "") {
+            showNotify("error", "Email e senha são obrigatórios!");
+            return;
+        }
+
         try {
-
-            if (inputs.email === "" || inputs.password === "") {
-                showNotify("error", "Email and password are required!");
-                return;
-            };
-
-            if (inputs.remember) {
-                await setPersistence(auth, browserLocalPersistence);
-                localStorage.setItem("savedEmail", inputs.email);
-                localStorage.setItem("savedChecked", "true");
-            }else{
-                localStorage.removeItem("savedEmail");
-                localStorage.removeItem("savedChecked");
-            }
-
             setLoadingLogin(true);
-            
-            const userCredential = await signInWithEmailAndPassword(auth, inputs.email, inputs.password).then((userCredential) => {
-                showNotify("success", "Successfully logged in.");
-                router.push("/dashboard");
-            }).catch((error) => {
-                showNotify("error", "Failed to login.");
-            });
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             console.error(error);
-            alert('Failed to login.');
-        } finally{
+            showNotify("error", "Falha ao realizar login.");
             setLoadingLogin(false);
         }
-    }
+    };
+
+    const handleDiscordLogin = async () => {
+        setLoadingLogin(true);
+        const provider = new OAuthProvider('oidc.discord');
+        provider.addScope('email');
+        provider.addScope('identify');
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            const userEmail = user.email || "";
+            if (!ALLOWED_EMAILS.includes(userEmail)) {
+                await signOut(auth);
+                showNotify("error", "Você não tem permissão.");
+                setLoadingLogin(false);
+                return;
+            }
+
+            let finalAvatar = user.photoURL || "/me.jpeg";
+
+            if (finalAvatar.includes("/a_")) {
+                finalAvatar = finalAvatar.replace(".png", ".gif").replace(".jpg", ".gif");
+            }
+
+            localStorage.setItem("admin_avatar", finalAvatar);
+            localStorage.setItem("admin_name", user.displayName || "Admin");
+            localStorage.setItem("admin_email", userEmail);
+
+            router.push('/screens/dashboard');
+        } catch (error: any) {
+            console.error(error);
+            setLoadingLogin(false);
+        }
+    };
 
     useEffect(() => {
-        const logged = auth.onAuthStateChanged(async (user) => { 
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
-                router.push('/dashboard');
-            }else{
-                const savedEmail = localStorage.getItem("savedEmail");
-                const savedChecked = localStorage.getItem("savedChecked");
-                if (savedEmail) {
-                    setInputs((prev) => ({ ...prev, email: savedEmail, remember: Boolean(savedChecked) }));
+                const userEmail = user.email || "";
+
+                if (ALLOWED_EMAILS.includes(userEmail)) {
+                    const avatar = user.photoURL || "/me.jpeg";
+
+                    localStorage.setItem("admin_avatar", avatar);
+                    localStorage.setItem("admin_name", user.displayName || "Admin");
+                    localStorage.setItem("admin_email", userEmail);
+
+                    showNotify("success", `Bem-vindo de volta!`);
+                    router.push('/screens/dashboard');
+                } else {
+                    console.warn(`Tentativa de acesso negada: ${userEmail}`);
+                    showNotify("error", "ACESSO NEGADO: Você não tem permissão para acessar este painel.");
+                    await signOut(auth);
+                    setLoadingLogin(false);
                 }
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000);
             }
         });
-
-        return () => {
-            logged();
-        };
+        return () => unsubscribe();
     }, [router]);
 
     return {
-        inputs,
-        loading,
-        loadingLogin,
-        setInputs,
-        submitForm
+        email, setEmail,
+        password, setPassword,
+        handleLogin,
+        handleDiscordLogin,
+        loading: loadingLogin
     };
 }
 
