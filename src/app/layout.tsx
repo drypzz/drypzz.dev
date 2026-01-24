@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://drypzz.netlify.app"),
   title: {
     default: "DRYPZZ - DEV | Portfolio",
-    template: "%s | DRYPZZ"
+    template: "%s"
   },
   applicationName: "DRYPZZ Portfolio",
   description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",

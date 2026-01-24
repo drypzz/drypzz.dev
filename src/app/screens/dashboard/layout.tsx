@@ -1,39 +1,37 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://drypzz.netlify.app/dashboard"),
-    title: "DRYPZZ - DEV | Dashboard",
-    applicationName: "DRYPZZ - DEV | Dashboard",
-    description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",
-    creator: "DRYPZZ",
-    authors: [{ name: "Next.js Team", url: "https://nextjs.org" }],
-    generator: "NextJS",
-    keywords: ["DRYPZZ", "DEV", "portfolio", "projetos", "tecnologias", "desenvolvimento", "web", "mobile", "front-end", "back-end", "fullstack", "programação", "programador", "desenvolvedor", "webdev", "webdeveloper", "webdesign"],
-    twitter: {
-        site: "@drypzz",
-        card: "summary_large_image",
-        images: "/me.jpeg",
+    metadataBase: new URL("https://drypzz.netlify.app"),
+    title: "Dashboard & Analytics | DRYPZZ",
+    description: "Painel de controle central. Visualize métricas de acesso, gerencie permissões de usuários e monitore o status dos projetos.",
+    applicationName: "DRYPZZ Dashboard",
+    robots: {
+        index: false,
+        follow: false,
     },
+    keywords: ["dashboard", "kpis", "analytics", "gerenciamento", "firebase", "react", "admin panel"],
     openGraph: {
-        title: "DRYPZZ - DEV | Dashboard",
-        description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",
-        siteName: "DRYPZZ - DEV | Dashboard",
-        type: "website",
-        url: "https://drypzz.netlify.app/dashboard",
-        images: [{ url: "/me.jpeg" }],
-        countryName: "Brazil",
+        title: "Dashboard - Visão Geral",
+        description: "Painel de controle para administração do portfólio.",
+        siteName: "DRYPZZ System",
+        url: "https://drypzz.netlify.app/screens/dashboard",
+        images: [{
+            url: "/me.jpeg",
+            width: 1200,
+            height: 630,
+            alt: "Dashboard Overview",
+        }],
         locale: "pt_BR",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "DRYPZZ Dashboard",
+        description: "Gerenciamento de projetos e usuários.",
+        images: ["/me.jpeg"],
     },
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <>
-            {children}
-        </>
-    );
-};  
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+    return <>{children}</>;
+}
