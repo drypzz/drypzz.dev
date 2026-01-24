@@ -3,14 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
-import { FaArrowLeft, FaSave, FaTerminal } from "react-icons/fa";
+import { FaArrowLeft, FaSave, FaTerminal, FaSearch } from "react-icons/fa";
 import { ref, get, update } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/app/database/config";
 import Loading from "@/app/components/layout/loading";
 import { showNotify } from "@/app/utils/notify";
-
-const AVAILABLE_TECHS = ["javascript", "typescript", "reactjs", "nextjs", "nodejs", "html", "css", "python", "java", "firebase", "tailwind"];
+import { TECH_DATA } from "@/app/utils/constants";
 
 const EditProject = () => {
     const router = useRouter();
@@ -24,6 +23,7 @@ const EditProject = () => {
     const [link, setLink] = useState("");
     const [techs, setTechs] = useState<string[]>([]);
     const [imageUrl, setImageUrl] = useState("");
+    const [techSearch, setTechSearch] = useState("");
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -31,14 +31,17 @@ const EditProject = () => {
                 router.push("/screens/login");
                 return;
             }
-
-            const role = localStorage.getItem("admin_role");
+            const sessionStr = localStorage.getItem("admin_session");
+            let role = "mod";
+            if (sessionStr) {
+                const session = JSON.parse(sessionStr);
+                role = session.role || "mod";
+            }
             if (role !== "super") {
-                showNotify("error", "Apenas Super Admins podem editar projetos.");
+                showNotify("error", "Acesso restrito a Super Admins.");
                 router.push("/screens/dashboard");
                 return;
             }
-
             if (projectId) {
                 try {
                     const snapshot = await get(ref(db, `projects/${projectId}`));
@@ -60,7 +63,6 @@ const EditProject = () => {
                 }
             }
         });
-
         return () => unsubscribe();
     }, [projectId, router]);
 
@@ -83,9 +85,13 @@ const EditProject = () => {
         }
     };
 
-    const toggleTech = (tech: string) => {
-        setTechs(prev => prev.includes(tech) ? prev.filter(t => t !== tech) : [...prev, tech]);
+    const toggleTech = (techId: string) => {
+        setTechs(prev => prev.includes(techId) ? prev.filter(t => t !== techId) : [...prev, techId]);
     };
+
+    const filteredTechs = TECH_DATA.filter(t =>
+        t.name.toLowerCase().includes(techSearch.toLowerCase())
+    );
 
     if (loadingData) return <Loading fullScreen={true} text="AUTHENTICATING..." />;
 
@@ -116,11 +122,38 @@ const EditProject = () => {
                         </div>
 
                         <div>
-                            <span className="font-mono text-neon-cyan text-xs tracking-widest uppercase mb-6 block flex items-center gap-2"><FaTerminal /> Stack</span>
-                            <div className="flex flex-wrap gap-3">
-                                {AVAILABLE_TECHS.map((tech) => (
-                                    <button key={tech} type="button" onClick={() => toggleTech(tech)} className={`px-4 py-2 rounded-lg text-xs font-mono uppercase border transition-all ${techs.includes(tech) ? 'bg-electric-violet text-white border-electric-violet' : 'bg-white/5 border-white/10 text-gray-400'}`}>{tech}</button>
-                                ))}
+                            <div className="flex justify-between items-center mb-6">
+                                <span className="font-mono text-neon-cyan text-xs tracking-widest uppercase block flex items-center gap-2">
+                                    <FaTerminal /> Stack Tecnológica
+                                </span>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        placeholder="Buscar..."
+                                        className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-white focus:outline-none focus:border-electric-violet w-32"
+                                        value={techSearch}
+                                        onChange={(e) => setTechSearch(e.target.value)}
+                                    />
+                                    <FaSearch className="absolute right-3 top-1.5 text-gray-500 text-[10px]" />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-wrap gap-3 max-h-60 overflow-y-auto custom-scrollbar p-1">
+                                {filteredTechs.map((tech) => {
+                                    const isSelected = techs.includes(tech.id);
+                                    const Icon = tech.icon;
+                                    return (
+                                        <button
+                                            key={tech.id}
+                                            type="button"
+                                            onClick={() => toggleTech(tech.id)}
+                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono uppercase border transition-all ${isSelected ? 'bg-electric-violet text-white border-electric-violet' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white'}`}
+                                        >
+                                            <Icon size={14} />
+                                            {tech.name}
+                                        </button>
+                                    )
+                                })}
                             </div>
                         </div>
 

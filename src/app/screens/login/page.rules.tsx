@@ -68,7 +68,6 @@ const useLogin = () => {
         if (successProcessed.current) return;
 
         const userEmail = user.email || "";
-
         const role = await getUserRole(userEmail);
 
         if (!role) {
@@ -92,19 +91,17 @@ const useLogin = () => {
             discordData = await fetchDiscordData(credential.accessToken);
         }
 
-        localStorage.setItem("admin_avatar", finalAvatar);
-        localStorage.setItem("admin_name", user.displayName || "Admin");
-        localStorage.setItem("admin_email", userEmail);
-        localStorage.setItem("admin_role", role);
+        const sessionData = {
+            avatar: finalAvatar,
+            name: user.displayName || "Admin",
+            email: userEmail,
+            role: role,
+            banner: discordData.banner || "",
+            guildTag: discordData.guildTag || "",
+            guildBadge: discordData.guildBadge || ""
+        };
 
-        if (discordData.banner) localStorage.setItem("admin_banner", discordData.banner);
-        else if (credential) localStorage.removeItem("admin_banner"); // Limpa se for novo login e não tiver
-
-        if (discordData.guildTag) localStorage.setItem("admin_guild_tag", discordData.guildTag);
-        else if (credential) localStorage.removeItem("admin_guild_tag");
-
-        if (discordData.guildBadge) localStorage.setItem("admin_guild_badge", discordData.guildBadge);
-        else if (credential) localStorage.removeItem("admin_guild_badge");
+        localStorage.setItem("admin_session", JSON.stringify(sessionData));
 
         showNotify("success", `Bem-vindo, ${role === 'super' ? 'Super Admin' : 'Moderador'}!`);
         router.push('/screens/dashboard');
@@ -133,15 +130,12 @@ const useLogin = () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const credential = OAuthProvider.credentialFromResult(result);
-
             await processUserAndRedirect(result.user, credential);
-
         } catch (error: any) {
             console.error("Erro no Popup:", error);
             if (error.code === 'auth/popup-closed-by-user') {
                 showNotify("info", "Login cancelado.");
-            } else if (error.code === 'auth/cancelled-popup-request') {
-            } else {
+            } else if (error.code !== 'auth/cancelled-popup-request') {
                 showNotify("error", "Erro ao conectar com Discord.");
             }
             setLoadingLogin(false);

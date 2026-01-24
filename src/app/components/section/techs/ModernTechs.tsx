@@ -2,31 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaFigma, FaDocker, FaPython, FaJava
-} from "react-icons/fa";
-import { SiNextdotjs, SiTypescript, SiTailwindcss, SiFirebase, SiPostgresql, SiSupabase } from "react-icons/si";
-import { TbBrandVscode } from "react-icons/tb";
-
-const TECH_DATA = [
-  { name: "Next.js", icon: <SiNextdotjs />, category: "Frontend", color: "#ffffff" },
-  { name: "React", icon: <FaReact />, category: "Frontend", color: "#61DAFB" },
-  { name: "TypeScript", icon: <SiTypescript />, category: "Frontend", color: "#3178C6" },
-  { name: "Node.js", icon: <FaNodeJs />, category: "Backend", color: "#339933" },
-  { name: "Firebase", icon: <SiFirebase />, category: "Backend", color: "#FFCA28" },
-  { name: "Tailwind", icon: <SiTailwindcss />, category: "Frontend", color: "#38B2AC" },
-  { name: "JavaScript", icon: <FaJs />, category: "Frontend", color: "#F7DF1E" },
-  { name: "HTML5", icon: <FaHtml5 />, category: "Frontend", color: "#E34F26" },
-  { name: "CSS3", icon: <FaCss3Alt />, category: "Frontend", color: "#1572B6" },
-  { name: "PostgreSQL", icon: <SiPostgresql />, category: "Backend", color: "#336791" },
-  { name: "Supabase", icon: <SiSupabase />, category: "Backend", color: "#47A248" },
-  { name: "Python", icon: <FaPython />, category: "Backend", color: "#3776AB" },
-  { name: "Java", icon: <FaJava />, category: "Backend", color: "#007396" },
-  { name: "Git", icon: <FaGitAlt />, category: "Tools", color: "#F05032" },
-  { name: "Docker", icon: <FaDocker />, category: "Tools", color: "#2496ED" },
-  { name: "Figma", icon: <FaFigma />, category: "Tools", color: "#F24E1E" },
-  { name: "VS Code", icon: <TbBrandVscode />, category: "Tools", color: "#007ACC" },
-];
+import { TECH_DATA } from "@/app/utils/constants";
 
 const CATEGORIES = ["All", "Frontend", "Backend", "Tools"];
 
@@ -123,7 +99,7 @@ const ModernTechs = () => {
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="text-4xl text-gray-500 transition-all duration-300 group-hover:scale-110 group-hover:text-[var(--tech-color)] filter group-hover:drop-shadow-[0_0_10px_var(--tech-color)]">
-                    {tech.icon}
+                    <tech.icon />
                   </div>
 
                   <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors duration-300">

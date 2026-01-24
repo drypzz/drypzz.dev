@@ -13,6 +13,7 @@ export interface Project {
     imageUrl: string;
     techs: string[];
     createdAt?: string;
+    views?: number;
 }
 
 interface GlobalContextProps {

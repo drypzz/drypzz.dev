@@ -3,12 +3,15 @@
 import React, { useState, useMemo } from 'react';
 import Image from "next/image";
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaInfoCircle, FaArrowRight, FaArrowUp, FaCalendarAlt } from 'react-icons/fa';
+import { FaInfoCircle, FaArrowRight, FaArrowUp, FaCalendarAlt, FaEye } from 'react-icons/fa';
 import useProjects from './index.rules';
 import ModernModal from '@/app/components/common/modal/ModernModal';
+import { useProjectView } from '@/app/hooks/useProjectView';
 
 const ModernProjects = () => {
     const { projects } = useProjects();
+    const { incrementView } = useProjectView();
+
     const [selectedProject, setSelectedProject] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAll, setShowAll] = useState(false);
@@ -25,6 +28,7 @@ const ModernProjects = () => {
     const handleOpenModal = (project: any) => {
         setSelectedProject(project);
         setIsModalOpen(true);
+        incrementView(project.id);
     };
 
     const handleCloseModal = () => {

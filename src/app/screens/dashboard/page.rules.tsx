@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { auth, db } from "@/app/database/config";
 import { signOut } from "firebase/auth";
-import { ref, onValue, remove, push, set } from "firebase/database";
+import { ref, onValue, remove, push, set, runTransaction } from "firebase/database";
 import { showNotify } from "@/app/utils/notify";
 
 interface AdminUser {
@@ -17,7 +17,7 @@ const useDashboard = () => {
 
     const [projects, setProjects] = useState<any[]>([]);
     const [allProjectsCount, setAllProjectsCount] = useState(0);
-    const [stats, setStats] = useState({ totalProjects: 0, uniqueTechs: 0, lastProject: "" });
+    const [stats, setStats] = useState({ totalProjects: 0, uniqueTechs: 0, lastProject: "", totalViews: 0 });
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -28,7 +28,7 @@ const useDashboard = () => {
         try {
             await signOut(auth);
             if (typeof window !== "undefined") {
-                localStorage.clear();
+                localStorage.removeItem("admin_session");
             }
             if (autoKick) {
                 showNotify("error", "Sua permissão foi revogada.");
@@ -42,13 +42,26 @@ const useDashboard = () => {
         }
     };
 
+    // --- INCREMENTAR VISUALIZAÇÃO ---
+    const incrementProjectView = async (projectId: string) => {
+        const projectRef = ref(db, `projects/${projectId}/views`);
+        runTransaction(projectRef, (currentViews) => {
+            return (currentViews || 0) + 1;
+        }).catch((err) => console.error(err));
+    };
+
+    // --- AUTO-KICK ---
     useEffect(() => {
         let isMounted = true;
 
         const checkPermissionStatus = () => {
             if (typeof window === "undefined") return;
 
-            const myEmail = localStorage.getItem("admin_email");
+            const sessionStr = localStorage.getItem("admin_session");
+            if (!sessionStr) return;
+
+            const session = JSON.parse(sessionStr);
+            const myEmail = session.email;
 
             if (!myEmail) return;
 
@@ -66,12 +79,13 @@ const useDashboard = () => {
                     );
 
                     if (!amIStillAdmin) {
-                        console.warn("⛔ Permissão revogada: Email não encontrado no banco.");
+                        console.warn("⛔ Permissão revogada.");
                         logout(true);
                     } else {
                         const myUser = allAdmins.find(a => a.email.toLowerCase() === myEmail.toLowerCase());
-                        if (myUser && myUser.role !== localStorage.getItem("admin_role")) {
-                            localStorage.setItem("admin_role", myUser.role);
+                        if (myUser && myUser.role !== session.role) {
+                            session.role = myUser.role;
+                            localStorage.setItem("admin_session", JSON.stringify(session));
                             window.location.reload();
                         }
                     }
@@ -91,6 +105,7 @@ const useDashboard = () => {
         };
     }, []);
 
+    // --- PROJETOS (COM ORDENAÇÃO POR DATA) ---
     useEffect(() => {
         const unsubscribeAuth = auth.onAuthStateChanged((user) => {
             if (!user) router.push("/screens/login");
@@ -100,27 +115,43 @@ const useDashboard = () => {
         const unsubscribeProjects = onValue(projectsRef, (snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                const projectsArray = Object.entries(data).map(([key, value]: [string, any]) => ({
+
+                // 1. Mapeia o objeto para array
+                let projectsArray = Object.entries(data).map(([key, value]: [string, any]) => ({
                     id: key,
                     ...value,
-                    techs: value.techs || []
-                })).reverse();
+                    techs: value.techs || [],
+                    views: value.views || 0,
+                    createdAt: value.createdAt || new Date().toISOString() // Fallback se não tiver data
+                }));
+
+                // 2. ORDENAÇÃO EXPLÍCITA: Mais recente primeiro
+                projectsArray.sort((a, b) => {
+                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                });
 
                 setProjects(projectsArray);
                 setAllProjectsCount(projectsArray.length);
 
                 const techs = new Set();
-                projectsArray.forEach((p: any) => p.techs?.forEach((t: string) => techs.add(t)));
+                let totalViewsCount = 0;
+
+                projectsArray.forEach((p: any) => {
+                    p.techs?.forEach((t: string) => techs.add(t));
+                    totalViewsCount += (p.views || 0);
+                });
 
                 setStats({
                     totalProjects: projectsArray.length,
                     uniqueTechs: techs.size,
-                    lastProject: projectsArray.length > 0 ? projectsArray[0].title : "Nenhum"
+                    // Como o array já está ordenado, o índice [0] é garantidamente o último lançado
+                    lastProject: projectsArray.length > 0 ? projectsArray[0].title : "Nenhum",
+                    totalViews: totalViewsCount
                 });
             } else {
                 setProjects([]);
                 setAllProjectsCount(0);
-                setStats({ totalProjects: 0, uniqueTechs: 0, lastProject: "Nenhum" });
+                setStats({ totalProjects: 0, uniqueTechs: 0, lastProject: "Nenhum", totalViews: 0 });
             }
             setLoading(false);
         });
@@ -131,6 +162,7 @@ const useDashboard = () => {
         };
     }, [router]);
 
+    // --- ADMINS ---
     const fetchAdmins = () => {
         setLoadingAdmins(true);
         const adminsRef = ref(db, 'admins');
@@ -161,10 +193,8 @@ const useDashboard = () => {
                 showNotify("error", "Este email já possui acesso.");
                 return;
             }
-
             const adminsRef = ref(db, 'admins');
             const newAdminRef = push(adminsRef);
-
             await set(newAdminRef, {
                 id: newAdminRef.key,
                 email: newEmail.toLowerCase(),
@@ -212,9 +242,15 @@ const useDashboard = () => {
     const chartsData = useMemo(() => {
         const techCount: Record<string, number> = {};
         const timelineMap: Record<string, number> = {};
-        const sortedForTimeline = [...projects].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
+        // Copia e ordena (novamente, para garantir integridade do gráfico de linha cronológica)
+        // Para linha do tempo queremos do Antigo -> Novo
+        const sortedForTimeline = [...projects].sort((a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
 
         projects.forEach(p => p.techs?.forEach((t: string) => techCount[t] = (techCount[t] || 0) + 1));
+
         sortedForTimeline.forEach(p => {
             if (p.createdAt) {
                 const key = new Date(p.createdAt).toLocaleDateString('pt-BR', { month: 'short', year: '2-digit' });
@@ -242,7 +278,8 @@ const useDashboard = () => {
         fetchAdmins,
         addAdmin,
         removeAdmin,
-        loadingAdmins
+        loadingAdmins,
+        incrementProjectView
     };
 };
 

@@ -26,9 +26,16 @@ const useCreate = () => {
             if (!user) {
                 router.push("/screens/login");
             } else {
-                const role = localStorage.getItem("admin_role");
+                const sessionStr = localStorage.getItem("admin_session");
+                let role = "mod";
+
+                if (sessionStr) {
+                    const session = JSON.parse(sessionStr);
+                    role = session.role || "mod";
+                }
+
                 if (role !== "super") {
-                    showNotify("error", "Apenas Super Admins podem criar projetos.");
+                    showNotify("error", "Acesso restrito a Super Admins.");
                     router.push("/screens/dashboard");
                     return;
                 }

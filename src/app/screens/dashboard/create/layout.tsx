@@ -1,39 +1,29 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://drypzz.netlify.app/dashboard/create"),
-    title: "DRYPZZ - DEV | Create",
-    applicationName: "DRYPZZ - DEV | Create",
-    description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",
-    creator: "DRYPZZ",
-    authors: [{ name: "Next.js Team", url: "https://nextjs.org" }],
-    generator: "NextJS",
-    keywords: ["DRYPZZ", "DEV", "portfolio", "projetos", "tecnologias", "desenvolvimento", "web", "mobile", "front-end", "back-end", "fullstack", "programação", "programador", "desenvolvedor", "webdev", "webdeveloper", "webdesign"],
-    twitter: {
-        site: "@drypzz",
-        card: "summary_large_image",
-        images: "/me.jpeg",
+    metadataBase: new URL("https://drypzz.netlify.app"),
+    title: "Novo Projeto | DRYPZZ Admin",
+    description: "Ferramenta de cadastro de portfólio. Adicione novos projetos, configure tecnologias, links de repositório e faça o upload de assets.",
+    applicationName: "DRYPZZ CMS",
+    robots: {
+        index: false,
+        follow: false,
     },
+    keywords: ["cms", "create", "deploy", "novo projeto", "upload", "firebase storage", "gestão de conteúdo"],
     openGraph: {
-        title: "DRYPZZ - DEV | Create",
-        description: "Olá, seja bem vindo(a), esse é meu portfolio. Aqui você verá alguns de meus projetos e minhas tecnologias 🙂.",
-        siteName: "DRYPZZ - DEV | Create",
-        type: "website",
-        url: "https://drypzz.netlify.app/dashboard/create",
-        images: [{ url: "/me.jpeg" }],
-        countryName: "Brazil",
+        title: "Criar Novo Projeto",
+        description: "Adicione um novo item ao portfólio público.",
+        siteName: "DRYPZZ System",
+        url: "https://drypzz.netlify.app/screens/dashboard/create",
+        images: [{
+            url: "/me.jpeg",
+            alt: "Create New Project",
+        }],
         locale: "pt_BR",
+        type: "website",
     },
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <>
-            {children}
-        </>
-    );
-};  
+export default function CreateLayout({ children }: { children: React.ReactNode }) {
+    return <>{children}</>;
+}

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     FaPlus, FaTrash, FaSignOutAlt, FaSearch, FaExternalLinkAlt, FaLayerGroup, FaTimesCircle, FaFolderOpen, FaEdit,
-    FaCalendarAlt, FaGithub, FaDiscord, FaUserShield, FaEye, FaCrown
+    FaCalendarAlt, FaGithub, FaDiscord, FaUserShield, FaEye, FaCrown, FaInbox, FaChartLine
 } from "react-icons/fa";
 
 import useDashboard from "./page.rules";
@@ -14,6 +14,7 @@ import DashboardCharts from "./components/DashboardCharts";
 import ActionModal from "@/app/components/common/modal/ActionModal";
 import { formatDate } from "@/app/utils/format";
 
+// --- MODAL DE GERENCIAR ADMINS ---
 const ManageAdminsModal = ({ isOpen, onClose, admins, onAdd, onRemove }: any) => {
     const [newEmail, setNewEmail] = useState("");
 
@@ -25,7 +26,7 @@ const ManageAdminsModal = ({ isOpen, onClose, admins, onAdd, onRemove }: any) =>
             <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="relative w-full max-w-md border border-white/10 p-6 rounded-2xl shadow-2xl overflow-hidden"
+                className="relative w-full max-w-md bg-[#0a0a0a] border border-white/10 p-6 rounded-2xl shadow-2xl overflow-hidden"
             >
                 <div className="flex justify-between items-center mb-6">
                     <h3 className="text-xl font-bold text-white font-sans flex items-center gap-2">
@@ -88,9 +89,9 @@ const ManageAdminsModal = ({ isOpen, onClose, admins, onAdd, onRemove }: any) =>
 // --- PÁGINA PRINCIPAL ---
 const Dashboard = () => {
     const {
-        projects, allProjectsCount, stats: initialStats, chartsData,
+        projects, allProjectsCount, stats, chartsData,
         searchTerm, setSearchTerm, loading, logout, deleteProject,
-        adminsList, fetchAdmins, addAdmin, removeAdmin
+        adminsList, fetchAdmins, addAdmin, removeAdmin, incrementProjectView
     } = useDashboard();
 
     const [userProfile, setUserProfile] = useState({
@@ -112,15 +113,19 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            setUserProfile({
-                name: localStorage.getItem("admin_name") || "Admin",
-                email: localStorage.getItem("admin_email") || "admin@drypzz.com",
-                avatar: localStorage.getItem("admin_avatar") || "/me.jpeg",
-                banner: localStorage.getItem("admin_banner") || "",
-                guildTag: localStorage.getItem("admin_guild_tag") || "",
-                guildBadge: localStorage.getItem("admin_guild_badge") || "",
-                role: localStorage.getItem("admin_role") || "mod"
-            });
+            const sessionStr = localStorage.getItem("admin_session");
+            if (sessionStr) {
+                const session = JSON.parse(sessionStr);
+                setUserProfile({
+                    name: session.name || "Admin",
+                    email: session.email || "admin@drypzz.com",
+                    avatar: session.avatar || "/me.jpeg",
+                    banner: session.banner || "",
+                    guildTag: session.guildTag || "",
+                    guildBadge: session.guildBadge || "",
+                    role: session.role || "mod"
+                });
+            }
         }
     }, []);
 
@@ -131,11 +136,10 @@ const Dashboard = () => {
         }
     }, [isSuperAdmin]);
 
-    const stats = useMemo(() => {
-        if (!projects || projects.length === 0) return initialStats;
-        const sortedByDate = [...projects].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        return { ...initialStats, lastProject: sortedByDate[0]?.title || "Nenhum" };
-    }, [projects, initialStats]);
+    const handleLinkClick = (id: string, url: string) => {
+        incrementProjectView(id);
+        window.open(url, "_blank");
+    };
 
     const confirmDelete = (id: string, title: string) => {
         setIdToDelete(id);
@@ -162,6 +166,10 @@ const Dashboard = () => {
     const hasProjectsInDatabase = allProjectsCount > 0;
     const hasSearchResults = projects && projects.length > 0;
     const showProjectList = hasProjectsInDatabase && hasSearchResults;
+
+    // Estados vazios
+    const showEmptySearch = hasProjectsInDatabase && !hasSearchResults;
+    const showEmptyPortfolio = !hasProjectsInDatabase;
 
     return (
         <div className="min-h-screen bg-transparent py-12 pb-32">
@@ -234,21 +242,26 @@ const Dashboard = () => {
                 </header>
 
                 {hasProjectsInDatabase && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div className="border border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FaLayerGroup size={40} /></div>
-                            <h3 className="text-5xl font-bold text-white font-sans mb-2">{stats.totalProjects}</h3>
-                            <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">Total Projetos</p>
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                        <div className="border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors backdrop-blur-sm">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FaLayerGroup size={32} /></div>
+                            <h3 className="text-4xl font-bold text-white font-sans mb-1">{stats.totalProjects}</h3>
+                            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest">Total Projetos</p>
                         </div>
-                        <div className="border border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FaFolderOpen size={40} /></div>
-                            <h3 className="text-5xl font-bold text-white font-sans mb-2">{stats.uniqueTechs}</h3>
-                            <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">Tecnologias</p>
+                        <div className="border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors backdrop-blur-sm">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FaFolderOpen size={32} /></div>
+                            <h3 className="text-4xl font-bold text-white font-sans mb-1">{stats.uniqueTechs}</h3>
+                            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest">Stacks</p>
                         </div>
-                        <div className="border border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FaCalendarAlt size={40} /></div>
-                            <h3 className="text-2xl font-bold text-white font-sans mb-2 truncate">{stats.lastProject || "-"}</h3>
-                            <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">Último Lançamento</p>
+                        <div className="border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-neon-cyan/20 transition-colors backdrop-blur-sm">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity text-neon-cyan"><FaChartLine size={32} /></div>
+                            <h3 className="text-4xl font-bold text-white font-sans mb-1">{stats.totalViews}</h3>
+                            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest">Total Cliques</p>
+                        </div>
+                        <div className="border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors backdrop-blur-sm">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FaCalendarAlt size={32} /></div>
+                            <h3 className="text-xl font-bold text-white font-sans mb-1 truncate leading-8 pt-2">{stats.lastProject || "-"}</h3>
+                            <p className="text-gray-500 font-mono text-[10px] uppercase tracking-widest">Último Lançamento</p>
                         </div>
                     </motion.div>
                 )}
@@ -274,24 +287,76 @@ const Dashboard = () => {
 
                 <div className="min-h-[300px] relative">
                     <AnimatePresence mode="wait">
+
+                        {showEmptyPortfolio && (
+                            <motion.div
+                                key="empty-db"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                className="flex flex-col items-center justify-center py-20 text-center"
+                            >
+                                <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 text-gray-500 border border-white/5">
+                                    <FaInbox size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold font-sans text-white mb-2">Portfolio Vazio</h3>
+                                <p className="text-gray-400 font-mono text-sm mb-6">Nenhum projeto cadastrado no banco de dados.</p>
+                                {isSuperAdmin && (
+                                    <Link href="/screens/dashboard/create" className="px-6 py-2 rounded-full bg-electric-violet text-white font-mono text-xs uppercase tracking-widest hover:bg-[#6d28d9] transition-all">
+                                        Criar Primeiro
+                                    </Link>
+                                )}
+                            </motion.div>
+                        )}
+
+                        {showEmptySearch && (
+                            <motion.div
+                                key="empty-search"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                className="flex flex-col items-center justify-center py-20 text-center"
+                            >
+                                <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 text-gray-500 border border-white/5">
+                                    <FaSearch size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold font-sans text-white mb-2">Nenhum resultado encontrado</h3>
+                                <p className="text-gray-400 font-mono text-sm mb-6">
+                                    Não encontramos nada para "{searchTerm}".
+                                </p>
+                                <button
+                                    onClick={() => setSearchTerm("")}
+                                    className="px-6 py-2 rounded-full bg-electric-violet/10 border border-electric-violet/30 text-electric-violet hover:bg-electric-violet hover:text-white transition-all font-mono text-xs uppercase tracking-widest"
+                                >
+                                    Limpar Filtro
+                                </button>
+                            </motion.div>
+                        )}
+
                         {showProjectList && (
                             <motion.div key="grid" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {projects.map((project) => (
-                                    <motion.div key={project.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="group relative flex flex-col bg-[#050505] border border-white/5 rounded-3xl overflow-hidden hover:border-electric-violet/30 hover:shadow-[0_0_40px_-10px_rgba(124,58,237,0.15)] transition-all duration-500">
+                                    <motion.div key={project.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="group relative flex flex-col bg-[#050505]/20 border border-white/5 rounded-3xl overflow-hidden hover:border-electric-violet/30 hover:shadow-[0_0_40px_-10px_rgba(124,58,237,0.15)] transition-all duration-500">
                                         <div className="relative w-full aspect-[16/9] overflow-hidden bg-black/40">
                                             <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
 
+                                            {/* BADGE DE VISUALIZAÇÕES */}
+                                            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-2 z-20">
+                                                <FaEye className="text-neon-cyan text-xs" />
+                                                <span className="text-white text-xs font-mono font-bold">{project.views || 0}</span>
+                                            </div>
+
                                             {isSuperAdmin ? (
-                                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm">
+                                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm z-30">
                                                     <Link href={`/screens/dashboard/edit/${project.id}`} className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black hover:bg-electric-violet hover:text-white transition-all transform hover:scale-110 shadow-lg"><FaEdit size={14} /></Link>
                                                     <button onClick={() => confirmDelete(project.id, project.title)} className="w-10 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-all transform hover:scale-110 shadow-lg"><FaTrash size={14} /></button>
-                                                    <a href={project.link} target="_blank" className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-black transition-all transform hover:scale-110 shadow-lg"><FaExternalLinkAlt size={14} /></a>
+                                                    <button onClick={() => handleLinkClick(project.id, project.link)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white hover:text-black transition-all transform hover:scale-110 shadow-lg"><FaExternalLinkAlt size={14} /></button>
                                                 </div>
                                             ) : (
-                                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                                                    <a href={project.link} target="_blank" className="px-6 py-2 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white hover:text-black transition-all flex items-center gap-2 font-mono text-xs uppercase">
+                                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm z-30">
+                                                    <button onClick={() => handleLinkClick(project.id, project.link)} className="px-6 py-2 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white hover:text-black transition-all flex items-center gap-2 font-mono text-xs uppercase">
                                                         <FaExternalLinkAlt /> Visualizar
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             )}
                                         </div>
