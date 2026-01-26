@@ -1,12 +1,22 @@
 "use client";
 
 import React from "react";
-import LiquidCursor from "./cursor/LiquidCursor";
+import dynamic from 'next/dynamic';
+
 import { GlobalProvider } from "@/app/global/global";
+
 import CosmicLights from "./effects/CosmicLights";
-import CosmicSnowfall from "./effects/CosmicSnowfall";
 
 import { useSeason } from "@/app/hooks/useSeason";
+
+const CosmicSnowfall = dynamic(() => import('./effects/CosmicSnowfall'), { 
+  ssr: false,
+  loading: () => null
+});
+
+const LiquidCursor = dynamic(() => import('./cursor/LiquidCursor'), { 
+  ssr: false 
+});
 
 interface ClientLayoutProps {
     children: React.ReactNode;
