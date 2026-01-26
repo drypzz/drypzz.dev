@@ -9,6 +9,7 @@ import { Project } from '@/app/global/global';
 const useProjects = () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<boolean>(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalImage, setModalImage] = useState({ src: '', alt: '' });
@@ -16,23 +17,32 @@ const useProjects = () => {
     useEffect(() => {
         const projectsRef = ref(db, 'projects');
 
-        const unsubscribe = onValue(projectsRef, (snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
+        const unsubscribe = onValue(projectsRef,
+            (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
 
-                const formatted = Object.entries(data).map(([key, value]: [string, any]) => ({
-                    id: key,
-                    ...value,
-                    techs: value.techs || [],
-                    views: value.views || 0
-                }));
+                    const formatted = Object.entries(data).map(([key, value]: [string, any]) => ({
+                        id: key,
+                        ...value,
+                        techs: value.techs || [],
+                        views: value.views || 0
+                    }));
 
-                setProjects(formatted);
-            } else {
-                setProjects([]);
+                    setProjects(formatted);
+                    setError(false);
+                } else {
+                    setProjects([]);
+                    setError(false);
+                }
+                setLoading(false);
+            },
+            (errorObject) => {
+                console.error("The read failed: " + errorObject.name);
+                setLoading(false);
+                setError(true);
             }
-            setLoading(false);
-        });
+        );
 
         return () => unsubscribe();
     }, []);
@@ -49,6 +59,7 @@ const useProjects = () => {
     return {
         projects,
         loading,
+        error,
         isModalOpen,
         modalImage,
         openModal,
