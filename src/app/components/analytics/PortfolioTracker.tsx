@@ -32,10 +32,6 @@ const PortfolioTracker = () => {
                         await runTransaction(viewRef, (currentViews) => {
                             return (currentViews || 0) + 1;
                         });
-
-                        console.log(`👁️ [TRACKER] +1 View contabilizada para: ${TARGET_PROJECT_TITLE}`);
-                    } else {
-                        console.warn(`⚠️ [TRACKER] Projeto "${TARGET_PROJECT_TITLE}" não encontrado no banco.`);
                     }
                 }
             } catch (error) {
