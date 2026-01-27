@@ -19,19 +19,26 @@ const useLogin = () => {
     const [loadingLogin, setLoadingLogin] = useState(true);
 
     const fetchDiscordData = async (accessToken: string) => {
-        const result = { banner: "", guildTag: "", guildBadge: "" };
+        const result = { banner: "", guildTag: "", guildBadge: "", avatar: "" };
         try {
             const response = await fetch("https://discord.com/api/users/@me", {
                 headers: { Authorization: `Bearer ${accessToken}` },
             });
             if (response.ok) {
                 const data = await response.json();
+                
+                if (data.avatar) {
+                    const format = data.avatar.startsWith("a_") ? "gif" : "png";
+                    result.avatar = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${format}?size=2048`;
+                }
+
                 if (data.banner) {
                     const format = data.banner.startsWith("a_") ? "gif" : "png";
                     result.banner = `https://cdn.discordapp.com/banners/${data.id}/${data.banner}.${format}?size=2048`;
                 } else if (data.accent_color) {
                     result.banner = "#" + data.accent_color.toString(16).padStart(6, '0');
                 }
+
                 if (data.clan) {
                     if (data.clan.tag) result.guildTag = data.clan.tag;
                     if (data.clan.badge && data.clan.identity_guild_id) {
@@ -80,15 +87,16 @@ const useLogin = () => {
 
         successProcessed.current = true;
 
-        let finalAvatar = user.photoURL || "/me.jpeg";
-        if (finalAvatar.includes("/a_")) {
-            finalAvatar = finalAvatar.replace(".png", ".gif").replace(".jpg", ".gif");
-        }
-
-        let discordData = { banner: "", guildTag: "", guildBadge: "" };
+        let discordData = { banner: "", guildTag: "", guildBadge: "", avatar: "" };
 
         if (credential && credential.accessToken) {
             discordData = await fetchDiscordData(credential.accessToken);
+        }
+
+        let finalAvatar = discordData.avatar || user.photoURL || "/me.jpeg";
+        
+        if (!discordData.avatar && finalAvatar.includes("/a_")) {
+            finalAvatar = finalAvatar.replace(".png", ".gif").replace(".jpg", ".gif");
         }
 
         const sessionData = {
