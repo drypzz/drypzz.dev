@@ -40,7 +40,7 @@ const ModernModal: React.FC<ModernModalProps> = ({ isOpen, onClose, project }) =
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="absolute inset-0 bg-[#030014]/90 backdrop-blur-xl cursor-pointer"
+                    className="absolute inset-0 bg-[#030014]/90 backdrop-blur-xl"
                 />
 
                 <motion.div

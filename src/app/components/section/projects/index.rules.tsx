@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { db } from '@/app/database/config';
 
-import { Project } from '@/app/global/global';
+import { Project } from '@/app/utils/props';
 
 const useProjects = () => {
     const [projects, setProjects] = useState<Project[]>([]);

@@ -106,7 +106,7 @@ const ModernProjects = () => {
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: index < 6 ? index * 0.05 : 0 }}
                                         style={{ willChange: 'transform, opacity' }}
-                                        className="group relative flex flex-col h-full bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden hover:border-electric-violet/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-15px_rgba(124,58,237,0.15)] cursor-pointer"
+                                        className="group relative flex flex-col h-full bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden hover:border-electric-violet/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-15px_rgba(124,58,237,0.15)]"
                                         onClick={() => handleOpenModal(project)}
                                     >
                                         <div className="relative w-full aspect-[16/10] overflow-hidden bg-black/40">

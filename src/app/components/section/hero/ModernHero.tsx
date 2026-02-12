@@ -13,7 +13,10 @@ const ModernHero = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        setIsMobile(window.innerWidth < 768);
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
     const scrollToSection = (id: string) => {
@@ -49,10 +52,10 @@ const ModernHero = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="text-5xl sm:text-6xl md:text-8xl font-bold font-sans tracking-tighter mb-4 min-h-[1.1em] w-full md:w-auto whitespace-nowrap"
+                            className="text-5xl sm:text-6xl md:text-8xl font-bold font-sans tracking-tighter mb-4 min-h-[1.1em] w-full md:w-auto whitespace-nowrap flex flex-col md:block items-center md:items-start"
                         >
-                            <span className="text-white">I am </span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-violet via-white to-neon-cyan inline-block">
+                            <span className="text-white inline-block mr-0 md:mr-4">I am</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-violet via-white to-neon-cyan inline-block w-[8ch] text-center md:text-left align-bottom">
                                 <Typewriter text='"DRYPZZ"' delay={0.5} />
                             </span>
                         </motion.h1>
@@ -82,7 +85,7 @@ const ModernHero = () => {
                         >
                             <button
                                 onClick={() => scrollToSection('projects')}
-                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold font-sans uppercase tracking-widest hover:bg-electric-violet hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(124,58,237,0.5)] rounded-xl flex items-center justify-center gap-2 group"
+                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold font-sans uppercase tracking-widest hover:bg-electric-violet hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(124,58,237,0.5)] rounded-xl flex items-center justify-center gap-2 group whitespace-nowrap"
                             >
                                 Explorar Projetos
                                 <FaArrowDown className="group-hover:translate-y-1 transition-transform" />
@@ -90,7 +93,7 @@ const ModernHero = () => {
 
                             <button
                                 onClick={() => scrollToSection('contact')}
-                                className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-mono text-xs uppercase tracking-widest hover:bg-white/5 hover:border-white transition-all rounded-xl flex items-center justify-center gap-2"
+                                className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-mono text-xs uppercase tracking-widest hover:bg-white/5 hover:border-white transition-all rounded-xl flex items-center justify-center gap-2 whitespace-nowrap"
                             >
                                 <FaHeadset /> Entrar em Contato
                             </button>

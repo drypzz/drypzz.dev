@@ -66,7 +66,7 @@ const DashboardCharts: React.FC<ChartsProps> = ({ data }) => {
                                     <Cell
                                         key={`cell-${index}`}
                                         fill={COLORS[index % COLORS.length]}
-                                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                                        className="hover:opacity-80 transition-opacity"
                                     />
                                 ))}
                             </Bar>

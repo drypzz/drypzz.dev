@@ -86,7 +86,7 @@ const ActionModal: React.FC<ActionModalProps> = ({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={!isLoading ? onClose : undefined}
-                    className="absolute inset-0 bg-[#030014]/60 backdrop-blur-xl cursor-pointer"
+                    className="absolute inset-0 bg-[#030014]/60 backdrop-blur-xl"
                 />
 
                 <motion.div
