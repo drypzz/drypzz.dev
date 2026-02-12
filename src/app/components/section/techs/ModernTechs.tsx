@@ -92,7 +92,7 @@ const ModernTechs = () => {
                     ease: "easeInOut",
                     delay: Math.random()
                   }}
-                  className="relative h-32 backdrop-blur-md border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-3 overflow-hidden cursor-pointer transition-all duration-300 group-hover:border-electric-violet/40 group-hover:bg-[#0f0728]/60"
+                  className="relative h-32 backdrop-blur-md border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-3 overflow-hidden transition-all duration-300 group-hover:border-electric-violet/40 group-hover:bg-[#0f0728]/60"
                   style={{ "--tech-color": tech.color } as React.CSSProperties}
                 >
 

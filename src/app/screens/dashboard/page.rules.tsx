@@ -42,7 +42,6 @@ const useDashboard = () => {
         }
     };
 
-    // --- INCREMENTAR VISUALIZAÇÃO ---
     const incrementProjectView = async (projectId: string) => {
         const projectRef = ref(db, `projects/${projectId}/views`);
         runTransaction(projectRef, (currentViews) => {
@@ -50,7 +49,6 @@ const useDashboard = () => {
         }).catch((err) => console.error(err));
     };
 
-    // --- AUTO-KICK ---
     useEffect(() => {
         let isMounted = true;
 
@@ -105,7 +103,6 @@ const useDashboard = () => {
         };
     }, []);
 
-    // --- PROJETOS (COM ORDENAÇÃO POR DATA) ---
     useEffect(() => {
         const unsubscribeAuth = auth.onAuthStateChanged((user) => {
             if (!user) router.push("/screens/login");
@@ -116,16 +113,14 @@ const useDashboard = () => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
 
-                // 1. Mapeia o objeto para array
                 let projectsArray = Object.entries(data).map(([key, value]: [string, any]) => ({
                     id: key,
                     ...value,
                     techs: value.techs || [],
                     views: value.views || 0,
-                    createdAt: value.createdAt || new Date().toISOString() // Fallback se não tiver data
+                    createdAt: value.createdAt || new Date().toISOString()
                 }));
 
-                // 2. ORDENAÇÃO EXPLÍCITA: Mais recente primeiro
                 projectsArray.sort((a, b) => {
                     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
                 });
@@ -144,7 +139,6 @@ const useDashboard = () => {
                 setStats({
                     totalProjects: projectsArray.length,
                     uniqueTechs: techs.size,
-                    // Como o array já está ordenado, o índice [0] é garantidamente o último lançado
                     lastProject: projectsArray.length > 0 ? projectsArray[0].title : "Nenhum",
                     totalViews: totalViewsCount
                 });
@@ -162,7 +156,6 @@ const useDashboard = () => {
         };
     }, [router]);
 
-    // --- ADMINS ---
     const fetchAdmins = () => {
         setLoadingAdmins(true);
         const adminsRef = ref(db, 'admins');
@@ -243,8 +236,6 @@ const useDashboard = () => {
         const techCount: Record<string, number> = {};
         const timelineMap: Record<string, number> = {};
 
-        // Copia e ordena (novamente, para garantir integridade do gráfico de linha cronológica)
-        // Para linha do tempo queremos do Antigo -> Novo
         const sortedForTimeline = [...projects].sort((a, b) =>
             new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );

@@ -1,6 +1,4 @@
-import {
-    FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaFigma, FaDocker, FaPython, FaJava
-} from "react-icons/fa";
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaFigma, FaDocker, FaPython, FaJava } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss, SiFirebase, SiPostgresql, SiSupabase } from "react-icons/si";
 import { TbBrandVscode } from "react-icons/tb";
 

@@ -20,6 +20,11 @@ body {
   color: #fff;
   background: var(--bg-void);
   overflow-x: hidden;
+  cursor: none;
+}
+
+a, button, input, textarea {
+  cursor: none!important;
 }
 
 /* Scrollbar Minimalista que combina com o fundo */

@@ -62,14 +62,12 @@ const Create = () => {
 
                 <div className="bg-[#0f0728]/40 backdrop-blur-xl border border-white/5 p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden">
                     <form onSubmit={(e) => { e.preventDefault(); handleCreateProject(); }} className="flex flex-col gap-12 relative z-10">
-
-                        {/* --- UPLOAD DE IMAGEM --- */}
                         <div>
                             <span className="font-mono text-neon-cyan text-xs tracking-widest uppercase mb-4 block flex items-center gap-2">
                                 <FaImage /> Capa do Projeto
                             </span>
                             {!imagePreview ? (
-                                <label className="group flex flex-col items-center justify-center w-full h-64 border border-dashed border-white/20 rounded-2xl cursor-pointer bg-white/[0.02] hover:bg-white/[0.05] hover:border-electric-violet/50 transition-all duration-300 relative overflow-hidden">
+                                <label className="group flex flex-col items-center justify-center w-full h-64 border border-dashed border-white/20 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-electric-violet/50 transition-all duration-300 relative overflow-hidden">
                                     <div className="flex flex-col items-center justify-center pt-5 pb-6 z-10">
                                         <div className="p-4 rounded-full bg-white/5 mb-4 group-hover:scale-110 group-hover:bg-electric-violet group-hover:text-white transition-all duration-300 text-gray-400">
                                             <FaCloudUploadAlt className="w-8 h-8" />
