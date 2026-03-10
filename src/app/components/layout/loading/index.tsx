@@ -8,54 +8,74 @@ interface LoadingProps {
     text?: string;
 }
 
-const Loading: React.FC<LoadingProps> = ({ fullScreen = true, text = "SYSTEM_INITIALIZING..." }) => {
+const Loading: React.FC<LoadingProps> = ({ fullScreen = true, text = "INITIALIZING_SYSTEM" }) => {
 
     const containerClasses = fullScreen
-        ? "fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#030014]/90 backdrop-blur-xl"
-        : "w-full h-full min-h-[300px] flex flex-col items-center justify-center bg-transparent";
+        ? "fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-void/95 backdrop-blur-md"
+        : "w-full h-full min-h-[400px] flex flex-col items-center justify-center bg-transparent";
 
     return (
         <div className={containerClasses}>
-            <div className="relative flex items-center justify-center w-24 h-24 mb-8">
+            {fullScreen && (
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-noise" />
+            )}
+
+            <div className="relative flex items-center justify-center w-32 h-32 mb-10">
 
                 <motion.div
-                    className="absolute inset-0 border-2 border-t-electric-violet border-r-transparent border-b-electric-violet/30 border-l-transparent rounded-full"
+                    className="absolute inset-0 border-2 border-dashed border-electric-violet/30 rounded-full"
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 3, ease: "linear", repeat: Infinity }}
+                    transition={{ duration: 8, ease: "linear", repeat: Infinity }}
                 />
 
                 <motion.div
-                    className="absolute inset-4 border-2 border-t-transparent border-r-neon-cyan border-b-transparent border-l-neon-cyan/50 rounded-full"
-                    animate={{ rotate: -360 }}
+                    className="absolute inset-2 border-t-2 border-l-2 border-neon-cyan rounded-full shadow-[0_0_15px_rgba(0,255,255,0.3)]"
+                    animate={{ rotate: 360 }}
                     transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
                 />
 
                 <motion.div
-                    className="w-4 h-4 bg-white rounded-full shadow-[0_0_20px_#fff]"
+                    className="absolute inset-6 border-b-2 border-r-2 border-electric-violet rounded-full opacity-60"
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 2, ease: "linear", repeat: Infinity }}
+                />
+
+                <motion.div
+                    className="w-2 h-2 bg-white rounded-full z-10 shadow-[0_0_20px_#fff]"
                     animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.5, 1, 0.5]
+                        scale: [1, 1.8, 1],
+                        opacity: [0.3, 1, 0.3]
                     }}
                     transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
                 />
 
-                <div className="absolute inset-0 bg-electric-violet/20 blur-[40px] rounded-full animate-pulse" />
+                <div className="absolute inset-0 bg-electric-violet/10 blur-[50px] rounded-full animate-pulse" />
             </div>
 
-            <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="font-mono text-xs tracking-[0.3em] text-neon-cyan uppercase"
-            >
-                {text}
-                <motion.span
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
+            <div className="flex flex-col items-center gap-2">
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="font-mono text-[10px] md:text-xs tracking-[0.5em] text-neon-cyan uppercase flex items-center"
                 >
-                    _
-                </motion.span>
-            </motion.p>
+                    <span className="opacity-50 mr-2">[</span>
+                    {text}
+                    <motion.span
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 0.8, repeat: Infinity }}
+                        className="ml-1 bg-neon-cyan w-2 h-3"
+                    />
+                    <span className="opacity-50 ml-1">]</span>
+                </motion.p>
+
+                <div className="w-32 h-[1px] bg-white/5 overflow-hidden relative">
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-electric-violet to-transparent"
+                        animate={{ x: ['-100%', '100%'] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                </div>
+            </div>
         </div>
     );
 };
