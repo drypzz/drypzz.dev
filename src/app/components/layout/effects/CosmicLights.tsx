@@ -4,70 +4,62 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const CosmicLights = () => {
-    const [isMobile, setIsMobile] = useState(false);
+    const [performanceMode, setPerformanceMode] = useState('high');
 
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+        const checkPerformance = () => {
+            const isMobile = window.innerWidth < 768;
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (isMobile || prefersReducedMotion) {
+                setPerformanceMode('low');
+            }
         };
 
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
+        checkPerformance();
+        window.addEventListener("resize", checkPerformance);
+        return () => window.removeEventListener("resize", checkPerformance);
     }, []);
 
-    if (isMobile) {
+    const blobStyle = (color: string) => ({
+        background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
+    });
+
+    if (performanceMode === 'low') {
         return (
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-40">
-                <div className="absolute top-[-5%] left-[-10%] w-[300px] h-[300px] rounded-full bg-electric-violet blur-[90px]" />
-                <div className="absolute bottom-[-5%] right-[-10%] w-[300px] h-[300px] rounded-full bg-neon-cyan blur-[90px]" />
+            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-30">
+                <div
+                    className="absolute top-[-5%] left-[-10%] w-[300px] h-[300px]"
+                    style={blobStyle('rgba(138, 43, 226, 0.4)')}
+                />
+                <div
+                    className="absolute bottom-[-5%] right-[-10%] w-[300px] h-[300px]"
+                    style={blobStyle('rgba(0, 255, 255, 0.3)')}
+                />
             </div>
         );
     }
-    const transitionSettings = {
-        duration: 25,
-        repeat: Infinity,
-        ease: "easeInOut",
-    };
 
     return (
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
             <motion.div
-                className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-electric-violet mix-blend-screen blur-[120px]"
+                className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-30"
+                style={blobStyle('rgba(138, 43, 226, 0.5)')}
                 animate={{
-                    x: ["0vw", "80vw", "0vw"],
-                    y: ["0vh", "80vh", "0vh"],
-                    scale: [1, 2, 1],
-                    opacity: [0.3, 0, 0.3],
+                    x: ["0vw", "40vw", "0vw"],
+                    y: ["0vh", "40vh", "0vh"],
                 }}
-                transition={transitionSettings}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             />
 
             <motion.div
-                className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-neon-cyan mix-blend-screen blur-[120px]"
+                className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-30"
+                style={blobStyle('rgba(0, 255, 255, 0.4)')}
                 animate={{
-                    x: ["0vw", "-80vw", "0vw"],
-                    y: ["0vh", "-80vh", "0vh"],
-                    scale: [1, 2, 1],
-                    opacity: [0.3, 0, 0.3],
+                    x: ["0vw", "-40vw", "0vw"],
+                    y: ["0vh", "-40vh", "0vh"],
                 }}
-                transition={{
-                    ...transitionSettings,
-                    delay: 2,
-                }}
-            />
-
-            <motion.div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-electric-violet mix-blend-screen blur-[100px]"
-                animate={{
-                    scale: [0.8, 1.2, 0.8],
-                    opacity: [0.1, 0.25, 0.1],
-                }}
-                transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 2 }}
             />
         </div>
     );

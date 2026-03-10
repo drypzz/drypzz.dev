@@ -14,7 +14,7 @@ const CosmicSnowfall = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d", { alpha: true });
         if (!ctx) return;
 
         let width = window.innerWidth;
@@ -23,9 +23,12 @@ const CosmicSnowfall = () => {
         canvas.height = height;
 
         const isMobile = width < 768;
-        const particleCount = isMobile ? 20 : 100;
-
+        const particleCount = isMobile ? 30 : 100;
         const particles: Particle[] = [];
+
+        let lastTime = 0;
+        const fps = 60;
+        const interval = 1000 / fps;
 
         class Particle {
             x: number;
@@ -58,18 +61,14 @@ const CosmicSnowfall = () => {
 
             draw() {
                 if (!ctx) return;
-
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 
-                const isSpecial = Math.random() > 0.9;
-
+                const isSpecial = Math.random() > 0.95;
                 ctx.fillStyle = isSpecial
                     ? `rgba(220, 38, 38, ${this.opacity})`
                     : `rgba(255, 255, 255, ${this.opacity})`;
 
-                ctx.shadowBlur = 5;
-                ctx.shadowColor = "white";
                 ctx.fill();
             }
         }
@@ -78,12 +77,18 @@ const CosmicSnowfall = () => {
             particles.push(new Particle());
         }
 
-        const animate = () => {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach((p) => {
-                p.update();
-                p.draw();
-            });
+        const animate = (currentTime: number) => {
+            const deltaTime = currentTime - lastTime;
+
+            if (deltaTime > interval) {
+                lastTime = currentTime - (deltaTime % interval);
+
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach((p) => {
+                    p.update();
+                    p.draw();
+                });
+            }
             requestAnimationFrame(animate);
         };
 
@@ -109,7 +114,7 @@ const CosmicSnowfall = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 z-[1] pointer-events-none mix-blend-screen"
+            className="fixed inset-0 z-[1] pointer-events-none opacity-90 mix-blend-screen"
             style={{ width: "100%", height: "100%" }}
         />
     );

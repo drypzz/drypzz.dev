@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "electric-violet": "var(--electric-violet)", 
+        "electric-violet": "var(--electric-violet)",
         "neon-cyan": "var(--neon-cyan)",
         "void": "var(--bg-void)",
       },
@@ -19,9 +19,12 @@ module.exports = {
         mono: ['var(--font-mono)', 'monospace'],
       },
       backgroundImage: {
-        'nebula-gradient': 'radial-gradient(circle at 50% 0%, #1a0b2e 0%, #030014 60%)',
-        'glass-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.00) 100%)',
+        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')", // Ou uma imagem PNG local
       },
+      // backgroundImage: {
+      //   'nebula-gradient': 'radial-gradient(circle at 50% 0%, #1a0b2e 0%, #030014 60%)',
+      //   'glass-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.00) 100%)',
+      // },
       animation: {
         'marquee': 'marquee 25s linear infinite',
         'float': 'float 6s ease-in-out infinite',

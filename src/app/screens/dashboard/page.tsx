@@ -14,7 +14,6 @@ import DashboardCharts from "./components/DashboardCharts";
 import ActionModal from "@/app/components/common/modal/ActionModal";
 import { formatDate } from "@/app/utils/format";
 
-// --- MODAL DE GERENCIAR ADMINS ---
 const ManageAdminsModal = ({ isOpen, onClose, admins, onAdd, onRemove }: any) => {
     const [newEmail, setNewEmail] = useState("");
 
@@ -86,7 +85,6 @@ const ManageAdminsModal = ({ isOpen, onClose, admins, onAdd, onRemove }: any) =>
     );
 };
 
-// --- PÁGINA PRINCIPAL ---
 const Dashboard = () => {
     const {
         projects, allProjectsCount, stats, chartsData,
@@ -167,7 +165,6 @@ const Dashboard = () => {
     const hasSearchResults = projects && projects.length > 0;
     const showProjectList = hasProjectsInDatabase && hasSearchResults;
 
-    // Estados vazios
     const showEmptySearch = hasProjectsInDatabase && !hasSearchResults;
     const showEmptyPortfolio = !hasProjectsInDatabase;
 
@@ -340,7 +337,6 @@ const Dashboard = () => {
                                         <div className="relative w-full aspect-[16/9] overflow-hidden bg-black/40">
                                             <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
 
-                                            {/* BADGE DE VISUALIZAÇÕES */}
                                             <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-2 z-20">
                                                 <FaEye className="text-neon-cyan text-xs" />
                                                 <span className="text-white text-xs font-mono font-bold">{project.views || 0}</span>

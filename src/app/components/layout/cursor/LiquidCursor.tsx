@@ -6,21 +6,20 @@ import gsap from 'gsap';
 const LiquidCursor = () => {
   const dotRef = useRef<HTMLDivElement>(null);
   const dropsRef = useRef<(HTMLDivElement | null)[]>([]);
-  
+
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const checkDevice = () => {
-        const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        setIsDesktop(hasMouse);
-      };
+    const checkDevice = () => {
+      const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4;
 
-      checkDevice();
+      setIsDesktop(hasMouse && !isLowEnd);
+    };
 
-      window.addEventListener('resize', checkDevice);
-      return () => window.removeEventListener('resize', checkDevice);
-    }
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
   useEffect(() => {
