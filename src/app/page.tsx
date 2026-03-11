@@ -7,7 +7,7 @@ import ModernHero from "./components/section/hero/ModernHero";
 
 import Preloader from "./components/layout/Preloader";
 
-import PortfolioTracker from "./components/analytics/PortfolioTracker";
+import { PortfolioTracker } from "./components/analytics/PortfolioTracker";
 
 const ModernTechs = dynamic(() => import("./components/section/techs/ModernTechs"));
 const ModernProjects = dynamic(() => import("./components/section/projects/ModernProjects"));
