@@ -1,10 +1,7 @@
-// src/app/database/config.ts
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
 import { getStorage } from "firebase/storage";
-import { getDatabase, ref, get, child, set, onValue, remove } from 'firebase/database';
-// 1. Importe o Analytics
+import { getDatabase, ref, get, child, set, onValue, remove, runTransaction } from 'firebase/database';
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -22,7 +19,6 @@ const db = getDatabase(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-// 2. Inicialize o Analytics apenas no lado do cliente (Browser)
 let analytics;
 if (typeof window !== "undefined") {
     isSupported().then((supported) => {
@@ -32,4 +28,4 @@ if (typeof window !== "undefined") {
     });
 }
 
-export { db, ref, get, child, set, auth, onValue, remove, storage, analytics };
+export { db, ref, get, child, set, auth, onValue, remove, storage, analytics, runTransaction };
