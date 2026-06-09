@@ -159,6 +159,28 @@ const Dashboard = () => {
         return { backgroundImage: `url(${userProfile.banner})`, backgroundSize: 'cover', backgroundPosition: 'center' };
     };
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const sessionStr = localStorage.getItem("admin_session");
+            if (sessionStr) {
+                const session = JSON.parse(sessionStr);
+
+                const isNameInvisible = !session.name || session.name.replace(/[\u1CBC\u2800\s]/g, "").length === 0;
+                const cleanName = isNameInvisible ? "Admin" : session.name;
+
+                setUserProfile({
+                    name: cleanName,
+                    email: session.email || "admin@drypzz.com",
+                    avatar: session.avatar || "/me.jpeg",
+                    banner: session.banner || "",
+                    guildTag: session.guildTag || "",
+                    guildBadge: session.guildBadge || "",
+                    role: session.role || "mod"
+                });
+            }
+        }
+    }, [loading]);
+
     if (loading) return <div className="min-h-screen"><Loading fullScreen={true} text="INITIALIZING_SYSTEM..." /></div>;
 
     const hasProjectsInDatabase = allProjectsCount > 0;
@@ -182,7 +204,13 @@ const Dashboard = () => {
                         <div className="relative">
                             <div className="absolute inset-0 bg-electric-violet/50 blur-[20px] rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                             <div className="w-24 h-24 md:w-32 md:h-32 rounded-full p-[3px] bg-[#0a0a0a] border-2 border-white/10 relative z-10 shadow-xl">
-                                <img src={userProfile.avatar} alt="User Avatar" className="w-full h-full rounded-full object-cover" />
+                                <img
+                                    src={userProfile.avatar}
+                                    alt="User Avatar"
+                                    key={userProfile.avatar}
+                                    onError={(e) => { e.currentTarget.src = "/me.jpeg" }}
+                                    className="w-full h-full rounded-full object-cover"
+                                />
                                 <div className="absolute bottom-1 right-1 w-6 h-6 bg-[#0a0a0a] rounded-full flex items-center justify-center">
                                     <div className={`w-4 h-4 rounded-full animate-pulse border-2 border-[#0a0a0a] ${isSuperAdmin ? 'bg-green-500' : 'bg-yellow-500'}`} />
                                 </div>

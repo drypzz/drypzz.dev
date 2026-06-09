@@ -6,9 +6,10 @@ import {
     OAuthProvider,
     signOut
 } from "firebase/auth";
-import { ref, get, child } from "firebase/database";
+import { ref, get, query, orderByChild, equalTo, child } from "firebase/database";
 import { auth, db } from "@/app/database/config";
 import { showNotify } from '@/app/utils/notify';
+import { createSession } from "@/app/actions/auth";
 
 const useLogin = () => {
     const router = useRouter();
@@ -21,12 +22,12 @@ const useLogin = () => {
     const fetchDiscordData = async (accessToken: string) => {
         const result = { banner: "", guildTag: "", guildBadge: "", avatar: "" };
         try {
-            const response = await fetch("https://discord.com/api/users/@me", {
+            const response = await fetch("https://discord.com/api/v10/users/@me", {
                 headers: { Authorization: `Bearer ${accessToken}` },
             });
             if (response.ok) {
                 const data = await response.json();
-                
+
                 if (data.avatar) {
                     const format = data.avatar.startsWith("a_") ? "gif" : "png";
                     result.avatar = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${format}?size=2048`;
@@ -46,7 +47,9 @@ const useLogin = () => {
                     }
                 }
             }
-        } catch (error) { console.error(error); }
+        } catch (error) {
+            console.error("Falha ao buscar dados ricos do Discord:", error);
+        }
         return result;
     };
 
@@ -57,6 +60,8 @@ const useLogin = () => {
 
             if (snapshot.exists()) {
                 const adminsData = snapshot.val();
+                console.log("📦 [DEBUG] Dados recebidos do Firebase:", adminsData);
+
                 const foundAdmin: any = Object.values(adminsData).find(
                     (admin: any) => admin.email.toLowerCase() === emailToCheck.toLowerCase()
                 );
@@ -66,8 +71,9 @@ const useLogin = () => {
                 }
             }
         } catch (error) {
-            console.error("Erro ao verificar admins:", error);
+            console.error("Falha ao tentar ler o Firebase:", error);
         }
+
         return null;
     };
 
@@ -87,6 +93,10 @@ const useLogin = () => {
 
         successProcessed.current = true;
 
+        const token = await user.getIdToken();
+
+        await createSession(token, role);
+
         let discordData = { banner: "", guildTag: "", guildBadge: "", avatar: "" };
 
         if (credential && credential.accessToken) {
@@ -94,7 +104,7 @@ const useLogin = () => {
         }
 
         let finalAvatar = discordData.avatar || user.photoURL || "/me.jpeg";
-        
+
         if (!discordData.avatar && finalAvatar.includes("/a_")) {
             finalAvatar = finalAvatar.replace(".png", ".gif").replace(".jpg", ".gif");
         }
@@ -103,7 +113,6 @@ const useLogin = () => {
             avatar: finalAvatar,
             name: user.displayName || "Admin",
             email: userEmail,
-            role: role,
             banner: discordData.banner || "",
             guildTag: discordData.guildTag || "",
             guildBadge: discordData.guildBadge || ""
@@ -112,11 +121,12 @@ const useLogin = () => {
         localStorage.setItem("admin_session", JSON.stringify(sessionData));
 
         showNotify("success", `Bem-vindo, ${role === 'super' ? 'Super Admin' : 'Moderador'}!`);
-        router.push('/screens/dashboard');
+
+        router.push('/dashboard');
     };
 
     const handleLogin = async () => {
-        if (email === "" || password === "") {
+        if (!email || !password) {
             showNotify("error", "Preencha os campos.");
             return;
         }
@@ -124,7 +134,7 @@ const useLogin = () => {
             setLoadingLogin(true);
             await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
-            showNotify("error", "Erro ao entrar.");
+            showNotify("error", "Credenciais inválidas.");
             setLoadingLogin(false);
         }
     };

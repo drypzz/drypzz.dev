@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell,
     CartesianGrid, AreaChart, Area
@@ -31,11 +31,29 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 const DashboardCharts: React.FC<ChartsProps> = ({ data }) => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsMounted(true);
+        }, 100);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (!isMounted) {
+        return (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div className="h-[400px] border border-white/5 rounded-3xl bg-white/[0.02] animate-pulse" />
+                <div className="h-[400px] border border-white/5 rounded-3xl bg-white/[0.02] animate-pulse" />
+            </div>
+        );
+    }
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            
-            <div className="border border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors flex flex-col">
 
+            <div className="border border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-electric-violet/20 transition-colors flex flex-col">
                 <div className="flex items-center gap-4 mb-8 relative z-10">
                     <div className="w-12 h-12 rounded-full bg-electric-violet/10 flex items-center justify-center border border-electric-violet/20">
                         <div className="w-4 h-4 bg-electric-violet rounded-full shadow-[0_0_15px_rgba(124,58,237,0.5)]" />
@@ -47,7 +65,8 @@ const DashboardCharts: React.FC<ChartsProps> = ({ data }) => {
                 </div>
 
                 <div className="h-[300px] w-full min-w-0 relative z-10">
-                    <ResponsiveContainer width="100%" height="100%">
+                    {/* HACK DO RECHARTS: width="99%" evita o bug do -1 width no ResizeObserver */}
+                    <ResponsiveContainer width="99%" height="100%">
                         <BarChart data={data.techDistribution} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" vertical={false} />
                             <XAxis
@@ -73,12 +92,10 @@ const DashboardCharts: React.FC<ChartsProps> = ({ data }) => {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-
                 <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-electric-violet/5 blur-[100px] rounded-full pointer-events-none" />
             </div>
 
             <div className="border border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-neon-cyan/20 transition-colors flex flex-col">
-
                 <div className="flex items-center gap-4 mb-8 relative z-10">
                     <div className="w-12 h-12 rounded-full bg-neon-cyan/10 flex items-center justify-center border border-neon-cyan/20">
                         <div className="w-4 h-4 bg-neon-cyan rounded-full shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
@@ -90,7 +107,8 @@ const DashboardCharts: React.FC<ChartsProps> = ({ data }) => {
                 </div>
 
                 <div className="h-[300px] w-full min-w-0 relative z-10">
-                    <ResponsiveContainer width="100%" height="100%">
+                    {/* HACK DO RECHARTS: width="99%" aqui também */}
+                    <ResponsiveContainer width="99%" height="100%">
                         <AreaChart data={data.timelineData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                             <defs>
                                 <linearGradient id="colorProjetos" x1="0" y1="0" x2="0" y2="1">
@@ -121,7 +139,6 @@ const DashboardCharts: React.FC<ChartsProps> = ({ data }) => {
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>
-
                 <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-neon-cyan/5 blur-[100px] rounded-full pointer-events-none" />
             </div>
         </div>

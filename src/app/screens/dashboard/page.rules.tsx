@@ -35,7 +35,7 @@ const useDashboard = () => {
             } else {
                 showNotify("info", "Sessão encerrada.");
             }
-            router.push("/screens/login");
+            router.push("/login");
         } catch (error) {
             console.error(error);
             showNotify("error", "Erro ao sair.");
@@ -105,7 +105,7 @@ const useDashboard = () => {
 
     useEffect(() => {
         const unsubscribeAuth = auth.onAuthStateChanged((user) => {
-            if (!user) router.push("/screens/login");
+            if (!user) router.push("/login");
         });
 
         const projectsRef = ref(db, 'projects');
