@@ -28,7 +28,7 @@ const EditProject = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (!user) {
-                router.push("/screens/login");
+                router.push("/login");
                 return;
             }
             const sessionStr = localStorage.getItem("admin_session");
@@ -39,7 +39,7 @@ const EditProject = () => {
             }
             if (role !== "super") {
                 showNotify("error", "Acesso restrito a Super Admins.");
-                router.push("/screens/dashboard");
+                router.push("/dashboard");
                 return;
             }
             if (projectId) {
@@ -53,7 +53,7 @@ const EditProject = () => {
                         setImageUrl(data.imageUrl);
                     } else {
                         showNotify("error", "Projeto não encontrado.");
-                        router.push("/screens/dashboard");
+                        router.push("/dashboard");
                     }
                 } catch (error) {
                     console.error(error);
@@ -77,7 +77,7 @@ const EditProject = () => {
                 imageUrl
             });
             showNotify("success", "Atualizado com sucesso!");
-            router.push("/screens/dashboard");
+            router.push("/dashboard");
         } catch (error) {
             showNotify("error", "Erro ao salvar.");
         } finally {
@@ -99,7 +99,7 @@ const EditProject = () => {
         <div className="min-h-screen bg-transparent py-20 pb-40">
             <div className="w-full max-w-[1000px] mx-auto px-6 md:px-12">
                 <div className="flex items-center justify-between mb-12">
-                    <Link href="/screens/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors"><FaArrowLeft /> Cancelar</Link>
+                    <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors"><FaArrowLeft /> Cancelar</Link>
                     <h1 className="text-2xl font-bold font-sans text-white">Editar Projeto</h1>
                 </div>
 

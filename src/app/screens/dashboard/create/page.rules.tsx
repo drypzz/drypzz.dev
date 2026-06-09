@@ -24,7 +24,7 @@ const useCreate = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
-                router.push("/screens/login");
+                router.push("/login");
             } else {
                 const sessionStr = localStorage.getItem("admin_session");
                 let role = "mod";
@@ -36,7 +36,7 @@ const useCreate = () => {
 
                 if (role !== "super") {
                     showNotify("error", "Acesso restrito a Super Admins.");
-                    router.push("/screens/dashboard");
+                    router.push("/dashboard");
                     return;
                 }
                 setPageLoading(false);
@@ -85,7 +85,7 @@ const useCreate = () => {
             });
 
             showNotify("success", "Projeto criado com sucesso!");
-            router.push('/screens/dashboard');
+            router.push('/dashboard');
 
         } catch (error) {
             console.error(error);

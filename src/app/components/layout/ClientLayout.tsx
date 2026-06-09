@@ -8,12 +8,11 @@ import { useSeason } from "@/app/hooks/useSeason";
 const CosmicSnowfall = dynamic(() => import('./effects/CosmicSnowfall'), { ssr: false });
 const LiquidCursor = dynamic(() => import('./cursor/LiquidCursor'), { ssr: false });
 
-const ClientLayout: React.FC<{ children: React.ReactNode; fonts: string }> = ({ children, fonts }) => {
+const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { isChristmas } = useSeason();
 
     return (
-        <body className={`${fonts} antialiased bg-void text-white font-sans selection:bg-electric-violet transition-colors duration-1000`}>
-
+        <div className="transition-colors duration-1000 min-h-screen">
             <LiquidCursor />
             {isChristmas && <CosmicSnowfall />}
             <CosmicLights />
@@ -23,7 +22,7 @@ const ClientLayout: React.FC<{ children: React.ReactNode; fonts: string }> = ({ 
             <main className="relative z-10 min-h-screen">
                 {children}
             </main>
-        </body>
+        </div>
     );
 };
 

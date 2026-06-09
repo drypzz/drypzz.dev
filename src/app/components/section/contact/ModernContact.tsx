@@ -3,8 +3,9 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPaperPlane, FaCheckCircle, FaUser, FaEnvelope, FaCommentAlt } from "react-icons/fa";
-import emailjs from "@emailjs/browser";
 import { showNotify } from "@/app/utils/notify";
+
+import { sendContactEmail } from "@/app/actions/contact";
 
 const ModernContact = () => {
     const [formData, setFormData] = useState({
@@ -30,46 +31,29 @@ const ModernContact = () => {
 
         setStatus("submitting");
 
-        const templateParams = {
-            from_name: formData.name,
-            email: formData.email,
-            message: formData.message,
-            hours: `${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}h - ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
-            year: new Date().getFullYear(),
-        };
+        const result = await sendContactEmail(formData);
 
-        const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID || "";
-        const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID || "";
-        const userId = process.env.NEXT_PUBLIC_USER_ID || "";
-
-        try {
-            await emailjs.send(serviceId, templateId, templateParams, userId);
-
+        if (result.success) {
             setStatus("success");
-
             setFormData({ name: "", email: "", message: "" });
             if (formRef.current) formRef.current.reset();
 
             setTimeout(() => {
                 setStatus("idle");
             }, 5000);
-
-        } catch (error) {
-            console.error("ERRO AO ENVIAR EMAIL:", error);
+        } else {
             setStatus("idle");
-            showNotify("error", "Falha ao enviar mensagem. Tente novamente.");
+            showNotify("error", result.error || "Falha ao enviar mensagem. Tente novamente.");
         }
     };
 
     return (
         <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
-
             <div className="absolute inset-0 pointer-events-none hidden md:block">
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-electric-violet/10 blur-[100px] rounded-full" />
             </div>
 
             <div className="w-full max-w-[800px] mx-auto px-6 relative z-10">
-
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +78,6 @@ const ModernContact = () => {
                     className="bg-white/[0.02] border border-white/5 backdrop-blur-xl p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden"
                 >
                     <AnimatePresence mode="wait">
-
                         {status === "success" ? (
                             <motion.div
                                 key="success"
@@ -117,7 +100,6 @@ const ModernContact = () => {
                                 </button>
                             </motion.div>
                         ) : (
-
                             <motion.form
                                 ref={formRef}
                                 key="form"

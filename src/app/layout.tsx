@@ -1,7 +1,5 @@
 import React from "react";
-
 import type { Metadata } from "next";
-
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -53,10 +51,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <ClientLayout fonts={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
-        {children}
-      </ClientLayout>
+    <html lang="pt-br" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <body className="antialiased bg-void text-white font-sans selection:bg-electric-violet" suppressHydrationWarning>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+      </body>
     </html>
   );
 }

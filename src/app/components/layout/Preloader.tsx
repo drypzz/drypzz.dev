@@ -75,7 +75,7 @@ const Preloader = () => {
                                     {progress}
                                 </span>
                                 <span className="text-[9px] font-mono text-neon-cyan/60 tracking-[0.4em] -mt-1 uppercase">
-                                    Loading_Bitrix
+                                    Loading
                                 </span>
                             </div>
 
