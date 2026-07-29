@@ -103,7 +103,7 @@ const useLogin = () => {
             discordData = await fetchDiscordData(credential.accessToken);
         }
 
-        let finalAvatar = discordData.avatar || user.photoURL || "/me.jpeg";
+        let finalAvatar = discordData.avatar || user.photoURL || "/me.jpg";
 
         if (!discordData.avatar && finalAvatar.includes("/a_")) {
             finalAvatar = finalAvatar.replace(".png", ".gif").replace(".jpg", ".gif");

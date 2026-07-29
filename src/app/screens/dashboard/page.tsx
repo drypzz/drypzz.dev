@@ -95,7 +95,7 @@ const Dashboard = () => {
     const [userProfile, setUserProfile] = useState({
         name: "Carregando...",
         email: "...",
-        avatar: "/me.jpeg",
+        avatar: "/me.jpg",
         banner: "",
         guildTag: "",
         guildBadge: "",
@@ -117,7 +117,7 @@ const Dashboard = () => {
                 setUserProfile({
                     name: session.name || "Admin",
                     email: session.email || "admin@drypzz.com",
-                    avatar: session.avatar || "/me.jpeg",
+                    avatar: session.avatar || "/me.jpg",
                     banner: session.banner || "",
                     guildTag: session.guildTag || "",
                     guildBadge: session.guildBadge || "",
@@ -171,7 +171,7 @@ const Dashboard = () => {
                 setUserProfile({
                     name: cleanName,
                     email: session.email || "admin@drypzz.com",
-                    avatar: session.avatar || "/me.jpeg",
+                    avatar: session.avatar || "/me.jpg",
                     banner: session.banner || "",
                     guildTag: session.guildTag || "",
                     guildBadge: session.guildBadge || "",
@@ -208,7 +208,7 @@ const Dashboard = () => {
                                     src={userProfile.avatar}
                                     alt="User Avatar"
                                     key={userProfile.avatar}
-                                    onError={(e) => { e.currentTarget.src = "/me.jpeg" }}
+                                    onError={(e) => { e.currentTarget.src = "/me.jpg" }}
                                     className="w-full h-full rounded-full object-cover"
                                 />
                                 <div className="absolute bottom-1 right-1 w-6 h-6 bg-[#0a0a0a] rounded-full flex items-center justify-center">

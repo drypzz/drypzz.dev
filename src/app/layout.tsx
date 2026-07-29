@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+// @ts-ignore: side-effect CSS import declaration missing
 import "./globals.css";
 
 import ClientLayout from "./components/layout/ClientLayout";
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   keywords: ["DRYPZZ", "DEV", "portfolio", "fullstack", "react", "nextjs", "bitrix24", "developer"],
   twitter: {
     card: "summary_large_image",
-    images: "/me.jpeg",
+    images: "/me.jpg",
   },
   openGraph: {
     title: "DRYPZZ - DEV | Portfolio",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "DRYPZZ Portfolio",
     type: "website",
     url: "https://drypzz.netlify.app",
-    images: [{ url: "/me.jpeg" }],
+    images: [{ url: "/me.jpg" }],
     countryName: "Brazil",
     locale: "pt_BR",
   },

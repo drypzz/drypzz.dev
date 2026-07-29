@@ -16,7 +16,7 @@ export const metadata: Metadata = {
         siteName: "DRYPZZ System",
         url: "https://drypzz.netlify.app/screens/dashboard",
         images: [{
-            url: "/me.jpeg",
+            url: "/me.jpg",
             width: 1200,
             height: 630,
             alt: "Dashboard Overview",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "DRYPZZ Dashboard",
         description: "Gerenciamento de projetos e usuários.",
-        images: ["/me.jpeg"],
+        images: ["/me.jpg"],
     },
 };
 

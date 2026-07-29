@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         type: "website",
         url: "https://drypzz.netlify.app/screens/login",
         images: [{
-            url: "/me.jpeg",
+            url: "/me.jpg",
             width: 800,
             height: 600,
             alt: "Tela de Login DRYPZZ",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         card: "summary",
         title: "Admin Login",
         description: "Área restrita.",
-        images: ["/me.jpeg"],
+        images: ["/me.jpg"],
     },
 };
 
