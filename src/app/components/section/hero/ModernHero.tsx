@@ -133,7 +133,7 @@ const ModernHero = () => {
                             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/5 shadow-[0_0_60px_rgba(124,58,237,0.3)] z-10 group">
                                 <div className="absolute inset-0 bg-electric-violet/20 mix-blend-overlay z-20 group-hover:bg-transparent transition-colors duration-500" />
                                 <Image
-                                    src="/me.jpeg"
+                                    src="/me.jpg"
                                     alt="DRYPZZ Profile"
                                     fill
                                     sizes="(max-width: 768px) 100vw, 50vw"

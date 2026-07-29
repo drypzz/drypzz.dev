@@ -16,7 +16,7 @@ export const metadata: Metadata = {
         siteName: "DRYPZZ System",
         url: "https://drypzz.netlify.app/screens/dashboard/create",
         images: [{
-            url: "/me.jpeg",
+            url: "/me.jpg",
             alt: "Create New Project",
         }],
         locale: "pt_BR",
